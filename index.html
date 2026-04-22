@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<!-- saved from url=(0048)index.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hannah McGough — Brand &amp; Marketing Strategist</title>
+  <title>Hannah McGough  -  Brand &amp; Marketing Strategist</title>
   <meta name="description" content="Hannah McGough is a Los Angeles-based brand strategist and operator who builds and grows brands that deserve attention.">
 
   <style>
@@ -162,6 +161,7 @@
     .clients-category-pill.cat-lav   { background: rgba(194,186,236,0.18); color: var(--lavender); }
     .clients-category-pill.cat-peach { background: rgba(244,201,168,0.18); color: var(--peach); }
     .clients-category-pill.cat-taupe { background: rgba(155,139,131,0.18); color: var(--taupe); }
+    .clients-note { font-size: 0.78rem; font-style: italic; color: var(--taupe); margin-top: 10px; letter-spacing: 0.01em; display: block; }
     .clients-names { padding: 28px 0 28px 28px; border-bottom: 1px solid rgba(255,255,255,0.1); border-left: 1px solid rgba(255,255,255,0.1); display: flex; flex-wrap: wrap; gap: 10px 20px; align-items: center; }
     .clients-names span { font-family: var(--font-display); font-size: clamp(0.82rem, 1.2vw, 1rem); font-weight: 500; color: rgba(237,232,224,0.6); letter-spacing: 0.01em; }
 
@@ -254,6 +254,16 @@
     .field-note-excerpt { font-size: 0.88rem; line-height: 1.75; color: var(--taupe-dark); }
     .field-note-excerpt p { margin-bottom: 14px; }
     .field-note-excerpt p:last-child { margin-bottom: 0; }
+    .field-note-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 20px; font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--dark); text-decoration: none;
+      border-bottom: 1.5px solid var(--dark); padding-bottom: 2px;
+      transition: opacity 0.2s ease;
+    }
+    .field-note-link:hover { opacity: 0.5; }
+    .fn-tag-coming { background: transparent; border: 1.5px dashed var(--taupe); color: var(--taupe); }
 
     /* ─── CONTACT ─── */
     .contact { background: var(--dark); color: var(--cream); padding: clamp(80px, 14vh, 160px) var(--gutter); text-align: center; }
@@ -358,7 +368,369 @@
       .evolving-item:nth-child(n) { border-radius: 12px; }
       .contact-form-row { grid-template-columns: 1fr; }
     }
+
+    /* ─── CASE STUDIES ─── */
+
+    /* Section wrapper  -  no bg, each block sets its own */
+    .case-studies { padding: 0; }
+    .case-studies-inner { max-width: var(--max-w); margin: 0 auto; }
+
+    /* Section header lives in its own padded row */
+    .cs-section-header {
+      background: var(--cream);
+      padding: clamp(80px,12vh,140px) var(--gutter) 64px;
+    }
+    .cs-section-header h2 { font-family: var(--font-display); font-size: clamp(28px,4vw,52px); font-weight: 700; letter-spacing: -0.03em; line-height:1.1; color: var(--dark); margin-bottom: 12px; }
+    .cs-section-header p { font-size: 1rem; color: var(--taupe); max-width: 520px; line-height: 1.65; }
+
+    /* ── Each case study block has its own bg ── */
+    .cs-block { padding: clamp(56px,8vh,100px) var(--gutter); }
+    .cs-block.bg-cream   { background: var(--cream); }
+    .cs-block.bg-white   { background: var(--white); }
+    .cs-block.bg-dark    { background: var(--dark); }
+    .cs-block.bg-lav     { background: #EDEAF8; }
+    .cs-block.bg-peach   { background: #FDF0E8; }
+
+    .cs-block-inner { max-width: var(--max-w); margin: 0 auto; }
+
+    /* ── Meta row: "Case 01" + tag pills ── */
+    .cs-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+    .cs-num {
+      font-family: var(--font-display); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--taupe); opacity: 0.5; margin-right: 6px;
+    }
+    /* Three tag types */
+    .cs-pill {
+      display: inline-block; padding: 5px 14px; border-radius: 100px;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .cs-pill-lime   { background: var(--lime);     color: var(--dark); }
+    .cs-pill-lav    { background: var(--lavender); color: var(--dark); }
+    .cs-pill-peach  { background: var(--peach);    color: var(--dark); }
+    .cs-pill-taupe  { background: var(--cream-deep); color: var(--taupe-deep); }
+
+    /* dark-bg variants */
+    .bg-dark .cs-num     { color: rgba(237,232,224,0.35); opacity: 1; }
+    .bg-dark .cs-pill-lime  { background: var(--lime); color: var(--dark); }
+    .bg-dark .cs-pill-lav   { background: rgba(194,186,236,0.25); color: var(--lavender); }
+    .bg-dark .cs-pill-peach { background: rgba(244,201,168,0.25); color: var(--peach); }
+
+    /* ── Client name ── */
+    .cs-client {
+      font-family: var(--font-display); font-size: clamp(28px,4vw,52px);
+      font-weight: 700; letter-spacing: -0.03em; color: var(--dark);
+      margin-bottom: 32px;
+    }
+    .bg-dark .cs-client { color: var(--cream); }
+
+    /* ── Hero: full-width cinematic banner ── */
+    .cs-hero-full {
+      aspect-ratio: 21/9;
+      border-radius: 16px; overflow: hidden;
+      margin-bottom: 36px;
+      background: var(--cream-mid);
+    }
+    .cs-hero-full img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block;
+    }
+    .bg-dark .cs-hero-full { background: rgba(255,255,255,0.06); }
+
+    /* ── Story text + thumb row ── */
+    .cs-story {
+      display: flex;
+      gap: clamp(24px,3vw,48px);
+      align-items: flex-start;
+      margin-bottom: 44px;
+    }
+    .cs-story-copy { flex: 1; }
+
+    .cs-intro-eyebrow {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--taupe);
+      margin-bottom: 10px;
+    }
+    .bg-dark .cs-intro-eyebrow { color: rgba(237,232,224,0.45); }
+
+    .cs-intro-text {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: clamp(1.05rem,1.55vw,1.28rem);
+      font-weight: 500; line-height: 1.65;
+      color: var(--dark); font-style: italic;
+      letter-spacing: 0.01em;
+    }
+    .bg-dark .cs-intro-text { color: rgba(237,232,224,0.85); }
+
+    /* ── Body row: copy only ── */
+    .cs-body { padding-top: 4px; }
+
+    /* ── Story tile: large thumb + text in styled card ── */
+    .cs-story-tile {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: clamp(20px,3vw,44px);
+      background: rgba(0,0,0,0.04);
+      border-radius: 20px;
+      padding: clamp(24px,3vw,44px);
+      margin-bottom: 48px;
+      align-items: center;
+    }
+    .bg-dark  .cs-story-tile { background: rgba(255,255,255,0.07); }
+    .bg-white .cs-story-tile { background: var(--cream-mid); }
+    .bg-peach .cs-story-tile { background: rgba(244,201,168,0.22); }
+    .cs-thumb-lg {
+      width: clamp(130px,15vw,200px);
+      border-radius: 14px; overflow: hidden;
+      flex-shrink: 0;
+    }
+    .cs-thumb-lg img {
+      width: 100%; height: auto;
+      display: block;
+    }
+    .cs-thumb-pair { display: flex; gap: 10px; align-items: flex-start; }
+    /* ── Work: copy left + side hero right ── */
+    .cs-work {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: clamp(32px,4vw,56px);
+      align-items: start;
+    }
+    .cs-collage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 6px;
+      border-radius: 14px;
+      overflow: hidden;
+      height: clamp(320px,42vw,500px);
+    }
+    .cs-collage-item {
+      overflow: hidden;
+      min-height: 0;
+    }
+    .cs-collage-item img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block;
+    }
+    .cs-collage-main { grid-row: 1 / 3; }
+
+    /* Section label  -  styled, not lime ── */
+    .cs-section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--taupe-dark);
+      margin-bottom: 14px; margin-top: 0;
+      padding: 5px 12px; border: 1px solid var(--cream-deep);
+      border-radius: 4px; background: transparent;
+    }
+    .cs-section-label::before { content: ' - '; color: var(--lime); font-weight: 700; }
+    .bg-dark .cs-section-label {
+      color: rgba(237,232,224,0.5);
+      border-color: rgba(255,255,255,0.12);
+    }
+    .bg-dark .cs-section-label::before { color: var(--lime); }
+
+    /* Impact label gets a different marker */
+    .cs-section-label.impact-label::before { content: '✦'; font-size: 0.6rem; }
+
+    /* Bullets  -  what I led */
+    .cs-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .cs-bullets li {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 0.88rem; color: var(--taupe-dark); line-height: 1.55;
+    }
+    .cs-bullets li::before {
+      content: ''; display: block; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--taupe); margin-top: 7px; flex-shrink: 0;
+    }
+    .bg-dark .cs-bullets li { color: rgba(237,232,224,0.6); }
+    .bg-dark .cs-bullets li::before { background: rgba(237,232,224,0.35); }
+
+    /* Impact items */
+    .cs-impact { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-top: 0; }
+    .cs-impact li {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 0.9rem; font-weight: 600; color: var(--dark); line-height: 1.5;
+    }
+    .cs-impact li::before {
+      content: ''; display: block; width: 3px; border-radius: 2px;
+      background: var(--lime); flex-shrink: 0; margin-top: 3px; align-self: stretch;
+    }
+    .bg-dark .cs-impact li { color: var(--cream); }
+
+    /* copy column sections */
+    .cs-copy-section { margin-bottom: 28px; }
+    .cs-copy-section:last-child { margin-bottom: 0; }
+
+    /* ── Secondary images column ── */
+    .cs-images { display: grid; gap: 10px; }
+    /* 2 images: side-by-side portraits */
+    .cs-images.imgs-2 { grid-template-columns: 1fr 1fr; }
+    .cs-images.imgs-2 .cs-img { aspect-ratio: 2/3; }
+    /* 3 images: tall feature left + 2 stacked right */
+    .cs-images.imgs-3 { grid-template-columns: 1fr 1fr; height: 460px; }
+    .cs-images.imgs-3 .cs-img:first-child { grid-row: 1 / 3; }
+    .cs-img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+
+
+    /* ── Case study header thumb ── */
+    .cs-client-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .cs-client-row .cs-client { margin-bottom: 0; flex: 1; }
+    .cs-thumb {
+      width: clamp(100px,12vw,150px);
+      aspect-ratio: 4/3;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--cream-mid);
+    }
+    .cs-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.4s ease;
+    }
+    .bg-dark .cs-thumb { background: rgba(255,255,255,0.08); }
+
+    /* ── Case study image tiles ── */
+    .cs-img {
+      border-radius: 12px; overflow: hidden;
+      background: var(--cream-mid);
+    }
+    .cs-img img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center;
+      display: block;
+    }
+    .bg-dark .cs-img  { background: rgba(255,255,255,0.06); }
+
+    /* ── ChapStick / brand extension wide accent ── */
+    .cs-wide-accent {
+      margin-top: 40px;
+      border-radius: 16px; overflow: hidden;
+      aspect-ratio: 21/9;
+      position: relative;
+    }
+    .cs-wide-accent img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center;
+      display: block;
+    }
+    .cs-wide-accent-label {
+      position: absolute; bottom: 20px; left: 24px;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--cream);
+      background: rgba(28,25,23,0.55); padding: 6px 14px;
+      border-radius: 100px; backdrop-filter: blur(6px);
+    }
+    .cs-copy-col { display: flex; flex-direction: column; gap: 28px; max-width: 720px; }
+
+    /* ── Mini 0→1 brands section ── */
+    .cs-mini-section { background: #F2EEF8; padding: clamp(56px,8vh,100px) var(--gutter); }
+    .cs-mini-inner   { max-width: var(--max-w); margin: 0 auto; }
+    .cs-mini-header  { margin-bottom: 52px; }
+    .cs-mini-header h3 {
+      font-family: var(--font-display); font-size: clamp(22px,3vw,38px);
+      font-weight: 700; letter-spacing: -0.02em; color: var(--dark); margin-bottom: 10px;
+    }
+    .cs-mini-header p { font-size: 0.95rem; color: var(--taupe-dark); max-width: 560px; line-height: 1.65; }
+
+    .cs-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 1024px) { .cs-mini-grid { grid-template-columns: repeat(2, 1fr); } }
+    .cs-mini-card {
+      border-radius: 14px; overflow: hidden;
+      background: var(--white);
+      display: flex; flex-direction: column;
+    }
+    .cs-mini-img {
+      aspect-ratio: 4/3;
+      overflow: hidden; background: var(--cream-mid);
+      display: block; width: 100%;
+    }
+    .cs-mini-img img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+    .cs-photo-credit { 
+      margin-top: 48px; 
+      font-size: 0.78rem; 
+      color: var(--taupe); 
+      font-style: italic; 
+      text-align: center;
+      padding-top: 32px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+    .cs-mini-body { padding: 18px 20px 22px; flex: 1; }
+    .cs-mini-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    .cs-mini-name {
+      font-family: var(--font-display); font-size: 1.05rem;
+      font-weight: 700; color: var(--dark); margin-bottom: 6px; letter-spacing: -0.01em;
+    }
+    .cs-mini-desc { font-size: 0.82rem; color: var(--taupe); line-height: 1.5; font-weight: 400; }
+    .cs-mini-impact {
+      font-size: 0.8rem; font-weight: 600; color: var(--dark);
+      margin-top: 8px; padding-top: 10px;
+      border-top: 1px solid var(--cream-deep);
+      display: flex; gap: 6px; align-items: flex-start;
+    }
+    .cs-mini-impact::before { content: '✦'; color: var(--lime); font-size: 0.55rem; margin-top: 3px; flex-shrink: 0; }
+
+    @media (max-width: 900px) {
+      .cs-story-tile { grid-template-columns: 1fr; }
+      .cs-thumb-pair { justify-content: center; }
+      .cs-work { grid-template-columns: 1fr; }
+      .cs-collage { height: clamp(240px,60vw,380px); }
+      .cs-mini-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .cs-mini-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── PROCESS DRAWER ─── */
+    .process-toggle-row { display: flex; justify-content: center; padding: 36px var(--gutter) 48px; background: var(--cream); }
+    .process-toggle-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: none; border: 1.5px solid var(--taupe);
+      color: var(--taupe); font-family: var(--font-display);
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.09em;
+      text-transform: uppercase; padding: 11px 22px; border-radius: 100px;
+      cursor: pointer; transition: border-color 0.2s, color 0.2s;
+    }
+    .process-toggle-btn:hover { border-color: var(--dark); color: var(--dark); }
+    .process-toggle-arrow { display: inline-block; transition: transform 0.35s ease; }
+    .process-toggle-btn.open .process-toggle-arrow { transform: rotate(180deg); }
+    .process-drawer-wrap { overflow: hidden; max-height: 0; transition: max-height 0.55s cubic-bezier(0.4,0,0.2,1); background: var(--cream); }
+    .process-drawer-wrap.open { max-height: 860px; }
+    .process-drawer { max-width: var(--max-w); margin: 0 auto; padding: clamp(40px,6vw,72px) var(--gutter) clamp(48px,7vw,80px); }
+    .process-drawer .process-top { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px,4vw,72px); align-items: start; margin-bottom: clamp(32px,5vw,52px); }
+    .process-drawer .process-headline { font-size: clamp(1.5rem,2.8vw,2.2rem); font-weight: 800; line-height: 1.15; color: var(--dark); }
+    .process-drawer .process-philosophy p { font-size: clamp(0.92rem,1.2vw,1.05rem); line-height: 1.65; color: var(--dark); margin-bottom: 12px; }
+    .process-drawer .process-philosophy em { font-size: clamp(0.85rem,1vw,0.97rem); color: var(--taupe); line-height: 1.6; }
+
+    /* ─── PRESS PILL ─── */
+    .press-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 16px;
+      background: rgba(221,239,68,0.12); border: 1px solid rgba(221,239,68,0.3);
+      color: var(--lime); font-family: var(--font-display);
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 8px 14px; border-radius: 100px;
+      text-decoration: none; transition: background 0.2s, border-color 0.2s;
+    }
+    .press-pill:hover { background: rgba(221,239,68,0.22); border-color: rgba(221,239,68,0.55); }
+    .press-pill .press-pill-pub { opacity: 0.65; font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 0.7rem; }
   </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -372,8 +744,10 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">About</a></li>
         <li><a href="#work">Work</a></li>
-        <li><a href="#portfolio">Selected Work</a></li>
+        <li><a href="#case-studies">Case Studies</a></li>
+        <li><a href="#clients">Clients</a></li>
         <li><a href="#experience">Experience</a></li>
+        <li><a href="#field-notes">Field Notes</a></li>
         <li><a href="#contact" class="nav-cta">Let's talk →</a></li>
       </ul>
       <div class="nav-mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
@@ -386,28 +760,28 @@
   <section class="hero" id="top">
     <div class="hero-main">
       <div class="hero-text">
-        <p class="hero-eyebrow reveal visible">Los Angeles &nbsp;·&nbsp; Available for Work</p>
-        <h1 class="hero-name reveal reveal-delay-1 visible">
+        <p class="hero-eyebrow reveal">Los Angeles &nbsp;·&nbsp; Available for Work</p>
+        <h1 class="hero-name reveal reveal-delay-1">
           hannah<br>mcgough<span class="dot">.</span>
         </h1>
-        <p class="hero-tagline reveal reveal-delay-2 visible">
+        <p class="hero-tagline reveal reveal-delay-2">
           <strong>I build and grow brands that deserve attention.</strong>
         </p>
-        <p class="hero-support reveal reveal-delay-2 visible">
-          The challenge isn't building more. It's building what actually matters and making sure it connects. Whether it's AI, consumer, or mission-driven work, I focus on the ideas that earn their place and make sure they show up that way.
+        <p class="hero-support reveal reveal-delay-2">
+          The challenge isn't building more. It's building what actually matters and making sure it connects. Whether it's consumer, tech, or mission-driven work, I focus on the ideas that earn their place and make sure they show up that way.
         </p>
-        <div class="hero-actions reveal reveal-delay-3 visible">
+        <div class="hero-actions reveal reveal-delay-3">
           <a href="#portfolio" class="btn-primary">Selected work</a>
           <a href="#contact" class="btn-secondary">Get in touch <span class="arrow">→</span></a>
         </div>
-        <div class="hero-stats reveal reveal-delay-4 visible">
+        <div class="hero-stats reveal reveal-delay-4">
           <div class="stat-item">
             <span class="stat-number">10+</span>
             <span class="stat-label">Years in Brand</span>
           </div>
           <div class="stat-item">
-            <span class="stat-number">$1M+</span>
-            <span class="stat-label">Studio Revenue</span>
+            <span class="stat-number">20</span>
+            <span class="stat-label">Store Launches</span>
           </div>
           <div class="stat-item">
             <span class="stat-number">30+</span>
@@ -420,9 +794,9 @@
         </div>
       </div>
 
-      <div class="hero-photo-wrap reveal reveal-delay-2 visible">
+      <div class="hero-photo-wrap reveal reveal-delay-2">
         <div class="hero-photo">
-          <img src="headshot-2.png" alt="Hannah McGough — Brand Strategist, Los Angeles">
+          <img src="headshot-2.png" alt="Hannah McGough  -  Brand Strategist, Los Angeles">
           <div class="hero-photo-badge">
             <strong>*hm</strong>
             Brand &amp; Marketing Studio
@@ -433,39 +807,29 @@
 
     <div class="hero-ticker">
       <div class="ticker-track">
+        <div class="ticker-item">Sephora <span class="sep">✦</span></div>
+        <div class="ticker-item">Disney <span class="sep">✦</span></div>
+        <div class="ticker-item">AT&T <span class="sep">✦</span></div>
+        <div class="ticker-item">Forever 21 <span class="sep">✦</span></div>
         <div class="ticker-item">ChapStick <span class="sep">✦</span></div>
         <div class="ticker-item">Suave <span class="sep">✦</span></div>
-        <div class="ticker-item">Disney <span class="sep">✦</span></div>
-        <div class="ticker-item">Sephora <span class="sep">✦</span></div>
-        <div class="ticker-item">Sol de Janeiro <span class="sep">✦</span></div>
-        <div class="ticker-item">Glow Recipe <span class="sep">✦</span></div>
-        <div class="ticker-item">Riley Rose <span class="sep">✦</span></div>
-        <div class="ticker-item">TOMS <span class="sep">✦</span></div>
         <div class="ticker-item">Sorel <span class="sep">✦</span></div>
-        <div class="ticker-item">Blank Beauty <span class="sep">✦</span></div>
-        <div class="ticker-item">Beauty Bakerie <span class="sep">✦</span></div>
-        <div class="ticker-item">Hatfetti <span class="sep">✦</span></div>
-        <div class="ticker-item">OurX <span class="sep">✦</span></div>
-        <div class="ticker-item">Forever 21 <span class="sep">✦</span></div>
-        <div class="ticker-item">AT&amp;T <span class="sep">✦</span></div>
         <div class="ticker-item">Goldfaden MD <span class="sep">✦</span></div>
+        <div class="ticker-item">Real Techniques <span class="sep">✦</span></div>
+        <div class="ticker-item">TOMS <span class="sep">✦</span></div>
+        <div class="ticker-item">Alterna <span class="sep">✦</span></div>
         <!-- Duplicate for seamless loop -->
+        <div class="ticker-item">Sephora <span class="sep">✦</span></div>
+        <div class="ticker-item">Disney <span class="sep">✦</span></div>
+        <div class="ticker-item">AT&T <span class="sep">✦</span></div>
+        <div class="ticker-item">Forever 21 <span class="sep">✦</span></div>
         <div class="ticker-item">ChapStick <span class="sep">✦</span></div>
         <div class="ticker-item">Suave <span class="sep">✦</span></div>
-        <div class="ticker-item">Disney <span class="sep">✦</span></div>
-        <div class="ticker-item">Sephora <span class="sep">✦</span></div>
-        <div class="ticker-item">Sol de Janeiro <span class="sep">✦</span></div>
-        <div class="ticker-item">Glow Recipe <span class="sep">✦</span></div>
-        <div class="ticker-item">Riley Rose <span class="sep">✦</span></div>
-        <div class="ticker-item">TOMS <span class="sep">✦</span></div>
         <div class="ticker-item">Sorel <span class="sep">✦</span></div>
-        <div class="ticker-item">Blank Beauty <span class="sep">✦</span></div>
-        <div class="ticker-item">Beauty Bakerie <span class="sep">✦</span></div>
-        <div class="ticker-item">Hatfetti <span class="sep">✦</span></div>
-        <div class="ticker-item">OurX <span class="sep">✦</span></div>
-        <div class="ticker-item">Forever 21 <span class="sep">✦</span></div>
-        <div class="ticker-item">AT&amp;T <span class="sep">✦</span></div>
         <div class="ticker-item">Goldfaden MD <span class="sep">✦</span></div>
+        <div class="ticker-item">Real Techniques <span class="sep">✦</span></div>
+        <div class="ticker-item">TOMS <span class="sep">✦</span></div>
+        <div class="ticker-item">Alterna <span class="sep">✦</span></div>
       </div>
     </div>
   </section>
@@ -518,7 +882,7 @@
         <span class="highlight">I Solve.</span>
       </h2>
       <p class="work-subline reveal reveal-delay-2">
-        The tools vary. The context changes. But the underlying challenge is almost always the same —
+        The tools vary. The context changes. But the underlying challenge is almost always the same  - 
         something valuable exists, and not enough people know it, feel it, or act on it.
       </p>
 
@@ -541,7 +905,7 @@
         <div class="work-card reveal reveal-delay-4">
           <div class="work-card-accent accent-taupe"></div>
           <h3>A launch needs to become culturally relevant and commercially effective</h3>
-          <p>GTM strategy through campaign production and activation — launches that land, not just go live. From consumer brands to public-facing platforms.</p>
+          <p>GTM strategy through campaign production and activation  -  launches that land, not just go live. From consumer brands to public-facing platforms.</p>
         </div>
         <div class="work-card reveal reveal-delay-5">
           <div class="work-card-accent accent-dark"></div>
@@ -552,62 +916,70 @@
     </div>
   </section>
 
+  <!-- ─── PROCESS DRAWER ─── -->
+  <div class="process-toggle-row">
+    <button class="process-toggle-btn" id="processToggle" aria-expanded="false">
+      How I approach it <span class="process-toggle-arrow">↓</span>
+    </button>
+  </div>
+  <div class="process-drawer-wrap" id="processDrawer">
+    <div class="process-drawer">
+      <div class="process-top">
+        <h2 class="process-headline">A philosophy<br>before a playbook.</h2>
+        <div class="process-philosophy">
+          <p>Great brands must <strong>first solve a real problem</strong> that a lot of people care about  -  and will gladly pay money and attention to <strong>you</strong> (over others) to get help with.</p>
+          <em>It's through this lens that the best identity, creative, and marketing can be born, and a business can sustain.</em>
+        </div>
+      </div>
+      <div class="process-stages">
+        <div class="process-stage">
+          <div class="process-stage-num">Stage 01</div>
+          <div class="process-stage-title">Discovery</div>
+          <span class="process-stage-tag tag-lime">Start here</span>
+          <ul class="process-stage-items">
+            <li>Consumer research &amp; insight</li>
+            <li>Brand positioning strategy</li>
+            <li>Visual identity &amp; messaging</li>
+            <li>Competitive landscape mapping</li>
+          </ul>
+        </div>
+        <div class="process-stage">
+          <div class="process-stage-num">Stage 02</div>
+          <div class="process-stage-title">Launch</div>
+          <span class="process-stage-tag tag-peach">Build momentum</span>
+          <ul class="process-stage-items">
+            <li>Go-to-market strategy</li>
+            <li>Campaign creative production</li>
+            <li>Retail &amp; DTC coordination</li>
+            <li>PR &amp; launch activation</li>
+          </ul>
+        </div>
+        <div class="process-stage">
+          <div class="process-stage-num">Stage 03</div>
+          <div class="process-stage-title">Growth</div>
+          <span class="process-stage-tag tag-lav">Scale it</span>
+          <ul class="process-stage-items">
+            <li>Paid media strategy &amp; creative</li>
+            <li>Influencer &amp; creator programs</li>
+            <li>IRL &amp; experiential activations</li>
+            <li>Brand partnerships</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ─── SELECTED WORK ─── -->
   <section class="portfolio" id="portfolio">
     <div class="portfolio-inner">
       <div class="portfolio-header reveal">
-        <div class="section-label">Selected Work</div>
-        <h2 class="portfolio-headline">Selected work.</h2>
-        <p class="portfolio-subline">Across consumer, retail, and early-stage systems.</p>
-        <a href="#contact" class="resume-link">Request full portfolio + case studies →</a>
+        <div class="section-label">Projects</div>
+        <h2 class="portfolio-headline">Chapters.</h2>
+        <p class="portfolio-subline">Ten years across consumer, retail, startup, and agency environments. Each engagement was a different kind of build.</p>
+        <a href="#case-studies" class="resume-link">View case studies ↓</a>
       </div>
 
       <div class="portfolio-grid">
-
-        <!-- ChapStick -->
-        <div class="portfolio-card reveal reveal-delay-1">
-          <div class="portfolio-card-media">
-            <picture>
-              <source srcset="chapstick.gif" media="(prefers-reduced-motion: no-preference)" type="image/gif">
-              <img src="chapstick.png" alt="ChapStick" loading="lazy">
-            </picture>
-          </div>
-          <div class="portfolio-card-body">
-            <div class="portfolio-card-label">CPG / Campaign</div>
-            <div class="portfolio-card-title">ChapStick</div>
-            <p class="portfolio-card-desc">Reviving a legacy brand and rebuilding cultural relevance</p>
-          </div>
-        </div>
-
-        <!-- Suave -->
-        <div class="portfolio-card reveal reveal-delay-2">
-          <div class="portfolio-card-media">
-            <picture>
-              <source srcset="suave.gif" media="(prefers-reduced-motion: no-preference)" type="image/gif">
-              <img src="suave.png" alt="Suave" loading="lazy">
-            </picture>
-          </div>
-          <div class="portfolio-card-body">
-            <div class="portfolio-card-label">CPG / Integrated Campaign</div>
-            <div class="portfolio-card-title">Suave</div>
-            <p class="portfolio-card-desc">Scaling a mass brand through modern creative and integrated campaigns</p>
-          </div>
-        </div>
-
-        <!-- Riley Rose -->
-        <div class="portfolio-card reveal reveal-delay-3">
-          <div class="portfolio-card-media">
-            <picture>
-              <source srcset="riley-rose.gif" media="(prefers-reduced-motion: no-preference)" type="image/gif">
-              <img src="riley-rose.png" alt="Riley Rose" loading="lazy">
-            </picture>
-          </div>
-          <div class="portfolio-card-body">
-            <div class="portfolio-card-label">Retail / Brand Experience</div>
-            <div class="portfolio-card-title">Riley Rose (Forever 21)</div>
-            <p class="portfolio-card-desc">Building a new retail concept and in-store brand experience from the ground up</p>
-          </div>
-        </div>
 
         <!-- Sephora -->
         <div class="portfolio-card reveal reveal-delay-1">
@@ -623,7 +995,48 @@
             <p class="portfolio-card-desc">Identifying and launching breakout brands into retail at scale</p>
           </div>
         </div>
-
+        <!-- Riley Rose -->
+        <div class="portfolio-card reveal reveal-delay-2">
+          <div class="portfolio-card-media">
+            <picture>
+              <source srcset="riley-rose.gif" media="(prefers-reduced-motion: no-preference)" type="image/gif">
+              <img src="riley-rose.png" alt="Riley Rose" loading="lazy">
+            </picture>
+          </div>
+          <div class="portfolio-card-body">
+            <div class="portfolio-card-label">Retail / Marketing</div>
+            <div class="portfolio-card-title">Riley Rose (Forever 21)</div>
+            <p class="portfolio-card-desc">Building a new retail concept and in-store brand experience from the ground up</p>
+          </div>
+        </div>
+        <!-- Suave -->
+        <div class="portfolio-card reveal reveal-delay-3">
+          <div class="portfolio-card-media">
+            <picture>
+              <source srcset="suave.gif" media="(prefers-reduced-motion: no-preference)" type="image/gif">
+              <img src="suave.png" alt="Suave" loading="lazy">
+            </picture>
+          </div>
+          <div class="portfolio-card-body">
+            <div class="portfolio-card-label">Studio Client</div>
+            <div class="portfolio-card-title">Suave</div>
+            <p class="portfolio-card-desc">Scaling a mass brand through modern creative and integrated campaigns</p>
+          </div>
+        </div>
+        <!-- ChapStick -->
+        <div class="portfolio-card reveal reveal-delay-1">
+          <div class="portfolio-card-media">
+            <picture>
+              <source srcset="chapstick.gif" media="(prefers-reduced-motion: no-preference)" type="image/gif">
+              <img src="chapstick.png" alt="ChapStick" loading="lazy">
+            </picture>
+          </div>
+          <div class="portfolio-card-body">
+            <div class="portfolio-card-label">Studio Client</div>
+            <div class="portfolio-card-title">ChapStick</div>
+            <p class="portfolio-card-desc">Reviving a legacy brand and rebuilding cultural relevance</p>
+          </div>
+        </div>
         <!-- Blank Beauty -->
         <div class="portfolio-card reveal reveal-delay-2">
           <div class="portfolio-card-media">
@@ -638,7 +1051,6 @@
             <p class="portfolio-card-desc">Translating new technology into a consumer-facing brand and go-to-market strategy</p>
           </div>
         </div>
-
         <!-- Emerging Brands -->
         <div class="portfolio-card reveal reveal-delay-3">
           <div class="portfolio-card-media">
@@ -653,7 +1065,6 @@
             <p class="portfolio-card-desc">End-to-end brand building across early-stage consumer companies</p>
           </div>
         </div>
-
         <!-- Hatfetti -->
         <div class="portfolio-card reveal reveal-delay-1">
           <div class="portfolio-card-media">
@@ -673,6 +1084,439 @@
     </div>
   </section>
 
+
+  <!-- ─── CASE STUDIES ─── -->
+  <section class="case-studies" id="case-studies">
+
+    <!-- Header -->
+    <div class="cs-section-header reveal">
+      <div class="cs-block-inner">
+        <div class="section-label">Case Studies</div>
+        <h2>Where the work goes deep.</h2>
+        <p>Four engagements that show the full range  -  from 0-to-1 brand builds to national campaign production for legacy names.</p>
+      </div>
+    </div>
+
+    <!-- ── CASE 01: SUAVE + CHAPSTICK ── cream bg -->
+    <div class="cs-block bg-cream reveal">
+      <div class="cs-block-inner">
+
+        <div class="cs-meta">
+          <span class="cs-num">Case 01</span>
+          <span class="cs-pill cs-pill-lav">CPG</span>
+          <span class="cs-pill cs-pill-lime">Heritage Brand Revival</span>
+        </div>
+        <div class="cs-client-row">
+          <div class="cs-client">Suave + ChapStick</div>
+        </div>
+
+        <div class="cs-story-tile reveal" style="grid-template-columns: auto 1fr auto;">
+          <div class="cs-thumb-lg"><img src="suave-thumb.jpg" alt="Suave campaign thumbnail" loading="lazy"></div>
+          <div>
+            <div class="cs-intro-eyebrow">The story</div>
+            <p class="cs-intro-text">When Suave was sold by Unilever and emerging as its own holding company, the brand needed a creative reset to reach a new generation. A Times Square launch became an ongoing multi-brand production contract  -  then expanded to include ChapStick after its acquisition by Suave.</p>
+          </div>
+          <div class="cs-thumb-lg"><img src="chaptstick-thumb.jpg" alt="ChapStick campaign thumbnail" loading="lazy"></div>
+        </div>
+
+        <div class="cs-work reveal">
+          <div class="cs-copy-col">
+            <div class="cs-copy-section">
+                <div class="cs-section-label">What I led</div>
+                <ul class="cs-bullets">
+                  <li>Established new creative direction for Suave's brand refresh across all product categories</li>
+                  <li>Produced the Times Square digital billboard campaign launch</li>
+                  <li>Built ongoing creative production pipeline for digital, social, and retail assets  -  deployed at Walmart, Target, CVS, and Dollar General</li>
+                  <li>Led visual direction for product reanimation and packaging refreshes</li>
+                  <li>Managed monthly creator content and campaign assets across Hair, Bath & Body, Personal Care, Men's, and Kids lines</li>
+                  <li>Social-first content strategy and full brand reset for ChapStick across IG and TikTok</li>
+                  <li>Produced ChapStick's Honey Nourish launch  -  first major product innovation as a heritage brand</li>
+                  <li>Built ChapStick's creator program including briefs, benchmarks, and early community building</li>
+                </ul>
+              </div>
+            <div class="cs-copy-section">
+                <div class="cs-section-label impact-label">Impact</div>
+                <ul class="cs-impact">
+                  <li>Elevated the visual identity of two heritage CPG brands simultaneously, reaching new consumer audiences</li>
+                  <li>Built scalable social and creator content systems that became the foundation for ongoing brand partnerships</li>
+                </ul>
+              </div>
+          </div>
+          <div class="cs-collage" style="grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr; height:clamp(480px,58vw,680px);">
+            <div class="cs-collage-item" style="grid-row:1/3;"><img src="suave-5.jpg" alt="Suave at Target" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="suave-3.jpg" alt="Suave campaign" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="chapstick-4.jpg" alt="ChapStick campaign" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="suave-6.jpeg" alt="Suave clarifying shampoo" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="chapstick-2.jpg" alt="ChapStick campaign" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="suave-7.jpeg" alt="Suave Walmart" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="suave-6.jpg" alt="Suave deodorant" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="chapstick-3.jpg" alt="ChapStick travel" loading="lazy"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── CASE 02: DISNEY ── dark bg -->
+    <div class="cs-block bg-dark reveal">
+      <div class="cs-block-inner">
+
+        <div class="cs-meta">
+          <span class="cs-num">Case 02</span>
+          <span class="cs-pill cs-pill-lav">Consumer Products</span>
+          <span class="cs-pill cs-pill-lime">Execution Under Pressure</span>
+        </div>
+        <div class="cs-client-row">
+          <div class="cs-client">Disney + Walmart</div>
+        </div>
+
+        <div class="cs-story-tile reveal">
+          <div class="cs-thumb-lg"><img src="disney-thumb.jpg" alt="Disney Moana 2 campaign thumbnail" loading="lazy"></div>
+          <div>
+            <div class="cs-intro-eyebrow">The story</div>
+            <p class="cs-intro-text">Disney's Walmart timeline compressed ahead of the Moana 2 launch. The team needed a full national campaign  -  cast, shot, and delivered  -  in one week. I built the production from scratch inside that window.</p>
+          </div>
+        </div>
+
+        <div class="cs-work reveal">
+          <div class="cs-copy-col">
+            <div class="cs-copy-section">
+                <div class="cs-section-label">What I led</div>
+                <ul class="cs-bullets">
+                  <li>End-to-end production under compressed national retail timelines</li>
+                  <li>Casting and talent direction aligned with Moana's cultural representation standards</li>
+                  <li>Multi-SKU campaign across dozens of products and talent configurations</li>
+                  <li>Logistics and compliance for working with minors under Disney guidelines</li>
+                  <li>Creative and asset delivery for retail, digital, and paid media channels</li>
+                </ul>
+              </div>
+            <div class="cs-copy-section">
+                <div class="cs-section-label impact-label">Impact</div>
+                <ul class="cs-impact">
+                  <li>Delivered a complete national campaign on schedule, enabling the Walmart retail launch without delay</li>
+                  <li>Maintained Disney brand integrity under high-pressure production conditions</li>
+                  <li>Proven execution model for large-scale, brand-sensitive shoots under tight deadlines</li>
+                </ul>
+              </div>
+          </div>
+          <div class="cs-collage" style="grid-template-columns:1fr 1fr; grid-template-rows:1fr; height:clamp(300px,38vw,460px);">
+            <div class="cs-collage-item"><img src="disney-2.jpg" alt="Disney Moana 2 campaign" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="disney-3.jpg" alt="Disney Moana 2 campaign" loading="lazy"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── CASE 03: FUNNY WATER ── white bg -->
+    <div class="cs-block bg-white reveal">
+      <div class="cs-block-inner">
+
+        <div class="cs-meta">
+          <span class="cs-num">Case 03</span>
+          <span class="cs-pill cs-pill-lav">Beverage / CPG</span>
+          <span class="cs-pill cs-pill-lime">Performance Creative</span>
+        </div>
+        <div class="cs-client-row">
+          <div class="cs-client">Funny Water</div>
+        </div>
+
+        <div class="cs-story-tile reveal">
+          <div class="cs-thumb-lg"><img src="funny-thumb.jpg" alt="Funny Water campaign thumbnail" loading="lazy"></div>
+          <div>
+            <div class="cs-intro-eyebrow">The story</div>
+            <p class="cs-intro-text">Funny Water had a great product and a blurry brand. I came in to clarify the positioning, build a consumer-first creative system, and develop performance assets that actually converted  -  contributing to national retail expansion into BevMo.</p>
+          </div>
+        </div>
+
+        <div class="cs-work reveal">
+          <div class="cs-copy-col">
+            <div class="cs-copy-section">
+                <div class="cs-section-label">What I led</div>
+                <ul class="cs-bullets">
+                  <li>End-to-end campaign concept and creative direction</li>
+                  <li>Positioning strategy: clarified product differentiation around low-cal, no-fizz, casual drinking</li>
+                  <li>Persona development to guide messaging and visual storytelling</li>
+                  <li>Production of ad creative, product photography, and digital assets</li>
+                  <li>Performance-focused asset development specifically built for DTC conversion</li>
+                </ul>
+              </div>
+            <div class="cs-copy-section">
+                <div class="cs-section-label impact-label">Impact</div>
+                <ul class="cs-impact">
+                  <li>Significantly outperformed all prior creative across digital campaigns</li>
+                  <li>Established a repeatable performance creative system that became the foundation for ongoing digital marketing</li>
+                  <li>Improved conversion by aligning messaging with real consumer behavior and use cases</li>
+                </ul>
+              </div>
+          </div>
+          <div class="cs-collage" style="grid-template-columns:1fr 1fr; grid-template-rows:2fr 1fr; height:clamp(340px,44vw,520px);">
+            <div class="cs-collage-item"><img src="funny-2.jpg" alt="Funny Water campaign" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="funny-3.jpg" alt="Funny Water campaign" loading="lazy"></div>
+            <div class="cs-collage-item" style="grid-column:1/-1;"><img src="funny-4.jpg" alt="Funny Water  -  Find Your Happy Place" loading="lazy"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── CASE 04: BLANK BEAUTY ── peach bg (the finale) -->
+    <div class="cs-block bg-peach reveal">
+      <div class="cs-block-inner">
+
+        <div class="cs-meta">
+          <span class="cs-num">Case 04</span>
+          <span class="cs-pill cs-pill-lav">Beauty Tech</span>
+          <span class="cs-pill cs-pill-lime">0 → 1 Brand Build</span>
+        </div>
+        <div class="cs-client-row">
+          <div class="cs-client">Blank Beauty</div>
+        </div>
+
+        <div class="cs-story-tile reveal">
+          <div class="cs-thumb-lg"><img src="bb-thumb.jpg" alt="Blank Beauty campaign thumbnail" loading="lazy"></div>
+          <div>
+            <div class="cs-intro-eyebrow">The story</div>
+            <p class="cs-intro-text">The product was real. The brand wasn't. I joined Blank Beauty at zero and built the brand infrastructure from scratch  -  positioning, consumer research, a full website and social media redesign, and the marketing systems that drove $30K/month in DTC sales within the first quarter. The work got noticed: WSJ, Forbes, Vogue Business, Entrepreneur, and others picked up the brand in those first months  -  editorially driven, not bought.</p>
+          </div>
+        </div>
+
+        <div class="cs-work reveal">
+          <div class="cs-copy-col">
+            <div class="cs-copy-section">
+                <div class="cs-section-label">What I led</div>
+                <ul class="cs-bullets">
+                  <li>End-to-end brand strategy and go-to-market for a beauty tech platform  -  with cross-functional alignment across product, engineering, and marketing</li>
+                  <li>Consumer research across Reddit and private focus groups  -  built a Customer Advisory Board</li>
+                  <li>Launch of customizable nail polish powered by proprietary “Huey” technology</li>
+                  <li>Full funnel marketing: paid, organic, email, partnerships, and conversion strategy</li>
+                  <li>Website, landing pages, and conversion flows for multiple consumer personas</li>
+                  <li>Complexion category expansion playbook  -  debuted at CosmoProf Miami, January 2026</li>
+                </ul>
+              </div>
+            <div class="cs-copy-section">
+                <div class="cs-section-label impact-label">Impact</div>
+                <ul class="cs-impact">
+                  <li>Grew revenue from near-zero to consistent $30K/month in DTC sales</li>
+                  <li>Established clear brand positioning bridging tech and beauty for mass consumers</li>
+                  <li>Left the brand with a full-funnel infrastructure and repeatable acquisition model</li>
+                  <li>Translated a complex product into a compelling, accessible consumer narrative</li>
+                </ul>
+              </div>
+          </div>
+          <div class="cs-collage" style="grid-template-columns:1fr 1fr 1fr; grid-template-rows:2fr 1fr; height:clamp(340px,44vw,520px);">
+            <div class="cs-collage-item"><img src="bb-2.jpg" alt="Blank Beauty campaign" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="bb-3.jpg" alt="Blank Beauty campaign" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="bb-4.jpg" alt="Blank Beauty campaign" loading="lazy"></div>
+            <div class="cs-collage-item" style="grid-column:1/-1;"><img src="bb-5.jpg" alt="Blank Beauty  -  customizable nail polish" loading="lazy"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── MINI 0→1 SECTION ── lavender wash bg -->
+    <div class="cs-mini-section reveal">
+      <div class="cs-mini-inner">
+
+        <div class="cs-mini-header">
+          <div class="section-label" style="color: var(--taupe-dark);">Additional Work</div>
+          <h3>More brands. Same approach.</h3>
+          <p>Building from nothing is a throughline, not a one-time assignment. These are more of the engagements where I came in early and built the foundation.</p>
+        </div>
+
+        <div class="cs-mini-grid">
+
+          <!-- Beauty Bakerie -->
+          <div class="cs-mini-card reveal">
+            <div class="cs-mini-img">
+              <img src="mini-beauty-bakerie.jpg" alt="Beauty Bakerie brand campaigns" loading="lazy">
+            </div>
+            <div class="cs-mini-body">
+              <div class="cs-mini-pills">
+                <span class="cs-pill cs-pill-lav" style="font-size:0.6rem;padding:3px 10px;">Beauty / Cosmetics</span>
+              </div>
+              <div class="cs-mini-name">Beauty Bakerie</div>
+              <div class="cs-mini-desc">Full brand repositioning for global prestige retail - new packaging, website, creative campaigns, and sub-brand development across ULTA, Nordstrom, Target, CVS, and international markets including Douglas, Selfridges, UAE, and UK/EU.</div>
+              <div class="cs-mini-impact">Scaled DTC to $200K/month; PR placements including GMA and CosmoProf keynote; brand sold in acquisition.</div>
+            </div>
+          </div>
+
+          <!-- SELFiES -->
+          <div class="cs-mini-card reveal">
+            <div class="cs-mini-img">
+              <img src="mini-selfies.jpg" alt="SELFiES Cannabis brand" loading="lazy">
+            </div>
+            <div class="cs-mini-body">
+              <div class="cs-mini-pills">
+                <span class="cs-pill cs-pill-lav" style="font-size:0.6rem;padding:3px 10px;">Cannabis</span>
+              </div>
+              <div class="cs-mini-name">Selfies Prerolls</div>
+              <div class="cs-mini-desc">Co-founded a cannabis brand in an emerging, legally complex category - built brand positioning, storytelling, and consumer marketing from the ground up in a space where the playbook didn't exist yet.</div>
+              <div class="cs-mini-impact">#1 product at MedMen; multiple Forbes features driving early-stage awareness and credibility.</div>
+            </div>
+          </div>
+
+          <!-- Leverden -->
+          <div class="cs-mini-card reveal">
+            <div class="cs-mini-img">
+              <img src="mini-leverden.jpg" alt="Leverden luxury home goods" loading="lazy">
+            </div>
+            <div class="cs-mini-body">
+              <div class="cs-mini-pills">
+                <span class="cs-pill cs-pill-lav" style="font-size:0.6rem;padding:3px 10px;">Luxury Home Goods</span>
+              </div>
+              <div class="cs-mini-name">Leverden</div>
+              <div class="cs-mini-desc">Luxury healing home goods inspired by world rituals and cultures. Handled campaigns, site copy, visuals and social content - helping launch the brand into CB2 and building IRL presence through brand activations in NYC and Seoul.</div>
+              <div class="cs-mini-impact">CB2 retail placement; Vogue feature; brand activations in New York and Seoul.</div>
+            </div>
+          </div>
+
+          <!-- Pancake Now -->
+          <div class="cs-mini-card reveal">
+            <div class="cs-mini-img">
+              <img src="mini-pancake.jpg" alt="Pancake Now brand" loading="lazy">
+            </div>
+            <div class="cs-mini-body">
+              <div class="cs-mini-pills">
+                <span class="cs-pill cs-pill-lav" style="font-size:0.6rem;padding:3px 10px;">Food + Beverage</span>
+              </div>
+              <div class="cs-mini-name">Pancake Now</div>
+              <div class="cs-mini-desc">Full 0 to 1 brand build - positioning, personas, and a full creative system across web, social, and investor materials. Translated a functional food product into a culturally relevant, lifestyle-driven brand with multiple audience entry points.</div>
+              <div class="cs-mini-impact">Contributed to rapid brand momentum including Shark Tank placement.</div>
+            </div>
+          </div>
+
+          <!-- Premium Jane -->
+          <div class="cs-mini-card reveal">
+            <div class="cs-mini-img">
+              <img src="mini-premium-jane.jpg" alt="Premium Jane wellness brand" loading="lazy">
+            </div>
+            <div class="cs-mini-body">
+              <div class="cs-mini-pills">
+                <span class="cs-pill cs-pill-lav" style="font-size:0.6rem;padding:3px 10px;">Wellness / Supplements</span>
+              </div>
+              <div class="cs-mini-name">Premium Jane</div>
+              <div class="cs-mini-desc">Brand strategy, social media management, and lifecycle marketing for a wellness supplements brand - building positioning, messaging, and channel growth from early stage.</div>
+              <div class="cs-mini-impact">Work expanded to two additional supplement brands owned by the same principals; secured brand partnerships with Club Pilates and Restore Hyper Wellness studios.</div>
+            </div>
+          </div>
+
+          <!-- Khelp -->
+          <div class="cs-mini-card reveal">
+            <div class="cs-mini-img">
+              <img src="mini-khelp.jpg" alt="Khelp supplement brand" loading="lazy">
+            </div>
+            <div class="cs-mini-body">
+              <div class="cs-mini-pills">
+                <span class="cs-pill cs-pill-lav" style="font-size:0.6rem;padding:3px 10px;">Wellness / Supplements</span>
+              </div>
+              <div class="cs-mini-name">Khelp</div>
+              <div class="cs-mini-desc">Supplement for heartburn and acid reflux that needed a more compelling, lifestyle-forward brand identity. Led creative direction and narrowed positioning to pregnant women, new mothers, and health-conscious shoppers - making a functional product feel aspirational.</div>
+              <div class="cs-mini-impact">Repositioned toward a high-converting niche audience aligned with Erewhon and health food retail channels.</div>
+            </div>
+          </div>
+
+          <!-- Forest Riot -->
+          <div class="cs-mini-card reveal">
+            <div class="cs-mini-img">
+              <img src="mini-forest-riot.jpg" alt="Forest Riot skincare US launch" loading="lazy">
+            </div>
+            <div class="cs-mini-body">
+              <div class="cs-mini-pills">
+                <span class="cs-pill cs-pill-lav" style="font-size:0.6rem;padding:3px 10px;">Beauty / Skincare</span>
+              </div>
+              <div class="cs-mini-name">Forest Riot</div>
+              <div class="cs-mini-desc">Skincare brand powered by Nordic soil extract, previously Europe-only. Prepped all web assets, US launch copy, and brand positioning to transition from a European-distributed product into an American consumer market.</div>
+              <div class="cs-mini-impact">Repositioned brand identity and messaging for US entry; full web and launch asset suite delivered.</div>
+            </div>
+          </div>
+
+          <!-- HPPY Skin -->
+          <div class="cs-mini-card reveal">
+            <div class="cs-mini-img">
+              <img src="mini-hppy-skin.jpg" alt="HPPY Skin brand launch" loading="lazy">
+            </div>
+            <div class="cs-mini-body">
+              <div class="cs-mini-pills">
+                <span class="cs-pill cs-pill-lav" style="font-size:0.6rem;padding:3px 10px;">Beauty / Skincare</span>
+              </div>
+              <div class="cs-mini-name">HPPY Skin</div>
+              <div class="cs-mini-desc">Built a premium brand world rooted in fresh, food-based skincare. Full campaign and product imagery production, styling, set design, and visual system development for web and retail launch.</div>
+              <div class="cs-mini-impact">Established a distinct identity in a crowded category with elevated perceived product value; positioned for retail and e-commerce launch.</div>
+            </div>
+          </div>
+
+          <!-- EVER -->
+          <div class="cs-mini-card reveal">
+            <div class="cs-mini-img">
+              <img src="mini-ever.jpg" alt="EVER skincare rebrand" loading="lazy">
+            </div>
+            <div class="cs-mini-body">
+              <div class="cs-mini-pills">
+                <span class="cs-pill cs-pill-lav" style="font-size:0.6rem;padding:3px 10px;">Beauty / Skincare</span>
+              </div>
+              <div class="cs-mini-name">EVER</div>
+              <div class="cs-mini-desc">Repositioned a mass-market MLM brand into a focused premium skincare line for mature women - new audience, messaging, and full marketing engine including email, content systems, and campaign calendar.</div>
+              <div class="cs-mini-impact">Repositioning contributed to long-term growth leading to acquisition.</div>
+            </div>
+          </div>
+
+          <!-- La Peony Clothing -->
+          <div class="cs-mini-card reveal">
+            <div class="cs-mini-img">
+              <img src="mini-la-peony.jpg" alt="La Peony Clothing editorial campaign" loading="lazy">
+            </div>
+            <div class="cs-mini-body">
+              <div class="cs-mini-pills">
+                <span class="cs-pill cs-pill-lav" style="font-size:0.6rem;padding:3px 10px;">Fashion / Apparel</span>
+              </div>
+              <div class="cs-mini-name">La Peony Clothing</div>
+              <div class="cs-mini-desc">Brand launch and full campaign production for a premium LA-based women's fashion label - editorial direction, lookbook production, and visual identity across two collection shoots in Mediterranean and desert settings.</div>
+              <div class="cs-mini-impact">Established a premium, editorial brand identity supporting e-commerce and wholesale positioning.</div>
+            </div>
+          </div>
+
+          <!-- Hatfetti -->
+          <div class="cs-mini-card reveal">
+            <div class="cs-mini-img">
+              <img src="mini-hatfetti.jpg" alt="Hatfetti luxury sustainable sun hats" loading="lazy">
+            </div>
+            <div class="cs-mini-body">
+              <div class="cs-mini-pills">
+                <span class="cs-pill cs-pill-lav" style="font-size:0.6rem;padding:3px 10px;">Fashion / Accessories</span>
+              </div>
+              <div class="cs-mini-name">Hatfetti</div>
+              <div class="cs-mini-desc">An original brand concept — luxury customizable sun hats designed for resort and hospitality settings. Conceived, designed, and built from scratch.</div>
+              <div class="cs-mini-impact">Pop-up activations at Saguaro Hotel; growing corporate gifting and wholesale partnerships.</div>
+            </div>
+          </div>
+
+          <!-- Windskin -->
+          <div class="cs-mini-card reveal">
+            <div class="cs-mini-img">
+              <img src="mini-windskin.jpg" alt="Windskin performance sunscreen brand" loading="lazy">
+            </div>
+            <div class="cs-mini-body">
+              <div class="cs-mini-pills">
+                <span class="cs-pill cs-pill-lav" style="font-size:0.6rem;padding:3px 10px;">Outdoor / Active Lifestyle</span>
+              </div>
+              <div class="cs-mini-name">Windskin</div>
+              <div class="cs-mini-desc">Repositioned a performance sunscreen brand from windsurf niche to full multi-sport outdoor lifestyle. Built brand world, visual direction, and a campaign system structured around monthly sport and environment drops - with a distribution plan for REI and ongoing social and Amazon content.</div>
+              <div class="cs-mini-impact">Elevated brand from niche concept to lifestyle positioning across web, social, Amazon, and retail.</div>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="cs-photo-credit">All photography shown in this section is original creative work produced through Hannah McGough client engagements.</p>
+
+      </div>
+    </div>
+
+
+  </section>
+
   <!-- ─── CLIENTS ─── -->
   <section class="clients" id="clients">
     <div class="clients-inner">
@@ -685,32 +1529,26 @@
       <div class="clients-grid reveal reveal-delay-2">
         <div class="clients-row">
           <div class="clients-category"><span class="clients-category-pill cat-lime">Creative</span></div>
-          <div class="clients-names">
-            <span>Real Techniques</span><span>Suave</span><span>Alterna</span><span>ChapStick</span>
-            <span>OurX</span><span>Disney</span><span>AT&amp;T</span><span>Goldfaden MD</span>
-            <span>PancakeNow</span><span>HPPY Skin</span><span>Windskin</span><span>Youngblood</span>
-            <span>TIDL</span><span>Puroast Coffee</span>
-          </div>
+          <div class="clients-names"><span>Alterna</span><span>AT&amp;T</span><span>ChapStick</span><span>Cycle Tea</span><span>Disney</span><span>Goldfaden MD</span><span>HPPY Skin</span><span>OurX</span><span>PancakeNow</span><span>Pure Kana</span><span>Puroast Coffee</span><span>Real Techniques</span><span>Suave</span><span>TIDL</span><span>Vida Cap</span><span>Windskin</span><span>Youngblood</span></div>
         </div>
         <div class="clients-row">
           <div class="clients-category"><span class="clients-category-pill cat-lav">Advertising</span></div>
-          <div class="clients-names">
-            <span>Varsity</span><span>TOMS</span><span>Ashapops</span><span>Sorel</span>
-            <span>Maelys</span><span>Funny Water</span><span>Alpyn Beauty</span>
-          </div>
+          <div class="clients-names"><span>Alpyn Beauty</span><span>Ashapops</span><span>Funny Water</span><span>MAËLYS</span><span>Sorel</span><span>TOMS</span><span>Varsity Spirit</span></div>
         </div>
         <div class="clients-row">
           <div class="clients-category"><span class="clients-category-pill cat-peach">360 Marketing</span></div>
-          <div class="clients-names">
-            <span>Leverden</span><span>Blank Beauty</span><span>Beauty Bakerie</span>
-            <span>Premium Jane</span><span>Ever</span>
-          </div>
+          <div class="clients-names"><span>Beauty Bakerie</span><span>Blank Beauty</span><span>Ever</span><span>Leverden</span><span>Premium Jane</span></div>
         </div>
         <div class="clients-row">
           <div class="clients-category"><span class="clients-category-pill cat-taupe">Brand Identity</span></div>
-          <div class="clients-names">
-            <span>Hatfetti</span><span>Blossoming Box</span><span>Elevar</span><span>One Earth Health</span>
+          <div class="clients-names"><span>Blossoming Box</span><span>Elevar</span><span>Fenix CBD</span><span>Hatfetti</span><span>One Earth Health</span></div>
+        </div>
+        <div class="clients-row">
+          <div class="clients-category" style="flex-direction:column; align-items:flex-start; gap:10px;">
+            <span class="clients-category-pill cat-lime">Sephora Skincare Desk</span>
+            <div class="clients-note" style="margin-top:0;">Managed as Sephora merchant partner</div>
           </div>
+          <div class="clients-names"><span>belif</span><span>Clarins</span><span>COOLA</span><span>Erborian</span><span>Fresh</span><span>GLAMGLOW</span><span>Glow Recipe</span><span>Kopari</span><span>L'Occitane</span><span>Laneige</span><span>philosophy</span><span>Shiseido</span><span>Sol de Janeiro</span><span>St. Tropez</span><span>Supergoop</span></div>
         </div>
       </div>
     </div>
@@ -738,6 +1576,9 @@
           <div class="evolving-icon">⚡</div>
           <div class="evolving-item-title">Emerging Technology / AI</div>
           <p class="evolving-item-desc">Systems that shape behavior faster than people can consciously process. I'm interested in the intersection of technology, brand intention, and human response, and how companies communicate and market in this new environment.</p>
+          <a class="press-pill" href="https://www.entrepreneur.com/building-a-business/run-your-business/ai-will-never-replace-this-one-thing-6-business-leaders-warn" target="_blank" rel="noopener">
+            Read my POV ↗ <span class="press-pill-pub">Entrepreneur · Jan/Feb 2026</span>
+          </a>
         </div>
         <div class="evolving-item">
           <div class="evolving-icon">🌿</div>
@@ -753,64 +1594,6 @@
           <div class="evolving-icon">↗</div>
           <div class="evolving-item-title">Systems That Shape Behavior</div>
           <p class="evolving-item-desc">The most interesting work sits at the intersection of how things are designed and how people actually respond. I want to be in rooms where that conversation is happening with rigor and care.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── PROCESS ─── -->
-  <section class="process" id="process">
-    <div class="process-inner">
-      <div class="section-label reveal">Process</div>
-      <div class="process-top">
-        <h2 class="process-headline reveal reveal-delay-1">
-          A philosophy<br>before a playbook.
-        </h2>
-        <div class="process-philosophy reveal reveal-delay-2">
-          <p>
-            Great brands must <strong>first solve a real problem</strong> that a lot of people care about
-            — and will gladly pay money and attention to <strong>you</strong> (over others) to get help with.
-          </p>
-          <em>
-            It's through this lens that the best identity, creative, and marketing can be born,
-            and a business can sustain.
-          </em>
-        </div>
-      </div>
-
-      <div class="process-stages">
-        <div class="process-stage reveal reveal-delay-1">
-          <div class="process-stage-num">Stage 01</div>
-          <div class="process-stage-title">Discovery</div>
-          <span class="process-stage-tag tag-lime">Start here</span>
-          <ul class="process-stage-items">
-            <li>Consumer research &amp; insight</li>
-            <li>Brand positioning strategy</li>
-            <li>Visual identity &amp; messaging</li>
-            <li>Competitive landscape mapping</li>
-          </ul>
-        </div>
-        <div class="process-stage reveal reveal-delay-2">
-          <div class="process-stage-num">Stage 02</div>
-          <div class="process-stage-title">Launch</div>
-          <span class="process-stage-tag tag-peach">Build momentum</span>
-          <ul class="process-stage-items">
-            <li>Go-to-market strategy</li>
-            <li>Campaign creative production</li>
-            <li>Retail &amp; DTC coordination</li>
-            <li>PR &amp; launch activation</li>
-          </ul>
-        </div>
-        <div class="process-stage reveal reveal-delay-3">
-          <div class="process-stage-num">Stage 03</div>
-          <div class="process-stage-title">Growth</div>
-          <span class="process-stage-tag tag-lav">Scale it</span>
-          <ul class="process-stage-items">
-            <li>Paid media strategy &amp; creative</li>
-            <li>Influencer &amp; creator programs</li>
-            <li>IRL &amp; experiential activations</li>
-            <li>Brand partnerships</li>
-          </ul>
         </div>
       </div>
     </div>
@@ -837,7 +1620,7 @@
               <div class="timeline-meta"><span class="timeline-date">2020 – 2026</span></div>
               <div class="timeline-dot current"></div>
               <div class="timeline-content">
-                <div class="timeline-company">Hannah McGough — Brand &amp; Marketing Studio</div>
+                <div class="timeline-company">Hannah McGough  -  Brand &amp; Marketing Studio</div>
                 <div class="timeline-role">Founder &amp; Owner</div>
                 <p class="timeline-desc">Managed brand strategy and campaign execution for clients including ChapStick, Suave, and Disney. Owned client growth and retention across a studio generating $1M+ in revenue. Built and managed cross-functional freelance teams across strategy, creative, production, and content.</p>
                 <span class="timeline-tag">Founder</span>
@@ -925,7 +1708,7 @@
         <div>
           <div class="section-label">Field Notes</div>
           <h2 class="field-notes-headline">Field Notes.</h2>
-          <p class="field-notes-sub">What I'm thinking about — on brand, behavior, and what actually deserves attention.</p>
+          <p class="field-notes-sub">What I'm thinking about  -  on brand, behavior, and what actually deserves attention.</p>
         </div>
         <div class="field-notes-portrait">
           <img src="headshot-3.png" alt="Hannah McGough">
@@ -935,28 +1718,29 @@
       <div class="field-notes-grid">
 
         <div class="field-note-card reveal reveal-delay-1">
-          <span class="field-note-tag fn-tag-lime">Conservation / Meaningful Work</span>
-          <div class="field-note-title">What Actually Deserves Attention</div>
+          <span class="field-note-tag fn-tag-lime">CPG / Consumer Behavior</span>
+          <div class="field-note-title">The Great Consumer Audit Is Here</div>
           <div class="field-note-excerpt">
-            <p>I've spent a decade helping brands compete for attention. Most of them didn't need it.</p>
-            <p>At the same time, the things that actually matter (biodiversity, ecosystems, the economic systems we depend on) are collapsing quietly, with almost no ability to command that same attention.</p>
-            <p>We've built an economy around manufacturing demand, while underfunding the things that sustain us (and keep us mentally well). I'm interested in contributing my creative marketing talent using the same tools to make people care about what's real, not just what's being sold to them.</p>
+            <p>For years, a brand could survive on vibes. A good logo. A slick Instagram. The right font. Consumers were buying the idea of a brand as much as the thing itself - and founders knew it.</p>
+            <p>That era is closing. We are now in a period I call the Great Consumer Audit - a mass, coordinated reassessment of whether brands actually deserve the trust and loyalty they've been coasting on. Ingredient labels are getting read. Supply chains are getting Googled. "Clean" claims are getting fact-checked before checkout.</p>
+            <p>The brands about to face a reckoning are the ones built on surface signals. For the ones that did the actual work - the ones with something real underneath - this moment should feel like relief. Which brings me to the stat that started all of this: 30,000 new consumer products hit the US market every year, and more than 80% fail within two years. But I have some ideas for how to avoid being in that 80%.</p>
           </div>
+          <a href="https://www.linkedin.com/pulse/great-consumer-audit-here-its-coming-your-brand-hannah-mcgough-zky1c/" target="_blank" rel="noopener" class="field-note-link">Read on LinkedIn &rarr;</a>
         </div>
 
         <div class="field-note-card reveal reveal-delay-2">
-          <span class="field-note-tag fn-tag-lav">AI / Systems / Behavior</span>
-          <div class="field-note-title">The Responsibility Shift</div>
+          <span class="field-note-tag fn-tag-lav">Community / Brand Strategy</span>
+          <div class="field-note-title">Communities Are the New Brands</div>
           <div class="field-note-excerpt">
-            <p>I used to spend weeks building what can now be done in a day: campaign shoots, brand worlds, full go-to-market systems. AI collapsed the timeline.</p>
-            <p>So yes, build your brand faster. Do it in a day, if it's something the world actually needs.</p>
-            <p>But then what to do with that saved time, money, energy, and even staff?</p>
-            <p>The opportunity isn't to flood the market with more — it's to reinvest into real-world presence like community, experiences, and moments that bring people together around a product instead of isolating them behind a screen consuming it.</p>
+            <p>Communities have become as culturally powerful as the brands trying to reach them - and in some cases, more trusted. The audience is already assembled, already activated, already talking. The question is just whether a brand has the fluency to show up in a way that adds something.</p>
+            <p>For product brands, this is an acquisition and credibility opportunity that most are leaving on the table. For community builders, it's a case for investing in brand strategy to attract the sponsors and partners they actually deserve - not just whoever shows up with a budget.</p>
+            <p>Both sides are underutilizing the other. Brands default to reach metrics. Communities default to whatever deal comes in. The real work is building a partnership model where the fit is the point.</p>
           </div>
+          <a href="https://www.linkedin.com/pulse/communities-new-brands-so-brand-them-hannah-mcgough-wvprc/" target="_blank" rel="noopener" class="field-note-link">Read on LinkedIn &rarr;</a>
         </div>
 
         <div class="field-note-card reveal reveal-delay-3">
-          <span class="field-note-tag fn-tag-peach">Brand / What Makes People Care</span>
+          <span class="field-note-tag fn-tag-peach">Brand / What Makes People Care</span>&nbsp;<span class="field-note-tag fn-tag-coming">Coming Soon</span>
           <div class="field-note-title">The Niche Advantage</div>
           <div class="field-note-excerpt">
             <p>Most brands don't have an awareness problem, they have a sameness problem.</p>
@@ -1101,4 +1885,17 @@
 
 
 
+  <script>
+    const processToggle = document.getElementById('processToggle');
+    const processDrawer = document.getElementById('processDrawer');
+    if (processToggle && processDrawer) {
+      processToggle.addEventListener('click', () => {
+        const isOpen = processDrawer.classList.toggle('open');
+        processToggle.classList.toggle('open', isOpen);
+        processToggle.setAttribute('aria-expanded', isOpen);
+        processToggle.querySelector('.process-toggle-arrow').textContent = isOpen ? '↑' : '↓';
+        if (isOpen) setTimeout(() => processDrawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 80);
+      });
+    }
+  </script>
 </body></html>
