@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- saved from url=(0030)https://www.hannahmcgough.com/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -101,7 +102,8 @@
 
     /* ─── ABOUT ─── */
     .about { background: var(--white); padding: clamp(80px, 12vh, 140px) var(--gutter); }
-    .about-inner { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 0.6fr 1fr; gap: clamp(40px, 6vw, 100px); align-items: center; }
+    .about-inner { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 0.6fr 1fr; gap: clamp(40px, 6vw, 100px); align-items: start; }
+    .about-gif { width: 100%; border-radius: 12px; overflow: hidden; margin: 28px 0 24px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); display: block; }
     .about-photo { order: -1; position: relative; }
     .about-photo-frame { width: 100%; max-width: 450px; aspect-ratio: 3/4; border-radius: 16px; overflow: hidden; background: linear-gradient(160deg, var(--lavender) 0%, var(--cream-mid) 100%); position: relative; }
     .about-photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
@@ -337,6 +339,10 @@
       .about-photo-frame { max-width: 100%; }
       .process-top { grid-template-columns: 1fr; }
       .process-stages { grid-template-columns: 1fr; }
+      .work-phil-inner { grid-template-columns: 1fr; gap: 48px 0; }
+      .work-phil-divider { min-height: 1px; width: 100%; align-self: auto; }
+      .work-col { padding-right: 0; }
+      .phil-col { padding-left: 0; }
       .work-cards { grid-template-columns: repeat(2, 1fr); }
       .timeline::before { display: none; }
       .timeline-item { grid-template-columns: 1fr; gap: 8px; }
@@ -694,6 +700,38 @@
       .cs-mini-grid { grid-template-columns: 1fr; }
     }
 
+    /* ─── WORK PILL TOGGLE ─── */
+    .work-pill-row { padding: 0 0 48px; }
+    .work-pill-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--white); border: none;
+      color: var(--dark); font-family: var(--font-display);
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.07em;
+      text-transform: uppercase; padding: 13px 28px; border-radius: 100px;
+      cursor: pointer; transition: box-shadow 0.2s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+    .work-pill-btn:hover { box-shadow: 0 5px 22px rgba(0,0,0,0.13); }
+    .work-pill-arrow { display: inline-block; transition: transform 0.35s ease; }
+    .work-pill-btn.open .work-pill-arrow { transform: rotate(180deg); }
+    .work-cards-drawer { overflow: hidden; max-height: 0; transition: max-height 0.65s cubic-bezier(0.4,0,0.2,1); }
+    .work-cards-drawer.open { max-height: 900px; }
+
+    /* ─── WORK + PHILOSOPHY SIDE BY SIDE ─── */
+    .work-phil-wrap { background: var(--cream); }
+    .work-phil-inner { max-width: var(--max-w); margin: 0 auto; padding: clamp(80px,12vh,140px) var(--gutter) clamp(60px,8vh,100px); display: grid; grid-template-columns: 1fr 1px 1fr; align-items: start; }
+    .work-col { padding-right: clamp(40px,5vw,80px); }
+    .phil-col { padding-left: clamp(40px,5vw,80px); }
+    .work-phil-divider { background: var(--cream-deep); align-self: stretch; min-height: 160px; }
+    .work-cards-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter) clamp(48px,7vw,80px); }
+    .philosophy-headline { font-family: var(--font-display); font-size: clamp(28px,4.5vw,60px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; color: var(--dark); margin-bottom: 28px; }
+    .philosophy-body { font-size: 1.02rem; line-height: 1.72; color: var(--taupe-dark); margin-bottom: 36px; }
+    .philosophy-body strong { color: var(--dark); font-weight: 600; }
+    .philosophy-body em { display: block; margin-top: 14px; font-style: italic; color: var(--taupe); font-size: 0.95rem; line-height: 1.65; }
+    .ph-stages-drawer { overflow: hidden; max-height: 0; transition: max-height 0.65s cubic-bezier(0.4,0,0.2,1); background: var(--cream); }
+    .ph-stages-drawer.open { max-height: 900px; }
+    .ph-stages-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter) clamp(56px,8vw,100px); }
+
     /* ─── PROCESS DRAWER ─── */
     .process-toggle-row { display: flex; justify-content: center; padding: 36px var(--gutter) 48px; background: var(--cream); }
     .process-toggle-btn {
@@ -727,10 +765,21 @@
     }
     .press-pill:hover { background: rgba(221,239,68,0.22); border-color: rgba(221,239,68,0.55); }
     .press-pill .press-pill-pub { opacity: 0.65; font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 0.7rem; }
+
+    /* ─── CASE STUDY DRAWER ─── */
+    .cs-drawer-wrap { overflow: hidden; max-height: 0; transition: max-height 0.7s cubic-bezier(0.4,0,0.2,1); }
+    .cs-drawer-wrap.open { max-height: 99999px; }
+    .cs-toggle-row { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 32px var(--gutter) 36px; background: var(--cream); }
+    .cs-logo-row { display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; }
+    .cs-logo-row img { height: 56px; width: auto; }
+    .cs-toggle-btn { display: inline-flex; align-items: center; gap: 10px; background: none; border: 1.5px solid var(--taupe); color: var(--taupe); font-family: var(--font-display); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; padding: 11px 24px; border-radius: 100px; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+    .cs-toggle-btn:hover { border-color: var(--dark); color: var(--dark); }
+    .cs-toggle-arrow { display: inline-block; transition: transform 0.35s ease; }
+    .cs-toggle-btn.open .cs-toggle-arrow { transform: rotate(180deg); }
   </style>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./index_files/css2" rel="stylesheet">
 </head>
 
 <body>
@@ -760,21 +809,21 @@
   <section class="hero" id="top">
     <div class="hero-main">
       <div class="hero-text">
-        <p class="hero-eyebrow reveal">Los Angeles &nbsp;·&nbsp; Available for Work</p>
-        <h1 class="hero-name reveal reveal-delay-1">
+        <p class="hero-eyebrow reveal visible">Los Angeles &nbsp;·&nbsp; Available for Work</p>
+        <h1 class="hero-name reveal reveal-delay-1 visible">
           hannah<br>mcgough<span class="dot">.</span>
         </h1>
-        <p class="hero-tagline reveal reveal-delay-2">
+        <p class="hero-tagline reveal reveal-delay-2 visible">
           <strong>I build and grow brands that deserve attention.</strong>
         </p>
-        <p class="hero-support reveal reveal-delay-2">
+        <p class="hero-support reveal reveal-delay-2 visible">
           The challenge isn't building more. It's building what actually matters and making sure it connects. Whether it's consumer, tech, or mission-driven work, I focus on the ideas that earn their place and make sure they show up that way.
         </p>
-        <div class="hero-actions reveal reveal-delay-3">
-          <a href="#portfolio" class="btn-primary">Selected work</a>
-          <a href="#contact" class="btn-secondary">Get in touch <span class="arrow">→</span></a>
+        <div class="hero-actions reveal reveal-delay-3 visible">
+          <a href="https://www.hannahmcgough.com/#portfolio" class="btn-primary">Selected work</a>
+          <a href="https://www.hannahmcgough.com/#contact" class="btn-secondary">Get in touch <span class="arrow">→</span></a>
         </div>
-        <div class="hero-stats reveal reveal-delay-4">
+        <div class="hero-stats reveal reveal-delay-4 visible">
           <div class="stat-item">
             <span class="stat-number">10+</span>
             <span class="stat-label">Years in Brand</span>
@@ -794,9 +843,9 @@
         </div>
       </div>
 
-      <div class="hero-photo-wrap reveal reveal-delay-2">
+      <div class="hero-photo-wrap reveal reveal-delay-2 visible">
         <div class="hero-photo">
-          <img src="lilac-ringlight.png" alt="Hannah McGough  -  Brand Strategist, Los Angeles">
+          <img src="./index_files/lilac-ringlight.png" alt="Hannah McGough  -  Brand Strategist, Los Angeles">
           <div class="hero-photo-badge">
             <strong>*hm</strong>
             Brand &amp; Marketing Studio
@@ -809,7 +858,7 @@
       <div class="ticker-track">
         <div class="ticker-item">Sephora <span class="sep">✦</span></div>
         <div class="ticker-item">Disney <span class="sep">✦</span></div>
-        <div class="ticker-item">AT&T <span class="sep">✦</span></div>
+        <div class="ticker-item">AT&amp;T <span class="sep">✦</span></div>
         <div class="ticker-item">Forever 21 <span class="sep">✦</span></div>
         <div class="ticker-item">ChapStick <span class="sep">✦</span></div>
         <div class="ticker-item">Suave <span class="sep">✦</span></div>
@@ -821,7 +870,7 @@
         <!-- Duplicate for seamless loop -->
         <div class="ticker-item">Sephora <span class="sep">✦</span></div>
         <div class="ticker-item">Disney <span class="sep">✦</span></div>
-        <div class="ticker-item">AT&T <span class="sep">✦</span></div>
+        <div class="ticker-item">AT&amp;T <span class="sep">✦</span></div>
         <div class="ticker-item">Forever 21 <span class="sep">✦</span></div>
         <div class="ticker-item">ChapStick <span class="sep">✦</span></div>
         <div class="ticker-item">Suave <span class="sep">✦</span></div>
@@ -837,31 +886,33 @@
   <!-- ─── ABOUT ─── -->
   <section class="about" id="about">
     <div class="about-inner">
-      <div class="about-photo reveal">
+      <div class="about-photo reveal visible">
         <div class="about-photo-frame">
-          <img src="headshot-4.png" alt="Hannah McGough">
+          <img src="./index_files/headshot-4.png" alt="Hannah McGough">
         </div>
         <div class="about-photo-accent">✦</div>
       </div>
 
       <div class="about-text">
-        <div class="section-label reveal">About</div>
-        <h2 class="statement reveal reveal-delay-1">
+        <div class="section-label reveal visible">About</div>
+        <h2 class="statement reveal reveal-delay-1 visible">
           I bring a perspective on brand <em>uncommonly found</em> in a creative lead.
         </h2>
-        <p class="reveal reveal-delay-2">
+        <p class="reveal reveal-delay-2 visible">
           Most brands aren’t as clear or differentiated as they think they are. I spend my time figuring out where that gap is - and closing it.
         </p>
-        <p class="reveal reveal-delay-3">
+        <p class="reveal reveal-delay-3 visible">
           I’ve worked across corporate, startup, agency, and founder environments over the past decade, building brands from scratch and stepping into ones that need to move faster, sharpen their point of view, or fully reposition (I love sinking my teeth into a blank slate or rebrand.
         </p>
-        <p class="reveal reveal-delay-3">
+        <p class="reveal reveal-delay-3 visible">
           Brand ecosystems come naturally to me, because I view brands as people. Just like the best people, the best brands have distinctions that make you want to support them at first meeting and be friends for the long haul. I give talks about these distinctions and love the process of shaping them.
         </p>
-        <p class="reveal reveal-delay-3">
+        <!-- GIF: name your file "brands-people.gif" and place it alongside index.html -->
+        <img src="brands-people.gif" alt="Brands = People illustration" class="about-gif reveal reveal-delay-3">
+        <p class="reveal reveal-delay-3 visible">
           I reside in Santa Monica, Los Angeles. When I'm not creating, you can find me walking my British Shorthair cat Bean, exploring California wildlife, and planning trips around live music with my friends.
         </p>
-        <div class="about-credentials reveal reveal-delay-4">
+        <div class="about-credentials reveal reveal-delay-4 visible">
           <div class="credential-item"><div class="credential-dot"></div><span>Brand strategy &amp; campaign execution</span></div>
           <div class="credential-item"><div class="credential-dot"></div><span>Freelance team management</span></div>
           <div class="credential-item"><div class="credential-dot"></div><span>Product launches &amp; go-to-market</span></div>
@@ -873,19 +924,42 @@
     </div>
   </section>
 
-  <!-- ─── WORK ─── -->
-  <section class="work" id="work">
-    <div class="work-inner">
-      <div class="section-label reveal">Working with me</div>
-      <h2 class="work-headline reveal reveal-delay-1">
-        Types of Problems<br>
-        <span class="highlight">I Solve.</span>
-      </h2>
-      <p class="work-subline reveal reveal-delay-2">
-        The tools vary. The context changes. But the underlying challenge is almost always the same  - 
-        something valuable exists, and not enough people know it, feel it, or act on it.
-      </p>
-
+  <!-- ─── WORK + PHILOSOPHY ─── -->
+  <div class="work-phil-wrap" id="work">
+    <div class="work-phil-inner">
+      <!-- Left: Types of Problems -->
+      <div class="work-col">
+        <div class="section-label reveal visible">Working with me</div>
+        <h2 class="work-headline reveal reveal-delay-1 visible">
+          Types of Problems<br>
+          <span class="highlight">I Solve.</span>
+        </h2>
+        <div class="work-pill-row reveal reveal-delay-2 visible">
+          <button class="work-pill-btn" id="workCardsToggle" aria-expanded="false">
+            What people come to me for <span class="work-pill-arrow">↓</span>
+          </button>
+        </div>
+      </div>
+      <!-- Divider -->
+      <div class="work-phil-divider" aria-hidden="true"></div>
+      <!-- Right: Philosophy -->
+      <div class="phil-col">
+        <h2 class="philosophy-headline reveal">Philosophy</h2>
+        <div class="philosophy-body reveal reveal-delay-1">
+          <p>Great brands must <strong>first solve a real problem</strong> that a lot of people care about  -  and will gladly pay money and attention to <strong>you</strong> (over others) to get help with.</p>
+          <em>It's through this lens that the best identity, creative, and marketing can be born, and a business can sustain.</em>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <button class="work-pill-btn" id="phProcessToggle" aria-expanded="false">
+            Process <span class="work-pill-arrow">↓</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Work cards drawer - full width -->
+  <div class="work-cards-drawer" id="workCardsDrawer">
+    <div class="work-cards-inner">
       <div class="work-cards">
         <div class="work-card reveal reveal-delay-1">
           <div class="work-card-accent accent-lime"></div>
@@ -914,23 +988,10 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- ─── PROCESS DRAWER ─── -->
-  <div class="process-toggle-row">
-    <button class="process-toggle-btn" id="processToggle" aria-expanded="false">
-      How I approach it <span class="process-toggle-arrow">↓</span>
-    </button>
   </div>
-  <div class="process-drawer-wrap" id="processDrawer">
-    <div class="process-drawer">
-      <div class="process-top">
-        <h2 class="process-headline">A philosophy<br>before a playbook.</h2>
-        <div class="process-philosophy">
-          <p>Great brands must <strong>first solve a real problem</strong> that a lot of people care about  -  and will gladly pay money and attention to <strong>you</strong> (over others) to get help with.</p>
-          <em>It's through this lens that the best identity, creative, and marketing can be born, and a business can sustain.</em>
-        </div>
-      </div>
+  <!-- Philosophy process drawer - full width -->
+  <div class="ph-stages-drawer" id="phStagesDrawer">
+    <div class="ph-stages-inner">
       <div class="process-stages">
         <div class="process-stage">
           <div class="process-stage-num">Stage 01</div>
@@ -972,7 +1033,7 @@
   <!-- ─── SELECTED WORK ─── -->
   <section class="portfolio" id="portfolio">
     <div class="portfolio-inner">
-      <div class="portfolio-header reveal">
+      <div class="portfolio-header reveal visible">
         <div class="section-label">Projects</div>
         <h2 class="portfolio-headline">Chapters.</h2>
         <p class="portfolio-subline">Ten years across consumer, retail, startup, and agency environments. Each engagement was a different kind of build.</p>
@@ -982,11 +1043,11 @@
       <div class="portfolio-grid">
 
         <!-- Sephora -->
-        <div class="portfolio-card reveal reveal-delay-1">
+        <div class="portfolio-card reveal reveal-delay-1 visible">
           <div class="portfolio-card-media">
             <picture>
               <source srcset="sephora.gif" media="(prefers-reduced-motion: no-preference)" type="image/gif">
-              <img src="sephora.png" alt="Sephora" loading="lazy">
+              <img src="./index_files/sephora.png" alt="Sephora" loading="lazy">
             </picture>
           </div>
           <div class="portfolio-card-body">
@@ -996,11 +1057,11 @@
           </div>
         </div>
         <!-- Riley Rose -->
-        <div class="portfolio-card reveal reveal-delay-2">
+        <div class="portfolio-card reveal reveal-delay-2 visible">
           <div class="portfolio-card-media">
             <picture>
               <source srcset="riley-rose.gif" media="(prefers-reduced-motion: no-preference)" type="image/gif">
-              <img src="riley-rose.png" alt="Riley Rose" loading="lazy">
+              <img src="./index_files/riley-rose.png" alt="Riley Rose" loading="lazy">
             </picture>
           </div>
           <div class="portfolio-card-body">
@@ -1010,11 +1071,11 @@
           </div>
         </div>
         <!-- Suave -->
-        <div class="portfolio-card reveal reveal-delay-3">
+        <div class="portfolio-card reveal reveal-delay-3 visible">
           <div class="portfolio-card-media">
             <picture>
               <source srcset="suave.gif" media="(prefers-reduced-motion: no-preference)" type="image/gif">
-              <img src="suave.png" alt="Suave" loading="lazy">
+              <img src="./index_files/suave.png" alt="Suave" loading="lazy">
             </picture>
           </div>
           <div class="portfolio-card-body">
@@ -1024,11 +1085,11 @@
           </div>
         </div>
         <!-- ChapStick -->
-        <div class="portfolio-card reveal reveal-delay-1">
+        <div class="portfolio-card reveal reveal-delay-1 visible">
           <div class="portfolio-card-media">
             <picture>
               <source srcset="chapstick.gif" media="(prefers-reduced-motion: no-preference)" type="image/gif">
-              <img src="chapstick.png" alt="ChapStick" loading="lazy">
+              <img src="./index_files/chapstick.png" alt="ChapStick" loading="lazy">
             </picture>
           </div>
           <div class="portfolio-card-body">
@@ -1038,11 +1099,11 @@
           </div>
         </div>
         <!-- Blank Beauty -->
-        <div class="portfolio-card reveal reveal-delay-2">
+        <div class="portfolio-card reveal reveal-delay-2 visible">
           <div class="portfolio-card-media">
             <picture>
               <source srcset="blank-beauty.gif" media="(prefers-reduced-motion: no-preference)" type="image/gif">
-              <img src="blank-beauty.png" alt="Blank Beauty" loading="lazy">
+              <img src="./index_files/blank-beauty.png" alt="Blank Beauty" loading="lazy">
             </picture>
           </div>
           <div class="portfolio-card-body">
@@ -1052,11 +1113,11 @@
           </div>
         </div>
         <!-- Emerging Brands -->
-        <div class="portfolio-card reveal reveal-delay-3">
+        <div class="portfolio-card reveal reveal-delay-3 visible">
           <div class="portfolio-card-media">
             <picture>
               <source srcset="emerging-brands.gif" media="(prefers-reduced-motion: no-preference)" type="image/gif">
-              <img src="emerging-brands.png" alt="Emerging Brands" loading="lazy">
+              <img src="./index_files/emerging-brands.png" alt="Emerging Brands" loading="lazy">
             </picture>
           </div>
           <div class="portfolio-card-body">
@@ -1066,11 +1127,11 @@
           </div>
         </div>
         <!-- Hatfetti -->
-        <div class="portfolio-card reveal reveal-delay-1">
+        <div class="portfolio-card reveal reveal-delay-1 visible">
           <div class="portfolio-card-media">
             <picture>
               <source srcset="hatfetti.gif" media="(prefers-reduced-motion: no-preference)" type="image/gif">
-              <img src="hatfetti.png" alt="Hatfetti" loading="lazy">
+              <img src="./index_files/hatfetti.png" alt="Hatfetti" loading="lazy">
             </picture>
           </div>
           <div class="portfolio-card-body">
@@ -1089,7 +1150,7 @@
   <section class="case-studies" id="case-studies">
 
     <!-- Header -->
-    <div class="cs-section-header reveal">
+    <div class="cs-section-header reveal visible">
       <div class="cs-block-inner">
         <div class="section-label">Case Studies</div>
         <h2>Featured work.</h2>
@@ -1097,8 +1158,20 @@
       </div>
     </div>
 
+    <div class="cs-toggle-row">
+      <div class="cs-logo-row">
+        <img src="logo-suavechap.png" alt="Suave + ChapStick">
+        <img src="logo-disneywalmart.png" alt="Disney + Walmart">
+        <img src="logo-funnybevmo.png" alt="Funny Water + BevMo">
+      </div>
+      <button class="work-pill-btn" id="csToggle" aria-expanded="false">
+        Open case studies <span class="work-pill-arrow">↓</span>
+      </button>
+    </div>
+    <div class="cs-drawer-wrap" id="csDrawer">
+
     <!-- ── CASE 01: SUAVE + CHAPSTICK ── cream bg -->
-    <div class="cs-block bg-cream reveal">
+    <div class="cs-block bg-cream reveal visible">
       <div class="cs-block-inner">
 
         <div class="cs-meta">
@@ -1110,16 +1183,16 @@
           <div class="cs-client">Suave + ChapStick</div>
         </div>
 
-        <div class="cs-story-tile reveal" style="grid-template-columns: auto 1fr auto;">
-          <div class="cs-thumb-lg"><img src="suave-thumb.jpg" alt="Suave campaign thumbnail" loading="lazy"></div>
+        <div class="cs-story-tile reveal visible" style="grid-template-columns: auto 1fr auto;">
+          <div class="cs-thumb-lg"><img src="./index_files/suave-thumb.jpg" alt="Suave campaign thumbnail" loading="lazy"></div>
           <div>
             <div class="cs-intro-eyebrow">The story</div>
             <p class="cs-intro-text">When Suave was sold by Unilever and emerging as its own holding company, the brand needed a creative reset to reach a new generation. A Times Square launch became an ongoing multi-brand production contract  -  then expanded to include ChapStick after its acquisition by Suave.</p>
           </div>
-          <div class="cs-thumb-lg"><img src="chaptstick-thumb.jpg" alt="ChapStick campaign thumbnail" loading="lazy"></div>
+          <div class="cs-thumb-lg"><img src="./index_files/chaptstick-thumb.jpg" alt="ChapStick campaign thumbnail" loading="lazy"></div>
         </div>
 
-        <div class="cs-work reveal">
+        <div class="cs-work reveal visible">
           <div class="cs-copy-col">
             <div class="cs-copy-section">
                 <div class="cs-section-label">What I led</div>
@@ -1128,7 +1201,7 @@
                   <li>Produced the Times Square digital billboard campaign launch</li>
                   <li>Built ongoing creative production pipeline for digital, social, and retail assets  -  deployed at Walmart, Target, CVS, and Dollar General</li>
                   <li>Led visual direction for product reanimation and packaging refreshes</li>
-                  <li>Managed monthly creator content and campaign assets across Hair, Bath & Body, Personal Care, Men's, and Kids lines</li>
+                  <li>Managed monthly creator content and campaign assets across Hair, Bath &amp; Body, Personal Care, Men's, and Kids lines</li>
                   <li>Social-first content strategy and full brand reset for ChapStick across IG and TikTok</li>
                   <li>Produced ChapStick's Honey Nourish launch  -  first major product innovation as a heritage brand</li>
                   <li>Built ChapStick's creator program including briefs, benchmarks, and early community building</li>
@@ -1143,14 +1216,14 @@
               </div>
           </div>
           <div class="cs-collage" style="grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr; height:clamp(480px,58vw,680px);">
-            <div class="cs-collage-item" style="grid-row:1/3;"><img src="suave-5.jpg" alt="Suave at Target" loading="lazy"></div>
-            <div class="cs-collage-item"><img src="suave-3.jpg" alt="Suave campaign" loading="lazy"></div>
-            <div class="cs-collage-item"><img src="chapstick-4.jpg" alt="ChapStick campaign" loading="lazy"></div>
-            <div class="cs-collage-item"><img src="suave-6.jpeg" alt="Suave clarifying shampoo" loading="lazy"></div>
-            <div class="cs-collage-item"><img src="chapstick-2.jpg" alt="ChapStick campaign" loading="lazy"></div>
-            <div class="cs-collage-item"><img src="suave-7.jpeg" alt="Suave Walmart" loading="lazy"></div>
-            <div class="cs-collage-item"><img src="suave-6.jpg" alt="Suave deodorant" loading="lazy"></div>
-            <div class="cs-collage-item"><img src="chapstick-3.jpg" alt="ChapStick travel" loading="lazy"></div>
+            <div class="cs-collage-item" style="grid-row:1/3;"><img src="./index_files/suave-5.jpg" alt="Suave at Target" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="./index_files/suave-3.jpg" alt="Suave campaign" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="./index_files/chapstick-4.jpg" alt="ChapStick campaign" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="./index_files/suave-6.jpeg" alt="Suave clarifying shampoo" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="./index_files/chapstick-2.jpg" alt="ChapStick campaign" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="./index_files/suave-7.jpeg" alt="Suave Walmart" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="./index_files/suave-6.jpg" alt="Suave deodorant" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="./index_files/chapstick-3.jpg" alt="ChapStick travel" loading="lazy"></div>
           </div>
         </div>
 
@@ -1158,7 +1231,7 @@
     </div>
 
     <!-- ── CASE 02: DISNEY ── dark bg -->
-    <div class="cs-block bg-dark reveal">
+    <div class="cs-block bg-dark reveal visible">
       <div class="cs-block-inner">
 
         <div class="cs-meta">
@@ -1170,15 +1243,15 @@
           <div class="cs-client">Disney + Walmart</div>
         </div>
 
-        <div class="cs-story-tile reveal">
-          <div class="cs-thumb-lg"><img src="disney-thumb.jpg" alt="Disney Moana 2 campaign thumbnail" loading="lazy"></div>
+        <div class="cs-story-tile reveal visible">
+          <div class="cs-thumb-lg"><img src="./index_files/disney-thumb.jpg" alt="Disney Moana 2 campaign thumbnail" loading="lazy"></div>
           <div>
             <div class="cs-intro-eyebrow">The story</div>
             <p class="cs-intro-text">Disney's Walmart timeline compressed ahead of the Moana 2 launch. The team needed a full national campaign  -  cast, shot, and delivered  -  in one week. I built the production from scratch inside that window.</p>
           </div>
         </div>
 
-        <div class="cs-work reveal">
+        <div class="cs-work reveal visible">
           <div class="cs-copy-col">
             <div class="cs-copy-section">
                 <div class="cs-section-label">What I led</div>
@@ -1200,8 +1273,8 @@
               </div>
           </div>
           <div class="cs-collage" style="grid-template-columns:1fr 1fr; grid-template-rows:1fr; height:clamp(300px,38vw,460px);">
-            <div class="cs-collage-item"><img src="disney-2.jpg" alt="Disney Moana 2 campaign" loading="lazy"></div>
-            <div class="cs-collage-item"><img src="disney-3.jpg" alt="Disney Moana 2 campaign" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="./index_files/disney-2.jpg" alt="Disney Moana 2 campaign" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="./index_files/disney-3.jpg" alt="Disney Moana 2 campaign" loading="lazy"></div>
           </div>
         </div>
 
@@ -1209,7 +1282,7 @@
     </div>
 
     <!-- ── CASE 03: FUNNY WATER ── white bg -->
-    <div class="cs-block bg-white reveal">
+    <div class="cs-block bg-white reveal visible">
       <div class="cs-block-inner">
 
         <div class="cs-meta">
@@ -1221,15 +1294,15 @@
           <div class="cs-client">Funny Water</div>
         </div>
 
-        <div class="cs-story-tile reveal">
-          <div class="cs-thumb-lg"><img src="funny-thumb.jpg" alt="Funny Water campaign thumbnail" loading="lazy"></div>
+        <div class="cs-story-tile reveal visible">
+          <div class="cs-thumb-lg"><img src="./index_files/funny-thumb.jpg" alt="Funny Water campaign thumbnail" loading="lazy"></div>
           <div>
             <div class="cs-intro-eyebrow">The story</div>
             <p class="cs-intro-text">Funny Water had a great product and a blurry brand. I came in to clarify the positioning, build a consumer-first creative system, and develop performance assets that actually converted  -  contributing to national retail expansion into BevMo.</p>
           </div>
         </div>
 
-        <div class="cs-work reveal">
+        <div class="cs-work reveal visible">
           <div class="cs-copy-col">
             <div class="cs-copy-section">
                 <div class="cs-section-label">What I led</div>
@@ -1251,9 +1324,9 @@
               </div>
           </div>
           <div class="cs-collage" style="grid-template-columns:1fr 1fr; grid-template-rows:2fr 1fr; height:clamp(340px,44vw,520px);">
-            <div class="cs-collage-item"><img src="funny-2.jpg" alt="Funny Water campaign" loading="lazy"></div>
-            <div class="cs-collage-item"><img src="funny-3.jpg" alt="Funny Water campaign" loading="lazy"></div>
-            <div class="cs-collage-item" style="grid-column:1/-1;"><img src="funny-4.jpg" alt="Funny Water  -  Find Your Happy Place" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="./index_files/funny-2.jpg" alt="Funny Water campaign" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="./index_files/funny-3.jpg" alt="Funny Water campaign" loading="lazy"></div>
+            <div class="cs-collage-item" style="grid-column:1/-1;"><img src="./index_files/funny-4.jpg" alt="Funny Water  -  Find Your Happy Place" loading="lazy"></div>
           </div>
         </div>
 
@@ -1261,7 +1334,7 @@
     </div>
 
     <!-- ── CASE 04: BLANK BEAUTY ── peach bg (the finale) -->
-    <div class="cs-block bg-peach reveal">
+    <div class="cs-block bg-peach reveal visible">
       <div class="cs-block-inner">
 
         <div class="cs-meta">
@@ -1273,15 +1346,15 @@
           <div class="cs-client">Blank Beauty</div>
         </div>
 
-        <div class="cs-story-tile reveal">
-          <div class="cs-thumb-lg"><img src="bb-thumb.jpg" alt="Blank Beauty campaign thumbnail" loading="lazy"></div>
+        <div class="cs-story-tile reveal visible">
+          <div class="cs-thumb-lg"><img src="./index_files/bb-thumb.jpg" alt="Blank Beauty campaign thumbnail" loading="lazy"></div>
           <div>
             <div class="cs-intro-eyebrow">The story</div>
             <p class="cs-intro-text">The product was real. The brand wasn't. I joined Blank Beauty at zero and built the brand infrastructure from scratch  -  positioning, consumer research, a full website and social media redesign, and the marketing systems that drove $30K/month in DTC sales within the first quarter. The work got noticed: WSJ, Forbes, Vogue Business, Entrepreneur, and others picked up the brand in those first months  -  editorially driven, not bought.</p>
           </div>
         </div>
 
-        <div class="cs-work reveal">
+        <div class="cs-work reveal visible">
           <div class="cs-copy-col">
             <div class="cs-copy-section">
                 <div class="cs-section-label">What I led</div>
@@ -1305,18 +1378,20 @@
               </div>
           </div>
           <div class="cs-collage" style="grid-template-columns:1fr 1fr 1fr; grid-template-rows:2fr 1fr; height:clamp(340px,44vw,520px);">
-            <div class="cs-collage-item"><img src="bb-2.jpg" alt="Blank Beauty campaign" loading="lazy"></div>
-            <div class="cs-collage-item"><img src="bb-3.jpg" alt="Blank Beauty campaign" loading="lazy"></div>
-            <div class="cs-collage-item"><img src="bb-4.jpg" alt="Blank Beauty campaign" loading="lazy"></div>
-            <div class="cs-collage-item" style="grid-column:1/-1;"><img src="bb-5.jpg" alt="Blank Beauty  -  customizable nail polish" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="./index_files/bb-2.jpg" alt="Blank Beauty campaign" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="./index_files/bb-3.jpg" alt="Blank Beauty campaign" loading="lazy"></div>
+            <div class="cs-collage-item"><img src="./index_files/bb-4.jpg" alt="Blank Beauty campaign" loading="lazy"></div>
+            <div class="cs-collage-item" style="grid-column:1/-1;"><img src="./index_files/bb-5.jpg" alt="Blank Beauty  -  customizable nail polish" loading="lazy"></div>
           </div>
         </div>
 
       </div>
     </div>
 
+    </div><!-- /cs-drawer-wrap -->
+
     <!-- ── MINI 0→1 SECTION ── lavender wash bg -->
-    <div class="cs-mini-section reveal">
+    <div class="cs-mini-section reveal visible">
       <div class="cs-mini-inner">
 
         <div class="cs-mini-header">
@@ -1328,9 +1403,9 @@
         <div class="cs-mini-grid">
 
           <!-- Beauty Bakerie -->
-          <div class="cs-mini-card reveal">
+          <div class="cs-mini-card reveal visible">
             <div class="cs-mini-img">
-              <img src="mini-beauty-bakerie.jpg" alt="Beauty Bakerie brand campaigns" loading="lazy">
+              <img src="./index_files/mini-beauty-bakerie.jpg" alt="Beauty Bakerie brand campaigns" loading="lazy">
             </div>
             <div class="cs-mini-body">
               <div class="cs-mini-pills">
@@ -1343,9 +1418,9 @@
           </div>
 
           <!-- SELFiES -->
-          <div class="cs-mini-card reveal">
+          <div class="cs-mini-card reveal visible">
             <div class="cs-mini-img">
-              <img src="mini-selfies.jpg" alt="SELFiES Cannabis brand" loading="lazy">
+              <img src="./index_files/mini-selfies.jpg" alt="SELFiES Cannabis brand" loading="lazy">
             </div>
             <div class="cs-mini-body">
               <div class="cs-mini-pills">
@@ -1358,9 +1433,9 @@
           </div>
 
           <!-- Leverden -->
-          <div class="cs-mini-card reveal">
+          <div class="cs-mini-card reveal visible">
             <div class="cs-mini-img">
-              <img src="mini-leverden.jpg" alt="Leverden luxury home goods" loading="lazy">
+              <img src="./index_files/mini-leverden.jpg" alt="Leverden luxury home goods" loading="lazy">
             </div>
             <div class="cs-mini-body">
               <div class="cs-mini-pills">
@@ -1375,7 +1450,7 @@
           <!-- Pancake Now -->
           <div class="cs-mini-card reveal">
             <div class="cs-mini-img">
-              <img src="mini-pancake.jpg" alt="Pancake Now brand" loading="lazy">
+              <img src="./index_files/mini-pancake.jpg" alt="Pancake Now brand" loading="lazy">
             </div>
             <div class="cs-mini-body">
               <div class="cs-mini-pills">
@@ -1390,7 +1465,7 @@
           <!-- Premium Jane -->
           <div class="cs-mini-card reveal">
             <div class="cs-mini-img">
-              <img src="mini-premium-jane.jpg" alt="Premium Jane wellness brand" loading="lazy">
+              <img src="./index_files/mini-premium-jane.jpg" alt="Premium Jane wellness brand" loading="lazy">
             </div>
             <div class="cs-mini-body">
               <div class="cs-mini-pills">
@@ -1405,7 +1480,7 @@
           <!-- Khelp -->
           <div class="cs-mini-card reveal">
             <div class="cs-mini-img">
-              <img src="mini-khelp.jpg" alt="Khelp supplement brand" loading="lazy">
+              <img src="./index_files/mini-khelp.jpg" alt="Khelp supplement brand" loading="lazy">
             </div>
             <div class="cs-mini-body">
               <div class="cs-mini-pills">
@@ -1420,7 +1495,7 @@
           <!-- Forest Riot -->
           <div class="cs-mini-card reveal">
             <div class="cs-mini-img">
-              <img src="mini-forest-riot.jpg" alt="Forest Riot skincare US launch" loading="lazy">
+              <img src="./index_files/mini-forest-riot.jpg" alt="Forest Riot skincare US launch" loading="lazy">
             </div>
             <div class="cs-mini-body">
               <div class="cs-mini-pills">
@@ -1435,7 +1510,7 @@
           <!-- HPPY Skin -->
           <div class="cs-mini-card reveal">
             <div class="cs-mini-img">
-              <img src="mini-hppy-skin.jpg" alt="HPPY Skin brand launch" loading="lazy">
+              <img src="./index_files/mini-hppy-skin.jpg" alt="HPPY Skin brand launch" loading="lazy">
             </div>
             <div class="cs-mini-body">
               <div class="cs-mini-pills">
@@ -1450,7 +1525,7 @@
           <!-- EVER -->
           <div class="cs-mini-card reveal">
             <div class="cs-mini-img">
-              <img src="mini-ever.jpg" alt="EVER skincare rebrand" loading="lazy">
+              <img src="./index_files/mini-ever.jpg" alt="EVER skincare rebrand" loading="lazy">
             </div>
             <div class="cs-mini-body">
               <div class="cs-mini-pills">
@@ -1465,7 +1540,7 @@
           <!-- La Peony Clothing -->
           <div class="cs-mini-card reveal">
             <div class="cs-mini-img">
-              <img src="mini-la-peony.jpg" alt="La Peony Clothing editorial campaign" loading="lazy">
+              <img src="./index_files/mini-la-peony.jpg" alt="La Peony Clothing editorial campaign" loading="lazy">
             </div>
             <div class="cs-mini-body">
               <div class="cs-mini-pills">
@@ -1480,7 +1555,7 @@
           <!-- Hatfetti -->
           <div class="cs-mini-card reveal">
             <div class="cs-mini-img">
-              <img src="mini-hatfetti.jpg" alt="Hatfetti luxury sustainable sun hats" loading="lazy">
+              <img src="./index_files/mini-hatfetti.jpg" alt="Hatfetti luxury sustainable sun hats" loading="lazy">
             </div>
             <div class="cs-mini-body">
               <div class="cs-mini-pills">
@@ -1495,7 +1570,7 @@
           <!-- Windskin -->
           <div class="cs-mini-card reveal">
             <div class="cs-mini-img">
-              <img src="mini-windskin.jpg" alt="Windskin performance sunscreen brand" loading="lazy">
+              <img src="./index_files/mini-windskin.jpg" alt="Windskin performance sunscreen brand" loading="lazy">
             </div>
             <div class="cs-mini-body">
               <div class="cs-mini-pills">
@@ -1567,7 +1642,7 @@
           </p>
         </div>
         <div class="field-notes-portrait evolving-header-portrait" style="margin-top: 40px; border-color: rgba(255,255,255,0.12);">
-          <img src="selfie.jpeg" alt="Hannah McGough" loading="lazy">
+          <img src="./index_files/selfie.jpeg" alt="Hannah McGough" loading="lazy">
         </div>
       </div>
 
@@ -1607,7 +1682,7 @@
           <div class="section-label reveal">Experience</div>
           <h2 class="experience-headline reveal reveal-delay-1">Career timeline.</h2>
         </div>
-        <a href="#contact" class="resume-link reveal reveal-delay-2">
+        <a href="https://www.hannahmcgough.com/#contact" class="resume-link reveal reveal-delay-2">
           Request full resume →
         </a>
       </div>
@@ -1711,7 +1786,7 @@
           <p class="field-notes-sub">What I'm thinking about  -  on brand, behavior, and what actually deserves attention.</p>
         </div>
         <div class="field-notes-portrait">
-          <img src="lilacfloor.png" alt="Hannah McGough">
+          <img src="./index_files/lilacfloor.png" alt="Hannah McGough">
         </div>
       </div>
 
@@ -1725,7 +1800,7 @@
             <p>That era is closing. We are now in a period I call the Great Consumer Audit - a mass, coordinated reassessment of whether brands actually deserve the trust and loyalty they've been coasting on. Ingredient labels are getting read. Supply chains are getting Googled. "Clean" claims are getting fact-checked before checkout.</p>
             <p>The brands about to face a reckoning are the ones built on surface signals. For the ones that did the actual work - the ones with something real underneath - this moment should feel like relief. Which brings me to the stat that started all of this: 30,000 new consumer products hit the US market every year, and more than 80% fail within two years. But I have some ideas for how to avoid being in that 80%.</p>
           </div>
-          <a href="https://www.linkedin.com/pulse/great-consumer-audit-here-its-coming-your-brand-hannah-mcgough-zky1c/" target="_blank" rel="noopener" class="field-note-link">Read on LinkedIn &rarr;</a>
+          <a href="https://www.linkedin.com/pulse/great-consumer-audit-here-its-coming-your-brand-hannah-mcgough-zky1c/" target="_blank" rel="noopener" class="field-note-link">Read on LinkedIn →</a>
         </div>
 
         <div class="field-note-card reveal reveal-delay-2">
@@ -1736,7 +1811,7 @@
             <p>For product brands, this is an acquisition and credibility opportunity that most are leaving on the table. For community builders, it's a case for investing in brand strategy to attract the sponsors and partners they actually deserve - not just whoever shows up with a budget.</p>
             <p>Both sides are underutilizing the other. Brands default to reach metrics. Communities default to whatever deal comes in. The real work is building a partnership model where the fit is the point.</p>
           </div>
-          <a href="https://www.linkedin.com/pulse/communities-new-brands-so-brand-them-hannah-mcgough-wvprc/" target="_blank" rel="noopener" class="field-note-link">Read on LinkedIn &rarr;</a>
+          <a href="https://www.linkedin.com/pulse/communities-new-brands-so-brand-them-hannah-mcgough-wvprc/" target="_blank" rel="noopener" class="field-note-link">Read on LinkedIn →</a>
         </div>
 
         <div class="field-note-card reveal reveal-delay-3">
@@ -1798,7 +1873,7 @@
       <div class="footer-links">
         <a href="mailto:hello@hannahmcgough.com">Email</a>
         <a href="https://www.linkedin.com/in/hannahmcgough/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="#top">Back to top ↑</a>
+        <a href="https://www.hannahmcgough.com/#top">Back to top ↑</a>
       </div>
     </div>
   </footer>
@@ -1886,16 +1961,44 @@
 
 
   <script>
-    const processToggle = document.getElementById('processToggle');
-    const processDrawer = document.getElementById('processDrawer');
-    if (processToggle && processDrawer) {
-      processToggle.addEventListener('click', () => {
-        const isOpen = processDrawer.classList.toggle('open');
-        processToggle.classList.toggle('open', isOpen);
-        processToggle.setAttribute('aria-expanded', isOpen);
-        processToggle.querySelector('.process-toggle-arrow').textContent = isOpen ? '↑' : '↓';
-        if (isOpen) setTimeout(() => processDrawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 80);
+    // Work cards drawer
+    const workCardsToggle = document.getElementById('workCardsToggle');
+    const workCardsDrawer = document.getElementById('workCardsDrawer');
+    if (workCardsToggle && workCardsDrawer) {
+      workCardsToggle.addEventListener('click', () => {
+        const isOpen = workCardsDrawer.classList.toggle('open');
+        workCardsToggle.classList.toggle('open', isOpen);
+        workCardsToggle.setAttribute('aria-expanded', isOpen);
+        workCardsToggle.querySelector('.work-pill-arrow').textContent = isOpen ? '↑' : '↓';
+        if (isOpen) setTimeout(() => workCardsDrawer.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+      });
+    }
+    // Philosophy process drawer
+    const phProcessToggle = document.getElementById('phProcessToggle');
+    const phStagesDrawer = document.getElementById('phStagesDrawer');
+    if (phProcessToggle && phStagesDrawer) {
+      phProcessToggle.addEventListener('click', () => {
+        const isOpen = phStagesDrawer.classList.toggle('open');
+        phProcessToggle.classList.toggle('open', isOpen);
+        phProcessToggle.setAttribute('aria-expanded', isOpen);
+        phProcessToggle.querySelector('.work-pill-arrow').textContent = isOpen ? '↑' : '↓';
+        if (isOpen) setTimeout(() => phStagesDrawer.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
       });
     }
   </script>
-</body></html>
+  <script>
+    const csToggle = document.getElementById('csToggle');
+    const csDrawer = document.getElementById('csDrawer');
+    if (csToggle && csDrawer) {
+      csToggle.addEventListener('click', () => {
+        const isOpen = csDrawer.classList.toggle('open');
+        csToggle.classList.toggle('open', isOpen);
+        csToggle.setAttribute('aria-expanded', isOpen);
+        csToggle.querySelector('.work-pill-arrow').textContent = isOpen ? '↑' : '↓';
+        csToggle.childNodes[0].textContent = isOpen ? 'Close case studies ' : 'Open case studies ';
+        if (isOpen) setTimeout(() => csDrawer.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+      });
+    }
+  </script>
+
+<div id="96fb8a500026d8" style="font-size: 16px; color: black; display: block;"><template shadowrootmode="closed"></template></div><div class="calendly-frame-tag" manager_id="e2f32306-19d0-4e07-902d-d9b150508f19" id="e2f32306-19d0-4e07-902d-d9b150508f19" style="height: 0px; width: 0px; visibility: hidden;"></div><div class="calendly-lifecycle-optibutton_singleton"><template shadowrootmode="closed"><div class="calendly-opti-root"></div></template></div><span data-test-id="pinterest-save-button" style="border-radius:10px !important;text-indent:12px !important;width:auto !important;height:20px !important;padding:0px 8px !important;text-align:center !important;vertical-align:middle !important;font:bold 11px / 20px &quot;Helvetica Neue&quot;, Helvetica, sans-serif !important;color:rgb(255, 255, 255) !important;background:url(&quot;data:image/svg+xml;base64,PHN2ZyBpZD0ic291cmNlIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNiIgY3k9IjYiIHI9IjYiIGZpbGw9IiNFNjAwMjMiPjwvY2lyY2xlPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNkMwIDguNTYxNSAxLjYwNTUgMTAuNzQ4NSAzLjg2NSAxMS42MDlDMy44MSAxMS4xNDA1IDMuNzUxNSAxMC4zNjggMy44Nzc1IDkuODI2QzMuOTg2IDkuMzYgNC41NzggNi44NTcgNC41NzggNi44NTdDNC41NzggNi44NTcgNC4zOTk1IDYuNDk5NSA0LjM5OTUgNS45N0M0LjM5OTUgNS4xNCA0Ljg4MDUgNC41MiA1LjQ4IDQuNTJDNS45OSA0LjUyIDYuMjM2IDQuOTAyNSA2LjIzNiA1LjM2MUM2LjIzNiA1Ljg3MzUgNS45MDk1IDYuNjM5NSA1Ljc0MSA3LjM1QzUuNjAwNSA3Ljk0NDUgNi4wMzk1IDguNDI5NSA2LjYyNTUgOC40Mjk1QzcuNjg3IDguNDI5NSA4LjUwMzUgNy4zMSA4LjUwMzUgNS42OTRDOC41MDM1IDQuMjYzNSA3LjQ3NTUgMy4yNjQgNi4wMDggMy4yNjRDNC4zMDkgMy4yNjQgMy4zMTE1IDQuNTM4NSAzLjMxMTUgNS44NTZDMy4zMTE1IDYuMzY5NSAzLjUwOSA2LjkxOTUgMy43NTYgNy4yMTlDMy44MDQ1IDcuMjc4NSAzLjgxMiA3LjMzIDMuNzk3NSA3LjM5MDVDMy43NTIgNy41Nzk1IDMuNjUxIDcuOTg1IDMuNjMxNSA4LjA2OEMzLjYwNSA4LjE3NyAzLjU0NSA4LjIwMDUgMy40MzE1IDguMTQ3NUMyLjY4NTUgNy44MDA1IDIuMjE5NSA2LjcxIDIuMjE5NSA1LjgzNEMyLjIxOTUgMy45NDk1IDMuNTg4IDIuMjE5NSA2LjE2NTUgMi4yMTk1QzguMjM3NSAyLjIxOTUgOS44NDggMy42OTYgOS44NDggNS42NjlDOS44NDggNy43Mjc1IDguNTUwNSA5LjM4NDUgNi43NDg1IDkuMzg0NUM2LjE0MyA5LjM4NDUgNS41NzQ1IDkuMDY5NSA1LjM3OTUgOC42OThDNS4zNzk1IDguNjk4IDUuMDggOS44MzkgNS4wMDc1IDEwLjExOEM0Ljg2NjUgMTAuNjYgNC40NzU1IDExLjM0NiA0LjIzMyAxMS43MzU1QzQuNzkyIDExLjkwNzUgNS4zODUgMTIgNiAxMkM5LjMxMzUgMTIgMTIgOS4zMTM1IDEyIDZDMTIgMi42ODY1IDkuMzEzNSAwIDYgMEMyLjY4NjUgMCAwIDIuNjg2NSAwIDZaIiBmaWxsPSJ3aGl0ZSI+PC9wYXRoPgo8L3N2Zz4=&quot;) 4px 50% / 12px 12px no-repeat rgb(230, 0, 35) !important;position:absolute !important;opacity:1 !important;z-index:9007199254740990 !important;display:none !important;cursor:pointer !important;border:none !important;-webkit-font-smoothing:antialiased !important;top:0 !important;left:0 !important;display:none !important;top:9637px !important;left:817px !important">Save</span></body></html>
