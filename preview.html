@@ -201,13 +201,24 @@
   .cs-impact li::before{background:var(--ink);height:2px;top:8px}
 
   .cs-images{display:grid;gap:8px}
+  /* 2-up: portrait pair, side by side */
   .cs-images.imgs-2{grid-template-columns:1fr 1fr}
-  .cs-images.imgs-3{grid-template-columns:1fr;grid-template-rows:1fr 1fr;gap:8px}
-  .cs-images.imgs-3 .cs-img:first-child{grid-row:1/2}
-  .cs-images.imgs-4{grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:8px}
+  .cs-images.imgs-2 .cs-img{aspect-ratio:3/4}
+  /* 3-up: 1 wide hero on top, 2 squares below */
+  .cs-images.imgs-3{grid-template-columns:1fr 1fr}
+  .cs-images.imgs-3 .cs-img:first-child{grid-column:span 2;aspect-ratio:16/9}
+  .cs-images.imgs-3 .cs-img:not(:first-child){aspect-ratio:1/1}
+  /* 4-up: clean 2x2 of squares */
+  .cs-images.imgs-4{grid-template-columns:1fr 1fr}
+  .cs-images.imgs-4 .cs-img{aspect-ratio:1/1}
+  /* 5-up: 1 tall portrait left + 4 squares right (2 cols x 2 rows) */
+  .cs-images.imgs-5{grid-template-columns:1.4fr 1fr 1fr}
+  .cs-images.imgs-5 .cs-img:first-child{grid-row:span 2;aspect-ratio:3/5}
+  .cs-images.imgs-5 .cs-img:not(:first-child){aspect-ratio:1/1}
+  /* base */
   .cs-img{aspect-ratio:4/3;background:rgba(26,24,23,.06);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:14px;color:rgba(26,24,23,.4);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:500}
   .cs-img.tall{aspect-ratio:3/4}
-  .cs-img.wide{aspect-ratio:16/9;grid-column:span 2}
+  .cs-img.wide{grid-column:span 2}
   .cs-img.g-suave{background:linear-gradient(140deg,#C2BAEC 0%,#E5D8C5 100%)}
   .cs-img.g-chap{background:linear-gradient(140deg,#F4C9A8 0%,#E8D4B8 100%)}
   .cs-img.g-bb{background:linear-gradient(155deg,#E5D8C5 0%,#F4C9A8 100%)}
@@ -549,6 +560,8 @@
     /* shorten the right-side images on mobile so they don't dominate */
     .cs-images{margin-top:12px}
     .cs-images.imgs-3,.cs-images.imgs-4{height:auto;grid-template-rows:auto}
+    .cs-images.imgs-5{grid-template-columns:1fr 1fr}
+    .cs-images.imgs-5 .cs-img:first-child{grid-row:auto;grid-column:1/-1;aspect-ratio:16/9}
 
     /* sephora & emerging brand list-grids — tighter */
     .sephora-grid li{font-size:12.5px}
@@ -709,8 +722,8 @@
                 </div>
               </div>
               <div class="cs-images imgs-2">
-                <div class="cs-img g-sephora tall">[ sephora.gif ]</div>
-                <div class="cs-img g-sephora tall">[ sephorahq.png ]</div>
+                <div class="cs-img g-sephora">[ sephora.gif ]</div>
+                <div class="cs-img g-sephora">[ sephorahq.png ]</div>
               </div>
             </div>
             <button class="cs-close" data-close>Close <span class="x">×</span></button>
@@ -752,7 +765,7 @@
                 </div>
               </div>
               <div class="cs-images imgs-3">
-                <div class="cs-img g-chap wide">[ chapstick-4.jpg ]</div>
+                <div class="cs-img g-chap">[ chapstick-4.jpg ]</div>
                 <div class="cs-img g-chap">[ chapstick-2.jpg ]</div>
                 <div class="cs-img g-chap">[ chapstick-3.jpg ]</div>
               </div>
@@ -796,9 +809,11 @@
                   </ul>
                 </div>
               </div>
-              <div class="cs-images imgs-4">
-                <div class="cs-img g-suave wide">[ suave-5.jpg ]</div>
+              <div class="cs-images imgs-5">
+                <div class="cs-img g-suave">[ suave-5.jpg ]</div>
                 <div class="cs-img g-suave">[ suave-3.jpg ]</div>
+                <div class="cs-img g-suave">[ suave-6.jpeg ]</div>
+                <div class="cs-img g-suave">[ suave-6.jpg ]</div>
                 <div class="cs-img g-suave">[ suave-7.jpeg ]</div>
               </div>
             </div>
@@ -881,9 +896,10 @@
                 </div>
               </div>
               <div class="cs-images imgs-4">
-                <div class="cs-img g-bb wide">[ bb-2.jpg ]</div>
+                <div class="cs-img g-bb">[ bb-2.jpg ]</div>
                 <div class="cs-img g-bb">[ bb-3.jpg ]</div>
                 <div class="cs-img g-bb">[ bb-4.jpg ]</div>
+                <div class="cs-img g-bb">[ bb-5.jpg ]</div>
               </div>
             </div>
             <button class="cs-close" data-close>Close <span class="x">×</span></button>
