@@ -119,7 +119,7 @@
   .portrait{position:relative;background:var(--lilac);aspect-ratio:4/5;overflow:hidden}
   .portrait::before{content:"";position:absolute;inset:0;background:linear-gradient(165deg,rgba(244,201,168,.5) 0%,transparent 55%,rgba(194,186,236,.4) 100%);mix-blend-mode:screen}
   .portrait .ph{position:absolute;inset:0;display:flex;align-items:flex-end;padding:20px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(26,24,23,.45);font-weight:500}
-  .portrait .ph::after{content:"[ lilac-ringlight.png ]"}
+  .portrait .ph::after{content:none}
   .portrait .cap{position:absolute;bottom:18px;right:20px;font-family:'Instrument Serif',serif;font-style:italic;font-size:16px;color:rgba(26,24,23,.7)}
 
   .deck{display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:clamp(8px,2vh,24px);max-width:540px}
@@ -227,6 +227,15 @@
   }
   .cs-more-btn .arr{font-family:'Instrument Serif',serif;font-style:italic;font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;margin-left:6px}
 
+  /* hide all leftover mock-stage filename placeholders */
+  .logo-ph,.boot-tile-ph,.ph-text{display:none}
+  /* let real images fill their frames */
+  .portrait>img,.p-portrait>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .portrait::before,.p-portrait::before{z-index:1;pointer-events:none}
+  .portrait .cap{z-index:2}
+  .cs-img>img,.eb-card-img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1}
+  .cs-img,.eb-card-img{position:relative}
+
   /* sephora-specific list of brands she launched */
   .sephora-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px 18px;margin-top:8px}
   .sephora-grid li{font-size:13px;color:var(--ink);font-weight:500;padding-left:0}
@@ -311,7 +320,7 @@
   .eng-num{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500}
   .eng h3{font-weight:700;font-size:clamp(28px,3vw,42px);letter-spacing:-.025em;line-height:1}
   .eng h3 .it{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--ink-soft);font-size:.78em;display:block;margin-top:6px}
-  .eng-desc{font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;line-height:1.4;color:var(--ink-soft);max-width:440px}
+  .eng-desc{font-size:15.5px;line-height:1.55;color:var(--ink-soft);max-width:440px;font-weight:400}
   .eng-meta{display:grid;grid-template-columns:auto 1fr;gap:6px 24px;font-size:13px;color:var(--ink-soft);margin-top:auto;padding-top:24px;border-top:1px solid var(--hair)}
   .eng-meta dt{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;align-self:center}
   .eng .inq{margin-top:14px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);font-weight:600;display:inline-flex;align-items:center;gap:10px}
@@ -323,9 +332,9 @@
   .p-portrait{aspect-ratio:4/5;background:var(--peach);position:relative;overflow:hidden}
   .p-portrait::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(244,201,168,0) 0%,rgba(194,186,236,.45) 100%);mix-blend-mode:multiply}
   .p-portrait .ph{position:absolute;inset:0;display:flex;align-items:flex-end;padding:20px;color:rgba(26,24,23,.4);font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:500}
-  .p-portrait .ph::after{content:"[ headshot-4.png ]"}
+  .p-portrait .ph::after{content:none}
   .p-text{display:flex;flex-direction:column;gap:22px;max-width:660px}
-  .p-text .lead{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(22px,2.4vw,32px);line-height:1.3;color:var(--ink);margin-bottom:6px}
+  .p-text .lead{font-weight:500;font-size:clamp(20px,2.2vw,28px);line-height:1.32;letter-spacing:-.01em;color:var(--ink);margin-bottom:6px}
   .p-text p{font-size:15px;line-height:1.7;color:var(--ink-soft)}
   .p-text p b{color:var(--ink);font-weight:600}
   .p-sig{margin-top:14px;font-family:'Instrument Serif',serif;font-style:italic;font-size:24px;color:var(--ink)}
@@ -358,7 +367,7 @@
   .bp h3{font-weight:700;font-size:clamp(48px,8vw,128px);line-height:.88;letter-spacing:-.045em;color:var(--ink)}
   .bp h3 .eq{color:var(--chartreuse);display:inline-block;margin:0 .04em}
   .bp h3 .ppl{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;display:block;color:var(--ink-soft)}
-  .bp-sub{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(18px,1.7vw,22px);line-height:1.4;color:var(--ink-soft);max-width:520px;margin-top:18px}
+  .bp-sub{font-weight:400;font-size:clamp(16px,1.5vw,19px);line-height:1.5;color:var(--ink-soft);max-width:520px;margin-top:18px}
 
   .bp-figure{
     aspect-ratio:5/4;background:var(--pale-lilac);
@@ -408,7 +417,7 @@
   .note.tone-peach .tag{background:var(--peach);color:var(--ink)}
   .note h4{font-weight:700;font-size:20px;line-height:1.25;letter-spacing:-.015em}
   .note h4 .it{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400}
-  .note .ex{font-family:'Instrument Serif',serif;font-style:italic;font-size:17px;line-height:1.45;color:var(--ink-soft)}
+  .note .ex{font-size:14.5px;line-height:1.55;color:var(--ink-soft);font-weight:400}
   .note .more{margin-top:auto;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--ink);display:inline-flex;gap:8px;padding-top:18px;border-bottom:1px solid var(--ink);width:fit-content;padding-bottom:3px}
   .note .more .arr{font-family:'Instrument Serif',serif;font-style:italic;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400}
   .note .coming{display:inline-block;font-size:9px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;padding:5px 10px;border:1px dashed var(--ink-soft);color:var(--ink-soft);border-radius:100px;width:fit-content}
@@ -624,6 +633,7 @@
 
       <div class="hero-grid">
         <div class="portrait">
+          <img src="./lilac-ringlight.png" alt="Hannah McGough" onerror="this.style.display='none'">
           <div class="ph"></div>
           <div class="cap">f.1 — portrait, 2026</div>
         </div>
@@ -699,8 +709,8 @@
                 </div>
               </div>
               <div class="cs-images imgs-2">
-                <div class="cs-img g-sephora tall">[ sephora-shelf.jpg ]</div>
-                <div class="cs-img g-sephora tall">[ sephora-launch.jpg ]</div>
+                <div class="cs-img g-sephora tall">[ sephora.gif ]</div>
+                <div class="cs-img g-sephora tall">[ sephorahq.png ]</div>
               </div>
             </div>
             <button class="cs-close" data-close>Close <span class="x">×</span></button>
@@ -825,8 +835,8 @@
                 <p style="font-family:'Instrument Serif',serif;font-style:italic;color:var(--ink-mute);font-size:14px;line-height:1.5;border-left:2px solid var(--chartreuse);padding-left:14px">Editor's note: full case study being written. Email for current write-up.</p>
               </div>
               <div class="cs-images imgs-2">
-                <div class="cs-img g-rr">[ riley-rose-1.jpg ]</div>
-                <div class="cs-img g-rr">[ riley-rose-2.jpg ]</div>
+                <div class="cs-img g-rr">[ riley-rose.gif ]</div>
+                <div class="cs-img g-rr">[ rileyhq.png ]</div>
               </div>
             </div>
             <button class="cs-close" data-close>Close <span class="x">×</span></button>
@@ -1110,6 +1120,7 @@
 
       <div class="practice">
         <div class="p-portrait">
+          <img src="./headshot-4.png" alt="Hannah McGough" onerror="this.style.display='none'">
           <div class="ph"></div>
         </div>
         <div class="p-text">
@@ -1449,6 +1460,23 @@
         ? `Show less <span class="arr">↑</span>`
         : `+ ${hidden} more <span class="arr">→</span>`;
     });
+  });
+})();
+
+/* convert "[ filename.ext ]" text placeholders inside .cs-img / .eb-card-img to real <img> tags */
+(() => {
+  document.querySelectorAll('.cs-img, .eb-card-img').forEach(el => {
+    if (el.querySelector('img')) return;
+    const m = el.textContent.trim().match(/^\[\s*(.+?)\s*\]$/);
+    if (!m) return;
+    const filename = m[1].trim();
+    el.textContent = '';
+    const img = document.createElement('img');
+    img.src = './' + filename;
+    img.alt = '';
+    img.loading = 'lazy';
+    img.onerror = function(){ this.style.display = 'none'; };
+    el.appendChild(img);
   });
 })();
 
