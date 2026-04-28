@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hannah McGough Studio — Mock v4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --chartreuse:#DDEF44; --lilac:#C2BAEC; --cream:#EDE8E0; --cream-deep:#E2DBCE;
+    --peach:#F4C9A8; --ink:#1A1817; --ink-soft:#5C504C; --ink-mute:#8C8079;
+    --hair:rgba(26,24,23,.16); --gutter:clamp(24px,4vw,72px);
+    --pale-lime:#F0F2D2; --pale-peach:#F4E2D0; --pale-lilac:#E2DCED; --pale-cream:#E2DBCE;
+    --ease:cubic-bezier(.7,0,.2,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:var(--cream);color:var(--ink);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;font-size:16px}
+  body{cursor:none}
+  a,button{color:inherit;text-decoration:none;cursor:none;background:none;border:none;font:inherit}
+  ul,ol{list-style:none}
+
+  /* CURSOR — dot, becomes an open circle on hover */
+  .cursor{position:fixed;left:0;top:0;pointer-events:none;z-index:9998;will-change:transform}
+  .cursor-i{width:8px;height:8px;margin:-4px 0 0 -4px;background:var(--ink);border-radius:50%;transition:transform .35s var(--ease),background .25s,border .25s}
+  .cursor.hover .cursor-i{transform:scale(4);background:transparent;border:1px solid var(--ink)}
+  .cursor.lime .cursor-i{background:var(--chartreuse)}
+  .cursor.lime.hover .cursor-i{background:transparent;border-color:var(--chartreuse)}
+  @media (hover:none){.cursor{display:none}html,body,a,button{cursor:auto}}
+
+  /* BOOT — image-tile montage → cream wash → studio mark → reveal */
+  .boot{
+    position:fixed;inset:0;z-index:99999;
+    background:var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+    animation:boot-out .65s 4.4s forwards var(--ease);
+  }
+  .boot-grid{
+    position:absolute;inset:0;
+    display:grid;grid-template-columns:repeat(6,1fr);
+    grid-auto-rows:1fr;gap:2px;
+    width:100vw;height:100vh;
+  }
+  .boot-tile{
+    position:relative;overflow:hidden;
+    opacity:0;background:#1A1817;
+    animation:tile-in .65s var(--ease) forwards;
+    animation-delay:calc(.06s * var(--i,0));
+  }
+  .boot-tile img{width:100%;height:100%;object-fit:cover;display:block}
+  .boot-tile-ph{
+    position:absolute;left:0;right:0;bottom:0;
+    padding:6px 8px;
+    font-size:8px;letter-spacing:.16em;text-transform:uppercase;
+    color:rgba(255,255,255,.32);font-weight:500;
+  }
+  /* tonal gradient fallbacks until images land */
+  .boot-tile:nth-child(6n+1){background:linear-gradient(150deg,#5C504C,#9B8B83)}
+  .boot-tile:nth-child(6n+2){background:linear-gradient(140deg,#C2BAEC,#3A3230)}
+  .boot-tile:nth-child(6n+3){background:linear-gradient(160deg,#F4C9A8,#5C504C)}
+  .boot-tile:nth-child(6n+4){background:linear-gradient(155deg,#1A1817,#5C504C)}
+  .boot-tile:nth-child(6n+5){background:linear-gradient(145deg,#DDEF44,#3A3230)}
+  .boot-tile:nth-child(6n+6){background:linear-gradient(165deg,#9B8B83,#1A1817)}
+
+  .boot-wash{
+    position:absolute;inset:0;background:var(--cream);
+    opacity:0;z-index:2;
+    animation:boot-wash-in .75s 3.2s forwards var(--ease);
+  }
+  .boot-mark{
+    position:relative;z-index:3;
+    font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--ink);font-weight:500;opacity:0;
+    animation:boot-mark-in .6s 3.7s forwards var(--ease);
+  }
+  .boot-mark::before{content:"";display:inline-block;width:6px;height:6px;background:var(--chartreuse);border-radius:50%;margin-right:10px;vertical-align:1px}
+
+  @keyframes tile-in{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:scale(1)}}
+  @keyframes boot-wash-in{from{opacity:0}to{opacity:1}}
+  @keyframes boot-mark-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes boot-out{to{opacity:0;visibility:hidden}}
+
+  @media (max-width:640px){.boot-grid{grid-template-columns:repeat(4,1fr)}}
+
+  .page{opacity:0;animation:page-in .8s 4.5s forwards var(--ease)}
+  @keyframes page-in{to{opacity:1}}
+
+  /* CHARTREUSE BANNER (replaces directory) */
+  .banner{
+    background:var(--chartreuse);
+    padding:8px var(--gutter);
+    display:flex;align-items:center;justify-content:center;
+    font-size:10px;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--ink);font-weight:600;
+    border-bottom:1px solid var(--ink);
+  }
+  .banner .em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:13px;letter-spacing:0;text-transform:none;margin:0 8px}
+
+  /* NAV */
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:24px var(--gutter)}
+  .wordmark{font-weight:700;font-size:24px;letter-spacing:-.04em;display:inline-flex;align-items:baseline;gap:0;color:var(--ink);text-transform:lowercase}
+  .wordmark .ast{color:var(--chartreuse);font-size:28px;line-height:0;display:inline-block;transform:translateY(-2px);font-weight:700;margin-left:1px}
+  .nav-links{display:flex;gap:36px}
+  .nav-links a{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);position:relative;padding-bottom:3px;font-weight:500}
+  .nav-links a:hover,.nav-links a.active{color:var(--ink)}
+  .nav-links a.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--ink)}
+  .nav-cta{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);font-weight:600;display:inline-flex;align-items:center;gap:8px}
+  .nav-cta .arr,.arr-it{font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;letter-spacing:0;text-transform:none;font-weight:400}
+
+  /* HERO */
+  .hero{padding:clamp(40px,7vh,80px) var(--gutter) clamp(60px,9vh,110px);display:grid;gap:clamp(36px,5vw,64px)}
+  .hero-eyebrow{display:flex;align-items:center;gap:18px;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);font-weight:500;margin-bottom:32px}
+  .hero-eyebrow .line{flex:1;height:1px;background:var(--hair);max-width:160px}
+  .hero-name{font-weight:700;font-size:clamp(78px,15vw,232px);line-height:.86;letter-spacing:-.045em}
+  .hero-grid{display:grid;grid-template-columns:.85fr 1fr;gap:clamp(36px,5vw,80px);align-items:end;margin-top:clamp(32px,5vh,56px)}
+
+  .portrait{position:relative;background:var(--lilac);aspect-ratio:4/5;overflow:hidden}
+  .portrait::before{content:"";position:absolute;inset:0;background:linear-gradient(165deg,rgba(244,201,168,.5) 0%,transparent 55%,rgba(194,186,236,.4) 100%);mix-blend-mode:screen}
+  .portrait .ph{position:absolute;inset:0;display:flex;align-items:flex-end;padding:20px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(26,24,23,.45);font-weight:500}
+  .portrait .ph::after{content:"[ lilac-ringlight.png ]"}
+  .portrait .cap{position:absolute;bottom:18px;right:20px;font-family:'Instrument Serif',serif;font-style:italic;font-size:16px;color:rgba(26,24,23,.7)}
+
+  .deck{display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:clamp(8px,2vh,24px);max-width:540px}
+  .deck .lead{font-size:clamp(20px,2vw,26px);line-height:1.32;color:var(--ink);font-weight:400;margin-bottom:24px}
+  .deck .lead .it{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:1.08em}
+  .deck .lead .mark{position:relative;display:inline-block;padding:0 2px;z-index:0}
+  .deck .lead .mark::after{content:"";position:absolute;left:-1px;right:-1px;bottom:.05em;height:.45em;background:var(--chartreuse);z-index:-1;transform:skew(-6deg);opacity:.85}
+  .deck-meta{display:grid;grid-template-columns:auto 1fr;gap:18px 32px;padding-top:24px;border-top:1px solid var(--hair);font-size:13px;line-height:1.5;color:var(--ink-soft)}
+  .deck-meta .k{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;align-self:start;padding-top:2px}
+  .actions{display:flex;align-items:center;gap:32px;margin-top:36px;flex-wrap:wrap}
+  .btn-line{font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--ink);color:var(--ink)}
+  .btn-line .arr{font-family:'Instrument Serif',serif;font-style:italic;font-size:20px;letter-spacing:0;text-transform:none;font-weight:400;transition:transform .3s var(--ease)}
+  .btn-line:hover .arr{transform:translateX(8px)}
+  .availability{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);font-weight:500}
+  .availability .pulse{width:7px;height:7px;border-radius:50%;background:var(--chartreuse);box-shadow:0 0 0 0 rgba(221,239,68,.6);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(221,239,68,.55)}70%{box-shadow:0 0 0 10px rgba(221,239,68,0)}100%{box-shadow:0 0 0 0 rgba(221,239,68,0)}}
+
+  /* CHAPTER */
+  .chapter{padding:clamp(60px,9vh,110px) var(--gutter) clamp(28px,4vh,56px);border-top:1px solid var(--hair);display:grid;grid-template-columns:auto 1fr auto;align-items:end;gap:32px}
+  .chapter .roman{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(72px,10vw,148px);line-height:.85;letter-spacing:-.02em}
+  .chapter .title{font-weight:700;font-size:clamp(28px,3.4vw,46px);line-height:1;letter-spacing:-.025em}
+  .chapter .title .it{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--ink-soft)}
+  .chapter .title .sub{display:block;font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--ink-soft);font-size:.4em;margin-top:10px;letter-spacing:0}
+  .chapter .meta{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;text-align:right;line-height:1.9;max-width:260px}
+  .chapter .meta b{color:var(--ink);font-weight:600}
+  .chapter .meta .it{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-soft);font-size:14px;display:block;margin-top:6px;line-height:1.4}
+
+  /* WORK TABLE + DRAWERS */
+  .index-list{padding:0 var(--gutter)}
+  .row-wrap{display:block}
+  .row{display:grid;grid-template-columns:64px 1.2fr 2fr 80px 64px;align-items:center;gap:24px;padding:28px 0;border-top:1px solid var(--hair);position:relative;z-index:0;transition:padding .35s var(--ease),background .35s var(--ease);cursor:none;width:100%;text-align:left}
+  .row-wrap:last-of-type .row{border-bottom:1px solid var(--hair)}
+  .row::before{content:"";position:absolute;inset:0;z-index:-1;background:transparent;transition:background .4s var(--ease)}
+  .row:hover{padding-left:24px;padding-right:24px}
+  .row.tone-lilac:hover::before{background:var(--lilac)}
+  .row.tone-peach:hover::before{background:var(--peach)}
+  .row.tone-cream:hover::before{background:var(--cream-deep)}
+  .row.tone-lime:hover::before{background:var(--chartreuse)}
+  .row .n{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500}
+  .row .brand{font-weight:700;font-size:clamp(20px,2.4vw,32px);letter-spacing:-.025em}
+  .row .desc{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(16px,1.4vw,20px);line-height:1.4;color:var(--ink-soft)}
+  .row .yr{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;text-align:right}
+  .row .arr{font-family:'Instrument Serif',serif;font-style:italic;font-size:24px;text-align:right;opacity:.4;transition:opacity .3s,transform .35s var(--ease)}
+  .row:hover .arr{opacity:1;transform:translateX(6px)}
+  .row .star{position:absolute;left:0;top:50%;transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:var(--chartreuse);margin-left:-14px;opacity:0;transition:opacity .3s}
+  .row.featured .star{opacity:1}
+  .row-wrap.open .row .arr{transform:rotate(90deg);opacity:1}
+
+  /* drawer */
+  .drawer{
+    overflow:hidden;
+    max-height:0;
+    transition:max-height .65s var(--ease),background .4s var(--ease);
+    background:transparent;
+    margin-left:calc(-1 * var(--gutter));margin-right:calc(-1 * var(--gutter));
+  }
+  .row-wrap.open .drawer{max-height:2400px}
+  .row-wrap.tone-lime.open .drawer{background:var(--pale-lime)}
+  .row-wrap.tone-peach.open .drawer{background:var(--pale-peach)}
+  .row-wrap.tone-lilac.open .drawer{background:var(--pale-lilac)}
+  .row-wrap.tone-cream.open .drawer{background:var(--pale-cream)}
+  .drawer-inner{padding:clamp(40px,6vh,80px) var(--gutter) clamp(40px,6vh,80px)}
+
+  .cs-head{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:32px;border-bottom:1px solid rgba(26,24,23,.18);padding-bottom:24px}
+  .cs-head h3{font-weight:700;font-size:clamp(28px,4vw,52px);letter-spacing:-.03em;line-height:1}
+  .cs-head h3 .it{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--ink-soft)}
+  .cs-head .tag{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;text-align:right;line-height:1.7}
+  .cs-head .tag b{color:var(--ink);font-weight:600}
+
+  .cs-body{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,64px);align-items:start}
+  .cs-text{display:flex;flex-direction:column;gap:24px;max-width:560px}
+  .cs-intro{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(18px,1.8vw,22px);line-height:1.5;color:var(--ink)}
+  .cs-section{display:flex;flex-direction:column;gap:10px}
+  .cs-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:600}
+  .cs-list{display:flex;flex-direction:column;gap:8px}
+  .cs-list li{font-size:14px;line-height:1.55;color:var(--ink-soft);padding-left:18px;position:relative}
+  .cs-list li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:1px;background:var(--ink-soft)}
+  .cs-impact li{color:var(--ink);font-weight:500}
+  .cs-impact li::before{background:var(--ink);height:2px;top:8px}
+
+  .cs-images{display:grid;gap:8px}
+  .cs-images.imgs-2{grid-template-columns:1fr 1fr}
+  .cs-images.imgs-3{grid-template-columns:1fr;grid-template-rows:1fr 1fr;gap:8px}
+  .cs-images.imgs-3 .cs-img:first-child{grid-row:1/2}
+  .cs-images.imgs-4{grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:8px}
+  .cs-img{aspect-ratio:4/3;background:rgba(26,24,23,.06);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:14px;color:rgba(26,24,23,.4);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:500}
+  .cs-img.tall{aspect-ratio:3/4}
+  .cs-img.wide{aspect-ratio:16/9;grid-column:span 2}
+  .cs-img.g-suave{background:linear-gradient(140deg,#C2BAEC 0%,#E5D8C5 100%)}
+  .cs-img.g-chap{background:linear-gradient(140deg,#F4C9A8 0%,#E8D4B8 100%)}
+  .cs-img.g-bb{background:linear-gradient(155deg,#E5D8C5 0%,#F4C9A8 100%)}
+  .cs-img.g-sephora{background:linear-gradient(165deg,#000 0%,#3A3230 100%);color:rgba(255,255,255,.45)}
+  .cs-img.g-rr{background:linear-gradient(150deg,#F4C9A8 0%,#C2BAEC 100%)}
+  .cs-img.g-eb{background:linear-gradient(160deg,#C2BAEC 0%,#DDEF44 100%)}
+
+  .cs-close{margin-top:36px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;display:inline-flex;align-items:center;gap:10px;border:none;background:none}
+  .cs-close .x{font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;letter-spacing:0;text-transform:none;font-weight:400}
+
+  /* mobile expand-more button (hidden on desktop) */
+  .cs-more-btn{
+    display:none;
+    font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;
+    color:var(--ink);padding:8px 0 6px;align-self:flex-start;
+    border:none;border-bottom:1px solid var(--ink);margin-top:6px;
+  }
+  .cs-more-btn .arr{font-family:'Instrument Serif',serif;font-style:italic;font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;margin-left:6px}
+
+  /* sephora-specific list of brands she launched */
+  .sephora-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px 18px;margin-top:8px}
+  .sephora-grid li{font-size:13px;color:var(--ink);font-weight:500;padding-left:0}
+  .sephora-grid li::before{display:none}
+
+  /* emerging brands — solo body + carousel */
+  .cs-body--solo{grid-template-columns:1fr;max-width:880px}
+  .eb-section{margin-top:48px;padding-top:32px;border-top:1px solid rgba(26,24,23,.18)}
+  .eb-section-hd{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin-bottom:24px;flex-wrap:wrap}
+  .eb-section-lbl{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:600}
+  .eb-section-lbl b{color:var(--ink);font-weight:700}
+  .eb-scroll-hint{font-family:'Instrument Serif',serif;font-style:italic;font-size:14px;color:var(--ink-soft);display:inline-flex;align-items:center;gap:8px}
+  .eb-scroll-hint .ar{font-size:18px;animation:nudge 2.4s ease-in-out infinite}
+  @keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+
+  .eb-carousel{
+    position:relative;
+    overflow:hidden;
+    margin:0 calc(-1 * var(--gutter));
+    padding:6px 0 24px;
+    -webkit-mask-image:linear-gradient(to right,transparent 0,#000 5%,#000 95%,transparent 100%);
+            mask-image:linear-gradient(to right,transparent 0,#000 5%,#000 95%,transparent 100%);
+  }
+  .eb-track{
+    display:flex;gap:14px;
+    width:max-content;
+    padding-left:var(--gutter);
+    --card-w:268px;
+    --gap-w:14px;
+    --count:12;
+    animation:eb-marquee 56s linear infinite;
+  }
+  .eb-carousel:hover .eb-track,
+  .eb-carousel:focus-within .eb-track{animation-play-state:paused}
+  @keyframes eb-marquee{
+    from{transform:translateX(0)}
+    to{transform:translateX(calc(-1 * (var(--card-w) + var(--gap-w)) * var(--count)))}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .eb-track{animation:none}
+    .eb-carousel{overflow-x:auto}
+  }
+  .eb-pause-hint{font-family:'Instrument Serif',serif;font-style:italic;font-size:13px;color:var(--ink-mute)}
+
+  .eb-card{
+    flex-shrink:0;width:268px;
+    scroll-snap-align:start;
+    background:rgba(255,255,255,.5);
+    border:1px solid rgba(26,24,23,.12);
+    display:flex;flex-direction:column;
+  }
+  .eb-card-img{
+    aspect-ratio:1/1;width:100%;
+    display:flex;align-items:flex-end;padding:12px;
+    font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,0,0,.4);font-weight:500;
+    overflow:hidden;
+  }
+  .eb-card-img.t1{background:linear-gradient(155deg,#F4C9A8 0%,#F0E6D5 100%)}
+  .eb-card-img.t2{background:linear-gradient(160deg,#C2BAEC 0%,#EDE8E0 100%)}
+  .eb-card-img.t3{background:linear-gradient(150deg,#E2D5C0 0%,#C2BAEC 100%)}
+  .eb-card-img.t4{background:linear-gradient(165deg,#F4C9A8 0%,#C2BAEC 100%)}
+  .eb-card-img.t5{background:linear-gradient(155deg,#DDEF44 0%,#E2DBCE 100%)}
+  .eb-card-img.t6{background:linear-gradient(165deg,#5C504C 0%,#9B8B83 100%);color:rgba(255,255,255,.4)}
+  .eb-card-body{padding:14px 16px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .eb-card-cat{font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);padding:4px 10px;background:rgba(26,24,23,.06);border-radius:100px;align-self:flex-start;line-height:1.2}
+  .eb-card-name{font-weight:700;font-size:17px;letter-spacing:-.015em;line-height:1.15}
+  .eb-card-impact{
+    font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;
+    font-size:13.5px;line-height:1.45;color:var(--ink-soft);
+    display:flex;gap:8px;margin-top:auto;padding-top:10px;border-top:1px solid rgba(26,24,23,.1);
+  }
+  .eb-card-impact::before{content:"✦";color:var(--chartreuse);font-style:normal;font-size:13px;flex-shrink:0;padding-top:1px}
+
+  /* ENGAGEMENTS */
+  .engagements{padding:0 var(--gutter) clamp(60px,8vh,100px)}
+  .eng-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair)}
+  .eng{background:var(--cream);padding:clamp(36px,4vw,56px);display:flex;flex-direction:column;gap:18px;min-height:340px;transition:background .4s var(--ease)}
+  .eng--lime:hover{background:var(--chartreuse)}
+  .eng--peach:hover{background:var(--peach)}
+  .eng--lilac:hover{background:var(--lilac)}
+  .eng--cream:hover{background:var(--cream-deep)}
+  .eng-num{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500}
+  .eng h3{font-weight:700;font-size:clamp(28px,3vw,42px);letter-spacing:-.025em;line-height:1}
+  .eng h3 .it{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--ink-soft);font-size:.78em;display:block;margin-top:6px}
+  .eng-desc{font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;line-height:1.4;color:var(--ink-soft);max-width:440px}
+  .eng-meta{display:grid;grid-template-columns:auto 1fr;gap:6px 24px;font-size:13px;color:var(--ink-soft);margin-top:auto;padding-top:24px;border-top:1px solid var(--hair)}
+  .eng-meta dt{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;align-self:center}
+  .eng .inq{margin-top:14px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);font-weight:600;display:inline-flex;align-items:center;gap:10px}
+  .eng .inq .arr{font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;letter-spacing:0;text-transform:none;font-weight:400;transition:transform .3s var(--ease)}
+  .eng:hover .inq .arr{transform:translateX(8px)}
+
+  /* PRACTICE */
+  .practice{padding:0 var(--gutter) clamp(60px,8vh,100px);display:grid;grid-template-columns:.85fr 1fr;gap:clamp(40px,5vw,80px);align-items:start}
+  .p-portrait{aspect-ratio:4/5;background:var(--peach);position:relative;overflow:hidden}
+  .p-portrait::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(244,201,168,0) 0%,rgba(194,186,236,.45) 100%);mix-blend-mode:multiply}
+  .p-portrait .ph{position:absolute;inset:0;display:flex;align-items:flex-end;padding:20px;color:rgba(26,24,23,.4);font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:500}
+  .p-portrait .ph::after{content:"[ headshot-4.png ]"}
+  .p-text{display:flex;flex-direction:column;gap:22px;max-width:660px}
+  .p-text .lead{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(22px,2.4vw,32px);line-height:1.3;color:var(--ink);margin-bottom:6px}
+  .p-text p{font-size:15px;line-height:1.7;color:var(--ink-soft)}
+  .p-text p b{color:var(--ink);font-weight:600}
+  .p-sig{margin-top:14px;font-family:'Instrument Serif',serif;font-style:italic;font-size:24px;color:var(--ink)}
+  .p-meta{display:grid;grid-template-columns:auto 1fr;gap:10px 24px;font-size:13px;color:var(--ink-soft);margin-top:18px;padding-top:18px;border-top:1px solid var(--hair)}
+  .p-meta dt{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;align-self:start;padding-top:2px}
+
+  /* — Practice Act II: Philosophy pull-quote — */
+  .philosophy{background:var(--cream-deep);padding:clamp(72px,11vh,140px) var(--gutter);position:relative}
+  .philosophy::before{content:"";position:absolute;top:0;left:var(--gutter);right:var(--gutter);height:1px;background:var(--chartreuse)}
+  .philosophy-inner{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
+  .phil-label{font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-mute);font-weight:600;display:inline-flex;align-items:center;gap:10px}
+  .phil-label::before{content:"";display:inline-block;width:24px;height:1px;background:var(--ink-mute)}
+  .phil-quote{
+    font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;
+    font-size:clamp(28px,4vw,50px);line-height:1.22;letter-spacing:-.015em;color:var(--ink);
+    max-width:1000px;
+  }
+  .phil-quote .hl{position:relative;display:inline-block;padding:0 4px;z-index:0}
+  .phil-quote .hl::after{content:"";position:absolute;left:-1px;right:-1px;bottom:.08em;height:.4em;background:var(--chartreuse);z-index:-1;transform:skew(-6deg);opacity:.85}
+  .phil-quote .em{font-style:italic;color:var(--ink);text-decoration:underline;text-decoration-color:var(--chartreuse);text-decoration-thickness:2px;text-underline-offset:6px}
+  .phil-coda{font-size:clamp(15px,1.4vw,18px);line-height:1.65;color:var(--ink-soft);max-width:680px;font-weight:400}
+  .phil-coda b{color:var(--ink);font-weight:600}
+
+  /* — Practice Act III: Brands = People — */
+  .bp{background:var(--cream);padding:clamp(72px,11vh,140px) var(--gutter)}
+  .bp-inner{max-width:1280px;margin:0 auto}
+  .bp-hd{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;margin-bottom:clamp(40px,6vh,72px)}
+  .bp-label{font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-mute);font-weight:600;display:inline-flex;align-items:center;gap:10px;margin-bottom:20px}
+  .bp-label::before{content:"";display:inline-block;width:24px;height:1px;background:var(--ink-mute)}
+  .bp h3{font-weight:700;font-size:clamp(48px,8vw,128px);line-height:.88;letter-spacing:-.045em;color:var(--ink)}
+  .bp h3 .eq{color:var(--chartreuse);display:inline-block;margin:0 .04em}
+  .bp h3 .ppl{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;display:block;color:var(--ink-soft)}
+  .bp-sub{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(18px,1.7vw,22px);line-height:1.4;color:var(--ink-soft);max-width:520px;margin-top:18px}
+
+  .bp-figure{
+    aspect-ratio:5/4;background:var(--pale-lilac);
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--hair);position:relative;overflow:hidden;
+  }
+  .bp-figure img{position:relative;z-index:2;max-width:88%;max-height:88%;object-fit:contain}
+  .bp-figure .ph-text{position:absolute;bottom:16px;left:20px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(26,24,23,.42);font-weight:500;z-index:1}
+
+  .bp-layers{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--hair)}
+  .bp-layer{padding:clamp(28px,3.5vh,40px) clamp(20px,2.5vw,40px) clamp(28px,3.5vh,40px) 0;border-right:1px solid var(--hair);position:relative;display:flex;flex-direction:column;gap:14px}
+  .bp-layer:not(:first-child){padding-left:clamp(20px,2.5vw,40px)}
+  .bp-layer:last-child{border-right:none}
+  .bp-layer .num{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--chartreuse);font-weight:700;background:var(--ink);padding:5px 10px;border-radius:100px;align-self:flex-start;line-height:1.2}
+  .bp-layer .lyr{font-weight:700;font-size:clamp(22px,2.4vw,32px);letter-spacing:-.02em;line-height:1.05;color:var(--ink)}
+  .bp-layer .lyr .it{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--ink-soft)}
+  .bp-layer p{font-size:14px;line-height:1.55;color:var(--ink-soft);max-width:280px;margin-top:auto;padding-top:14px;border-top:1px solid var(--hair)}
+
+  .bp-cta{margin-top:clamp(28px,4vh,40px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(16px,1.4vw,20px);color:var(--ink-soft)}
+  .bp-cta a{color:var(--ink);font-weight:600;border-bottom:1px solid var(--ink);padding-bottom:2px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-style:normal;font-size:11px;letter-spacing:.22em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px}
+  .bp-cta a .arr{font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;letter-spacing:0;text-transform:none;font-weight:400;transition:transform .3s var(--ease)}
+  .bp-cta a:hover .arr{transform:translateX(6px)}
+
+  @media (max-width:980px){
+    .bp-hd{grid-template-columns:1fr;gap:28px}
+    .bp-layers{grid-template-columns:1fr;border-top:1px solid var(--hair)}
+    .bp-layer{border-right:none;border-bottom:1px solid var(--hair);padding:24px 0}
+    .bp-layer:not(:first-child){padding-left:0}
+    .bp-layer:last-child{border-bottom:none}
+    .bp-layer p{max-width:none;padding-top:6px;border-top:none}
+  }
+  @media (max-width:640px){
+    .bp h3{font-size:60px}
+    .phil-quote{font-size:24px;line-height:1.3}
+  }
+
+  /* NOTES */
+  .notes{padding:0 var(--gutter) clamp(60px,8vh,100px)}
+  .notes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair)}
+  .note{background:var(--cream);padding:clamp(28px,3vw,40px);display:flex;flex-direction:column;gap:14px;min-height:300px;transition:background .4s var(--ease)}
+  .note.tone-lime:hover{background:var(--pale-lime)}
+  .note.tone-lilac:hover{background:var(--pale-lilac)}
+  .note.tone-peach:hover{background:var(--pale-peach)}
+  .note .tag{display:inline-block;font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:5px 12px;border-radius:100px;align-self:flex-start}
+  .note.tone-lime .tag{background:var(--chartreuse);color:var(--ink)}
+  .note.tone-lilac .tag{background:var(--lilac);color:var(--ink)}
+  .note.tone-peach .tag{background:var(--peach);color:var(--ink)}
+  .note h4{font-weight:700;font-size:20px;line-height:1.25;letter-spacing:-.015em}
+  .note h4 .it{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400}
+  .note .ex{font-family:'Instrument Serif',serif;font-style:italic;font-size:17px;line-height:1.45;color:var(--ink-soft)}
+  .note .more{margin-top:auto;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--ink);display:inline-flex;gap:8px;padding-top:18px;border-bottom:1px solid var(--ink);width:fit-content;padding-bottom:3px}
+  .note .more .arr{font-family:'Instrument Serif',serif;font-style:italic;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400}
+  .note .coming{display:inline-block;font-size:9px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;padding:5px 10px;border:1px dashed var(--ink-soft);color:var(--ink-soft);border-radius:100px;width:fit-content}
+
+  /* TRUSTED BY */
+  .trust{padding:clamp(60px,8vh,100px) var(--gutter);position:relative;border-top:1px solid var(--hair)}
+  .trust-hd{display:grid;grid-template-columns:auto 1fr auto;align-items:end;gap:24px;margin-bottom:36px}
+  .trust-hd .lbl{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(28px,3.5vw,44px);line-height:1;color:var(--ink)}
+  .trust-hd .ct{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;text-align:right}
+  .trust-hd .ct b{color:var(--ink)}
+  .trust-rule{height:1px;background:var(--chartreuse)}
+
+  .logos{display:grid;grid-template-columns:repeat(8,1fr);gap:0;border-top:1px solid var(--chartreuse);border-bottom:1px solid var(--chartreuse);padding:0}
+  .logo{height:96px;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--hair);position:relative;padding:14px;overflow:hidden}
+  .logo:last-child{border-right:none}
+  .logo:nth-child(8n){border-right:none}
+  .logo img{max-width:78%;max-height:62%;object-fit:contain;display:block;position:relative;z-index:1}
+  .logo-ph{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;padding:0 8px;z-index:0;line-height:1.3}
+
+  .roster-toggle{margin-top:32px;display:inline-flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--ink);padding:14px 0;border-bottom:1px solid var(--ink)}
+  .roster-toggle .arr{font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;letter-spacing:0;text-transform:none;font-weight:400;transition:transform .3s var(--ease)}
+  .roster.open ~ .roster-toggle .arr,.trust.open .roster-toggle .arr{transform:rotate(90deg)}
+
+  .roster{
+    overflow:hidden;max-height:0;
+    transition:max-height .55s var(--ease),margin-top .35s var(--ease);
+    margin-top:0;
+  }
+  .trust.open .roster{max-height:1600px;margin-top:36px}
+  .roster-row{display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:start;padding:22px 0;border-top:1px solid var(--hair)}
+  .roster-row:first-child{border-top:none}
+  .roster-row .pill{font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;padding:6px 14px;border-radius:100px;justify-self:start;align-self:start;line-height:1.2}
+  .roster-row.cat-creative .pill{background:var(--chartreuse);color:var(--ink)}
+  .roster-row.cat-ad .pill{background:var(--lilac);color:var(--ink)}
+  .roster-row.cat-360 .pill{background:var(--peach);color:var(--ink)}
+  .roster-row.cat-id .pill{background:var(--cream-deep);color:var(--ink)}
+  .roster-row.cat-seph .pill{background:var(--ink);color:var(--chartreuse)}
+  .roster-names{display:flex;flex-wrap:wrap;gap:6px 22px;color:var(--ink-soft);font-size:14px;font-weight:500}
+  .roster-names .sep{color:var(--chartreuse);font-weight:700}
+  .roster-row .meta{font-style:italic;font-family:'Instrument Serif',serif;color:var(--ink-mute);font-size:13px;display:block;margin-top:6px}
+
+  /* CONTACT */
+  .contact{background:var(--ink);color:var(--cream);padding:clamp(72px,10vh,140px) var(--gutter) clamp(60px,8vh,100px);border-top:1px solid var(--hair)}
+  .contact-inner{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+  .contact .label{font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:rgba(237,232,224,.5);font-weight:500;display:inline-flex;align-items:center;gap:10px}
+  .contact .label::before{content:"";display:inline-block;width:6px;height:6px;background:var(--chartreuse);border-radius:50%}
+  .contact h2{font-weight:700;font-size:clamp(40px,6vw,84px);line-height:.95;letter-spacing:-.035em;color:var(--cream)}
+  .contact h2 .it{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--chartreuse)}
+  .contact .sub{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(18px,1.8vw,22px);line-height:1.5;color:rgba(237,232,224,.75);max-width:560px}
+
+  .form{display:flex;flex-direction:column;gap:0;margin-top:8px;border-top:1px solid rgba(237,232,224,.2)}
+  .form-row{display:grid;grid-template-columns:160px 1fr;gap:24px;align-items:center;padding:18px 0;border-bottom:1px solid rgba(237,232,224,.2)}
+  .form-row label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(237,232,224,.5);font-weight:500}
+  .form-row input,.form-row textarea{
+    width:100%;background:transparent;border:none;color:var(--cream);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;outline:none;padding:0;
+  }
+  .form-row textarea{resize:vertical;min-height:48px;line-height:1.5}
+  .form-row input::placeholder,.form-row textarea::placeholder{color:rgba(237,232,224,.3);font-style:italic;font-family:'Instrument Serif',serif;font-size:18px}
+  .form-row.tall{align-items:start;padding:18px 0 22px}
+  .form-row.tall label{padding-top:4px}
+  .submit-row{display:flex;align-items:center;justify-content:space-between;padding:20px 0 0;flex-wrap:wrap;gap:18px}
+  .submit-row .send{
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;
+    color:var(--chartreuse);display:inline-flex;align-items:center;gap:14px;
+    padding:14px 0;border-bottom:1px solid var(--chartreuse);
+  }
+  .submit-row .send .arr{font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;letter-spacing:0;text-transform:none;font-weight:400;transition:transform .3s var(--ease)}
+  .submit-row .send:hover .arr{transform:translateX(8px)}
+  .contact-meta{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(237,232,224,.5);font-weight:500;flex-wrap:wrap;gap:14px;padding-top:18px;border-top:1px solid rgba(237,232,224,.1);margin-top:24px}
+  .contact-meta a{color:var(--chartreuse);border-bottom:1px solid rgba(221,239,68,.4);padding-bottom:1px}
+
+  /* FOOTER */
+  .footer{padding:36px var(--gutter);background:var(--ink);color:var(--cream);border-top:1px solid rgba(237,232,224,.1)}
+  .footer-row{display:grid;grid-template-columns:1fr auto 1fr;gap:32px;align-items:center}
+  .footer-mark{font-weight:700;letter-spacing:-.04em;font-size:18px;display:inline-flex;align-items:baseline;text-transform:lowercase;color:var(--cream)}
+  .footer-mark .ast{color:var(--chartreuse);font-size:22px;line-height:0;display:inline-block;transform:translateY(-2px);font-weight:700;margin-left:1px}
+  .footer-copy{text-align:center;font-size:10.5px;color:rgba(237,232,224,.5);letter-spacing:.18em;text-transform:uppercase;font-weight:500}
+  .footer-links{display:flex;justify-content:flex-end;gap:24px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(237,232,224,.6);font-weight:500}
+  .footer-links a{border-bottom:1px solid transparent;padding-bottom:1px;transition:color .2s,border-color .2s}
+  .footer-links a:hover{color:var(--chartreuse);border-color:var(--chartreuse)}
+
+  .version{position:fixed;bottom:14px;left:14px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;padding:7px 12px;border:1px solid var(--hair);color:var(--ink-mute);background:var(--cream);font-weight:500;z-index:10}
+  .version b{color:var(--ink)}
+
+  /* RESPONSIVE */
+  @media (max-width:980px){
+    .hero-grid{grid-template-columns:1fr;gap:36px}
+    .deck{padding-bottom:0;max-width:none}
+    .row{grid-template-columns:48px 1fr 60px 32px;gap:14px}
+    .row .desc{display:none}
+    .cs-body{grid-template-columns:1fr}
+    .eng-grid{grid-template-columns:1fr}
+    .practice{grid-template-columns:1fr}
+    .notes-grid{grid-template-columns:1fr}
+    .footer-row{grid-template-columns:1fr;text-align:left;gap:14px}
+    .footer-copy{text-align:left}
+    .footer-links{justify-content:flex-start;flex-wrap:wrap}
+    .nav-links{display:none}
+    .chapter{grid-template-columns:1fr;gap:14px}
+    .chapter .meta{text-align:left}
+    .logos{grid-template-columns:repeat(4,1fr)}
+    .logo:nth-child(8n){border-right:1px solid var(--hair)}
+    .logo:nth-child(4n){border-right:none}
+    .roster-row{grid-template-columns:1fr;gap:14px}
+    .form-row{grid-template-columns:1fr;gap:6px}
+    .trust-hd{grid-template-columns:1fr}
+    .trust-hd .ct{text-align:left}
+    .banner{font-size:9.5px}
+  }
+  @media (max-width:640px){
+    .drawer-inner{padding:28px var(--gutter) 32px}
+    .cs-head{grid-template-columns:1fr;gap:10px;padding-bottom:14px;margin-bottom:18px}
+    .cs-head h3{font-size:26px;letter-spacing:-.025em;line-height:1.05}
+    .cs-head .tag{text-align:left;line-height:1.7;font-size:9.5px}
+    .cs-text{gap:18px}
+    .cs-intro{font-size:15.5px!important;line-height:1.5}
+    .cs-section{gap:8px}
+    .cs-label{font-size:9.5px}
+    .cs-list li{font-size:13px;line-height:1.5;padding-left:14px}
+    .cs-list li::before{top:9px;width:7px}
+    .cs-impact li{font-size:13px;line-height:1.45}
+    .cs-impact li::before{top:7px}
+
+    /* truncate "What I led" lists to first 3 bullets, expand on click */
+    .cs-section .cs-list:not(.cs-impact):not(.sephora-grid):not(.eb-grid) li:nth-child(n+4){display:none}
+    .cs-section.expanded .cs-list:not(.cs-impact):not(.sephora-grid):not(.eb-grid) li:nth-child(n+4){display:list-item}
+    .cs-more-btn{display:inline-flex;align-items:center}
+
+    /* shorten the right-side images on mobile so they don't dominate */
+    .cs-images{margin-top:12px}
+    .cs-images.imgs-3,.cs-images.imgs-4{height:auto;grid-template-rows:auto}
+
+    /* sephora & emerging brand list-grids — tighter */
+    .sephora-grid li{font-size:12.5px}
+    .eb-grid li{font-size:16px}
+
+    /* carousel cards a touch narrower on small phones */
+    .eb-card{width:240px}
+    .eb-track{--card-w:240px}
+    .eb-card-name{font-size:16px}
+    .eb-card-impact{font-size:12.5px}
+  }
+</style>
+</head>
+<body>
+
+  <div class="boot" id="boot">
+    <div class="boot-grid">
+      <div class="boot-tile" style="--i:1"><img src="./boot-01.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-01</span></div>
+      <div class="boot-tile" style="--i:2"><img src="./boot-02.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-02</span></div>
+      <div class="boot-tile" style="--i:3"><img src="./boot-03.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-03</span></div>
+      <div class="boot-tile" style="--i:4"><img src="./boot-04.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-04</span></div>
+      <div class="boot-tile" style="--i:5"><img src="./boot-05.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-05</span></div>
+      <div class="boot-tile" style="--i:6"><img src="./boot-06.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-06</span></div>
+      <div class="boot-tile" style="--i:7"><img src="./boot-07.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-07</span></div>
+      <div class="boot-tile" style="--i:8"><img src="./boot-08.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-08</span></div>
+      <div class="boot-tile" style="--i:9"><img src="./boot-09.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-09</span></div>
+      <div class="boot-tile" style="--i:10"><img src="./boot-10.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-10</span></div>
+      <div class="boot-tile" style="--i:11"><img src="./boot-11.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-11</span></div>
+      <div class="boot-tile" style="--i:12"><img src="./boot-12.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-12</span></div>
+      <div class="boot-tile" style="--i:13"><img src="./boot-13.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-13</span></div>
+      <div class="boot-tile" style="--i:14"><img src="./boot-14.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-14</span></div>
+      <div class="boot-tile" style="--i:15"><img src="./boot-15.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-15</span></div>
+      <div class="boot-tile" style="--i:16"><img src="./boot-16.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-16</span></div>
+      <div class="boot-tile" style="--i:17"><img src="./boot-17.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-17</span></div>
+      <div class="boot-tile" style="--i:18"><img src="./boot-18.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-18</span></div>
+      <div class="boot-tile" style="--i:19"><img src="./boot-19.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-19</span></div>
+      <div class="boot-tile" style="--i:20"><img src="./boot-20.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-20</span></div>
+      <div class="boot-tile" style="--i:21"><img src="./boot-21.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-21</span></div>
+      <div class="boot-tile" style="--i:22"><img src="./boot-22.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-22</span></div>
+      <div class="boot-tile" style="--i:23"><img src="./boot-23.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-23</span></div>
+      <div class="boot-tile" style="--i:24"><img src="./boot-24.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-24</span></div>
+      <div class="boot-tile" style="--i:25"><img src="./boot-25.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-25</span></div>
+      <div class="boot-tile" style="--i:26"><img src="./boot-26.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-26</span></div>
+      <div class="boot-tile" style="--i:27"><img src="./boot-27.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-27</span></div>
+      <div class="boot-tile" style="--i:28"><img src="./boot-28.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-28</span></div>
+      <div class="boot-tile" style="--i:29"><img src="./boot-29.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-29</span></div>
+      <div class="boot-tile" style="--i:30"><img src="./boot-30.jpg" alt="" onerror="this.style.display='none'"><span class="boot-tile-ph">boot-30</span></div>
+    </div>
+    <div class="boot-wash"></div>
+    <div class="boot-mark">Hannah McGough Studio</div>
+  </div>
+
+  <div class="cursor" id="cursor"><div class="cursor-i"></div></div>
+
+  <div class="page">
+
+    <!-- CHARTREUSE BANNER -->
+    <div class="banner">Independent Practice <span class="em">—</span> Est. 2020</div>
+
+    <!-- NAV -->
+    <nav class="nav">
+      <a href="#" class="wordmark">hm<span class="ast">*</span></a>
+      <ul class="nav-links">
+        <li><a href="#i" class="active">Work</a></li>
+        <li><a href="#ii">Engagements</a></li>
+        <li><a href="#iii">Practice</a></li>
+        <li><a href="#iv">Notes</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">Inquire <span class="arr">→</span></a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="hero-eyebrow">
+          <span>The Studio</span>
+          <span class="line"></span>
+          <span>Los Angeles · MMXX</span>
+        </div>
+        <h1 class="hero-name">Hannah<br>McGough</h1>
+      </div>
+
+      <div class="hero-grid">
+        <div class="portrait">
+          <div class="ph"></div>
+          <div class="cap">f.1 — portrait, 2026</div>
+        </div>
+
+        <div class="deck">
+          <p class="lead">
+            <span class="it">An independent brand &amp; marketing studio</span> for products that <span class="mark">deserve attention</span> — and the ones that have already earned it.
+          </p>
+
+          <div class="deck-meta">
+            <span class="k">Practice</span>
+            <span>Brand strategy, naming, positioning, go-to-market &amp; creative direction. From 0→1 launches to legacy revivals.</span>
+
+            <span class="k">Selected</span>
+            <span>Sephora · ChapStick · Suave · Riley Rose · Blank Beauty</span>
+
+            <span class="k">Principal</span>
+            <span>Hannah McGough — based in Los Angeles, working internationally.</span>
+          </div>
+
+          <div class="actions">
+            <a href="#i" class="btn-line">Read the work <span class="arr">→</span></a>
+            <span class="availability"><span class="pulse"></span>Booking two engagements this quarter</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ I · WORK ════════════ -->
+    <section id="i">
+      <div class="chapter">
+        <div class="roman">I</div>
+        <div class="title">Selected Work, <span class="it">2016—2026.</span><span class="sub">Engagements that shaped the studio.</span></div>
+        <div class="meta">Case studies &amp;<br><b>Full portfolio on request</b><br><span class="it">Click a project to open. Click outside to close.</span></div>
+      </div>
+
+      <div class="index-list">
+
+        <!-- ── 01 SEPHORA ── -->
+        <div class="row-wrap tone-lime" data-row>
+          <button class="row tone-lime featured">
+            <span class="star"></span>
+            <span class="n">№ 01</span>
+            <span class="brand">Sephora</span>
+            <span class="desc">Identifying &amp; launching breakout brands into retail at scale.</span>
+            <span class="yr">2024 —</span>
+            <span class="arr">→</span>
+          </button>
+          <div class="drawer"><div class="drawer-inner">
+            <div class="cs-head">
+              <h3>Sephora <span class="it">— skincare desk.</span></h3>
+              <div class="tag"><b>2024 — present</b><br>Sephora merchant partner<br>Beauty / Retail</div>
+            </div>
+            <div class="cs-body">
+              <div class="cs-text">
+                <p class="cs-intro">As a Sephora merchant partner, I identify, vet, and launch breakout skincare brands into Sephora's national retail footprint — bridging brand teams and the merchant desk.</p>
+                <div class="cs-section">
+                  <span class="cs-label">What I lead</span>
+                  <ul class="cs-list">
+                    <li>Brand vetting and merchant fit assessment for the Sephora Skincare Desk</li>
+                    <li>Launch readiness — positioning, GTM, retail-creative alignment</li>
+                    <li>Cross-functional choreography between brand teams &amp; Sephora buyers</li>
+                    <li>Post-launch performance review &amp; expansion strategy</li>
+                  </ul>
+                </div>
+                <div class="cs-section">
+                  <span class="cs-label">Brands launched / managed</span>
+                  <ul class="cs-list sephora-grid">
+                    <li>belif</li><li>Clarins</li><li>COOLA</li><li>Erborian</li><li>Fresh</li>
+                    <li>GLAMGLOW</li><li>Glow Recipe</li><li>Kopari</li><li>L'Occitane</li><li>Laneige</li>
+                    <li>philosophy</li><li>Shiseido</li><li>Sol de Janeiro</li><li>St. Tropez</li><li>Supergoop</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="cs-images imgs-2">
+                <div class="cs-img g-sephora tall">[ sephora-shelf.jpg ]</div>
+                <div class="cs-img g-sephora tall">[ sephora-launch.jpg ]</div>
+              </div>
+            </div>
+            <button class="cs-close" data-close>Close <span class="x">×</span></button>
+          </div></div>
+        </div>
+
+        <!-- ── 02 CHAPSTICK ── -->
+        <div class="row-wrap tone-peach" data-row>
+          <button class="row tone-peach">
+            <span class="n">№ 02</span>
+            <span class="brand">ChapStick</span>
+            <span class="desc">Reviving a legacy brand and rebuilding cultural relevance.</span>
+            <span class="yr">2023</span>
+            <span class="arr">→</span>
+          </button>
+          <div class="drawer"><div class="drawer-inner">
+            <div class="cs-head">
+              <h3>ChapStick <span class="it">— cultural reset.</span></h3>
+              <div class="tag"><b>2023</b><br>CPG / Heritage Brand Revival</div>
+            </div>
+            <div class="cs-body">
+              <div class="cs-text">
+                <p class="cs-intro">Acquired by Suave's new holding company, ChapStick needed to feel relevant to a generation that had aged out of it. The work: a social-first brand reset, a flagship product launch, and an early creator program built from scratch.</p>
+                <div class="cs-section">
+                  <span class="cs-label">What I led</span>
+                  <ul class="cs-list">
+                    <li>Social-first content strategy and full brand reset across IG &amp; TikTok</li>
+                    <li>Produced ChapStick's <em>Honey Nourish</em> launch — first major innovation as a heritage brand</li>
+                    <li>Built ChapStick's creator program: briefs, benchmarks, and early community building</li>
+                    <li>Visual direction for product reanimation &amp; campaign assets</li>
+                  </ul>
+                </div>
+                <div class="cs-section">
+                  <span class="cs-label">Impact</span>
+                  <ul class="cs-list cs-impact">
+                    <li>Repositioned a 100-year-old brand for a younger consumer in a single year</li>
+                    <li>Built scalable creator &amp; social systems still running today</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="cs-images imgs-3">
+                <div class="cs-img g-chap wide">[ chapstick-4.jpg ]</div>
+                <div class="cs-img g-chap">[ chapstick-2.jpg ]</div>
+                <div class="cs-img g-chap">[ chapstick-3.jpg ]</div>
+              </div>
+            </div>
+            <button class="cs-close" data-close>Close <span class="x">×</span></button>
+          </div></div>
+        </div>
+
+        <!-- ── 03 SUAVE ── -->
+        <div class="row-wrap tone-lilac" data-row>
+          <button class="row tone-lilac">
+            <span class="n">№ 03</span>
+            <span class="brand">Suave</span>
+            <span class="desc">Scaling a mass brand through modern creative &amp; integrated campaigns.</span>
+            <span class="yr">2023</span>
+            <span class="arr">→</span>
+          </button>
+          <div class="drawer"><div class="drawer-inner">
+            <div class="cs-head">
+              <h3>Suave <span class="it">— Times Square &amp; beyond.</span></h3>
+              <div class="tag"><b>2023</b><br>CPG / Heritage Brand Revival</div>
+            </div>
+            <div class="cs-body">
+              <div class="cs-text">
+                <p class="cs-intro">When Suave was sold by Unilever and emerged as its own holding company, it needed a creative reset to reach a new generation. A Times Square launch became an ongoing multi-brand production contract.</p>
+                <div class="cs-section">
+                  <span class="cs-label">What I led</span>
+                  <ul class="cs-list">
+                    <li>New creative direction across all Suave product categories</li>
+                    <li>Produced the Times Square digital billboard launch campaign</li>
+                    <li>Built ongoing production pipeline for digital, social, and retail — deployed at Walmart, Target, CVS, Dollar General</li>
+                    <li>Visual direction for product reanimation &amp; packaging refreshes</li>
+                    <li>Monthly creator content across Hair, Bath &amp; Body, Personal Care, Men's, Kids</li>
+                  </ul>
+                </div>
+                <div class="cs-section">
+                  <span class="cs-label">Impact</span>
+                  <ul class="cs-list cs-impact">
+                    <li>Elevated visual identity of two heritage CPG brands simultaneously</li>
+                    <li>Built scalable social &amp; creator systems for ongoing partnerships</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="cs-images imgs-4">
+                <div class="cs-img g-suave wide">[ suave-5.jpg ]</div>
+                <div class="cs-img g-suave">[ suave-3.jpg ]</div>
+                <div class="cs-img g-suave">[ suave-7.jpeg ]</div>
+              </div>
+            </div>
+            <button class="cs-close" data-close>Close <span class="x">×</span></button>
+          </div></div>
+        </div>
+
+        <!-- ── 04 RILEY ROSE ── -->
+        <div class="row-wrap tone-cream" data-row>
+          <button class="row tone-cream">
+            <span class="n">№ 04</span>
+            <span class="brand">Riley Rose</span>
+            <span class="desc">Building a new retail concept &amp; in-store brand experience from the ground up.</span>
+            <span class="yr">2018</span>
+            <span class="arr">→</span>
+          </button>
+          <div class="drawer"><div class="drawer-inner">
+            <div class="cs-head">
+              <h3>Riley Rose <span class="it">— retail concept, 0→1.</span></h3>
+              <div class="tag"><b>2018</b><br>Retail / In-Store Concept<br>Forever 21 Incubator</div>
+            </div>
+            <div class="cs-body">
+              <div class="cs-text">
+                <p class="cs-intro">An entirely new beauty retail concept built inside Forever 21's incubator — from naming and brand world to in-store experience design and merchandising strategy.</p>
+                <div class="cs-section">
+                  <span class="cs-label">What I led</span>
+                  <ul class="cs-list">
+                    <li>Brand foundation: name, voice, identity, in-store experience principles</li>
+                    <li>Merchandising strategy across beauty, gifting &amp; lifestyle SKUs</li>
+                    <li>Launch marketing &amp; PR across digital and retail</li>
+                    <li>In-store brand experience design</li>
+                  </ul>
+                </div>
+                <p style="font-family:'Instrument Serif',serif;font-style:italic;color:var(--ink-mute);font-size:14px;line-height:1.5;border-left:2px solid var(--chartreuse);padding-left:14px">Editor's note: full case study being written. Email for current write-up.</p>
+              </div>
+              <div class="cs-images imgs-2">
+                <div class="cs-img g-rr">[ riley-rose-1.jpg ]</div>
+                <div class="cs-img g-rr">[ riley-rose-2.jpg ]</div>
+              </div>
+            </div>
+            <button class="cs-close" data-close>Close <span class="x">×</span></button>
+          </div></div>
+        </div>
+
+        <!-- ── 05 BLANK BEAUTY ── -->
+        <div class="row-wrap tone-peach" data-row>
+          <button class="row tone-peach">
+            <span class="n">№ 05</span>
+            <span class="brand">Blank Beauty</span>
+            <span class="desc">Translating new technology into a consumer-facing brand &amp; go-to-market strategy.</span>
+            <span class="yr">2022 — 2024</span>
+            <span class="arr">→</span>
+          </button>
+          <div class="drawer"><div class="drawer-inner">
+            <div class="cs-head">
+              <h3>Blank Beauty <span class="it">— tech to consumer.</span></h3>
+              <div class="tag"><b>2022 — 2024</b><br>Beauty Tech / 0→1 Brand Build<br>Featured: WSJ, Forbes, Vogue Business</div>
+            </div>
+            <div class="cs-body">
+              <div class="cs-text">
+                <p class="cs-intro">The product was real. The brand wasn't. I joined Blank Beauty at zero and built the brand infrastructure from scratch — positioning, consumer research, full website &amp; social redesign, and the marketing systems that drove $30K/month in DTC sales within the first quarter.</p>
+                <div class="cs-section">
+                  <span class="cs-label">What I led</span>
+                  <ul class="cs-list">
+                    <li>End-to-end brand strategy &amp; GTM for a beauty tech platform — cross-functional across product, eng &amp; marketing</li>
+                    <li>Consumer research across Reddit &amp; private focus groups; built a Customer Advisory Board</li>
+                    <li>Launch of customizable nail polish powered by proprietary "Huey" technology</li>
+                    <li>Full-funnel marketing: paid, organic, email, partnerships, conversion strategy</li>
+                    <li>Website, landing pages &amp; conversion flows for multiple consumer personas</li>
+                    <li>Complexion category expansion playbook — debuted at CosmoProf Miami, Jan 2026</li>
+                  </ul>
+                </div>
+                <div class="cs-section">
+                  <span class="cs-label">Impact</span>
+                  <ul class="cs-list cs-impact">
+                    <li>Grew revenue from near-zero to consistent $30K/month DTC</li>
+                    <li>Earned editorial coverage in WSJ, Forbes, Vogue Business, Entrepreneur</li>
+                    <li>Left a full-funnel infrastructure &amp; repeatable acquisition model behind</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="cs-images imgs-4">
+                <div class="cs-img g-bb wide">[ bb-2.jpg ]</div>
+                <div class="cs-img g-bb">[ bb-3.jpg ]</div>
+                <div class="cs-img g-bb">[ bb-4.jpg ]</div>
+              </div>
+            </div>
+            <button class="cs-close" data-close>Close <span class="x">×</span></button>
+          </div></div>
+        </div>
+
+        <!-- ── 06 EMERGING BRANDS / EARLY-STAGE STARS ── -->
+        <div class="row-wrap tone-lilac" data-row>
+          <button class="row tone-lilac">
+            <span class="n">№ 06</span>
+            <span class="brand">Emerging Brands</span>
+            <span class="desc">End-to-end brand building across early-stage consumer companies.</span>
+            <span class="yr">2020 —</span>
+            <span class="arr">→</span>
+          </button>
+          <div class="drawer"><div class="drawer-inner">
+            <div class="cs-head">
+              <h3>Early-stage stars <span class="it">— building from 0.</span></h3>
+              <div class="tag"><b>2020 — present</b><br>Multi-engagement<br>0→1 builds &amp; foundations</div>
+            </div>
+            <div class="cs-body cs-body--solo">
+              <div class="cs-text">
+                <p class="cs-intro">Building from 0 is a throughline, not a one-time assignment. These are engagements where I came in early and built the foundation: positioning, naming, GTM playbooks, and the early-stage brand system the team can run.</p>
+                <div class="cs-section">
+                  <span class="cs-label">What "early-stage" means here</span>
+                  <ul class="cs-list">
+                    <li>Brand foundation — name, voice, positioning, identity guardrails</li>
+                    <li>GTM playbook the founder can run without me</li>
+                    <li>Conversion-aware creative system for paid &amp; organic</li>
+                    <li>Hiring &amp; agency-selection guidance for the next 12 months</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="eb-section">
+              <div class="eb-section-hd">
+                <span class="eb-section-lbl">Selected early-stage builds</span>
+                <span class="eb-pause-hint">hover to pause</span>
+              </div>
+
+              <div class="eb-carousel">
+                <div class="eb-track">
+
+                <article class="eb-card">
+                  <div class="eb-card-img t1">[ mini-beauty-bakerie.jpg ]</div>
+                  <div class="eb-card-body">
+                    <span class="eb-card-cat">Beauty / Cosmetics</span>
+                    <span class="eb-card-name">Beauty Bakerie</span>
+                    <span class="eb-card-impact">Scaled DTC to $200K/month; PR including GMA &amp; CosmoProf keynote; brand sold in acquisition.</span>
+                  </div>
+                </article>
+
+                <article class="eb-card">
+                  <div class="eb-card-img t6">[ mini-selfies.jpg ]</div>
+                  <div class="eb-card-body">
+                    <span class="eb-card-cat">Cannabis</span>
+                    <span class="eb-card-name">Selfies Prerolls</span>
+                    <span class="eb-card-impact">#1 product at MedMen; multiple Forbes features driving early-stage awareness &amp; credibility.</span>
+                  </div>
+                </article>
+
+                <article class="eb-card">
+                  <div class="eb-card-img t5">[ mini-pancake.jpg ]</div>
+                  <div class="eb-card-body">
+                    <span class="eb-card-cat">Food + Beverage</span>
+                    <span class="eb-card-name">Pancake Now</span>
+                    <span class="eb-card-impact">Contributed to rapid brand momentum including Shark Tank placement.</span>
+                  </div>
+                </article>
+
+                <article class="eb-card">
+                  <div class="eb-card-img t2">[ mini-premium-jane.jpg ]</div>
+                  <div class="eb-card-body">
+                    <span class="eb-card-cat">Wellness / Supplements</span>
+                    <span class="eb-card-name">Premium Jane</span>
+                    <span class="eb-card-impact">Work expanded to two additional brands by the same principals; partnerships with Club Pilates &amp; Restore Hyper Wellness.</span>
+                  </div>
+                </article>
+
+                <article class="eb-card">
+                  <div class="eb-card-img t1">[ mini-khelp.jpg ]</div>
+                  <div class="eb-card-body">
+                    <span class="eb-card-cat">Wellness / Supplements</span>
+                    <span class="eb-card-name">Khelp</span>
+                    <span class="eb-card-impact">Repositioned toward a high-converting niche audience aligned with Erewhon &amp; health food retail channels.</span>
+                  </div>
+                </article>
+
+                <article class="eb-card">
+                  <div class="eb-card-img t2">[ mini-hppy-skin.jpg ]</div>
+                  <div class="eb-card-body">
+                    <span class="eb-card-cat">Beauty / Skincare</span>
+                    <span class="eb-card-name">HPPY Skin</span>
+                    <span class="eb-card-impact">Established a distinct identity in a crowded category with elevated perceived product value; positioned for retail &amp; e-commerce launch.</span>
+                  </div>
+                </article>
+
+                <article class="eb-card">
+                  <div class="eb-card-img t4">[ mini-ever.jpg ]</div>
+                  <div class="eb-card-body">
+                    <span class="eb-card-cat">Beauty / Skincare</span>
+                    <span class="eb-card-name">EVER</span>
+                    <span class="eb-card-impact">Repositioning contributed to long-term growth leading to acquisition.</span>
+                  </div>
+                </article>
+
+                <article class="eb-card">
+                  <div class="eb-card-img t3">[ mini-leverden.jpg ]</div>
+                  <div class="eb-card-body">
+                    <span class="eb-card-cat">Luxury Home Goods</span>
+                    <span class="eb-card-name">Leverden</span>
+                    <span class="eb-card-impact">CB2 retail placement; Vogue feature; brand activations in New York &amp; Seoul.</span>
+                  </div>
+                </article>
+
+                <article class="eb-card">
+                  <div class="eb-card-img t6">[ mini-forest-riot.jpg ]</div>
+                  <div class="eb-card-body">
+                    <span class="eb-card-cat">Beauty / Skincare</span>
+                    <span class="eb-card-name">Forest Riot</span>
+                    <span class="eb-card-impact">Repositioned brand identity &amp; messaging for US entry; full web and launch asset suite delivered.</span>
+                  </div>
+                </article>
+
+                <article class="eb-card">
+                  <div class="eb-card-img t1">[ mini-la-peony.jpg ]</div>
+                  <div class="eb-card-body">
+                    <span class="eb-card-cat">Fashion / Apparel</span>
+                    <span class="eb-card-name">La Peony Clothing</span>
+                    <span class="eb-card-impact">Established a premium, editorial brand identity supporting e-commerce &amp; wholesale positioning.</span>
+                  </div>
+                </article>
+
+                <article class="eb-card">
+                  <div class="eb-card-img t3">[ mini-hatfetti.jpg ]</div>
+                  <div class="eb-card-body">
+                    <span class="eb-card-cat">Fashion / Accessories</span>
+                    <span class="eb-card-name">Hatfetti</span>
+                    <span class="eb-card-impact">Pop-up activations at Saguaro Hotel; growing corporate gifting &amp; wholesale partnerships.</span>
+                  </div>
+                </article>
+
+                <article class="eb-card">
+                  <div class="eb-card-img t4">[ mini-windskin.jpg ]</div>
+                  <div class="eb-card-body">
+                    <span class="eb-card-cat">Outdoor / Active Lifestyle</span>
+                    <span class="eb-card-name">Windskin</span>
+                    <span class="eb-card-impact">Elevated brand from niche concept to lifestyle positioning across web, social, Amazon &amp; retail.</span>
+                  </div>
+                </article>
+
+                </div>
+              </div>
+            </div>
+
+            <button class="cs-close" data-close>Close <span class="x">×</span></button>
+          </div></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ════════════ II · ENGAGEMENTS ════════════ -->
+    <section id="ii">
+      <div class="chapter">
+        <div class="roman">II</div>
+        <div class="title">Engagements, <span class="it">how we work together.</span></div>
+        <div class="meta">Four ways in<br><b>Booking Spring 2026</b><br>Custom scopes welcome</div>
+      </div>
+
+      <div class="engagements">
+        <div class="eng-grid">
+
+          <div class="eng eng--lime">
+            <span class="eng-num">№ 01 — Build</span>
+            <h3>Brand Build <span class="it">— 0→1.</span></h3>
+            <p class="eng-desc">For founders bringing a new product or company into the world. Strategy, name, voice, identity foundation, and a launch playbook the team can run.</p>
+            <dl class="eng-meta">
+              <dt>Scope</dt><dd>Discovery → identity → GTM</dd>
+              <dt>Duration</dt><dd>4 — 8 months</dd>
+              <dt>Best for</dt><dd>Pre-launch &amp; Series A consumer</dd>
+            </dl>
+            <a class="inq" href="#contact">Inquire <span class="arr">→</span></a>
+          </div>
+
+          <div class="eng eng--peach">
+            <span class="eng-num">№ 02 — Reposition</span>
+            <h3>Brand Turnaround <span class="it">— the reset.</span></h3>
+            <p class="eng-desc">For legacy or stalled brands that need a clear-eyed audit, a sharper position, and a relaunch the org can rally behind. Surgical, not sentimental.</p>
+            <dl class="eng-meta">
+              <dt>Scope</dt><dd>Audit → reposition → relaunch</dd>
+              <dt>Duration</dt><dd>8 — 16 weeks</dd>
+              <dt>Best for</dt><dd>Mid-market &amp; legacy CPG</dd>
+            </dl>
+            <a class="inq" href="#contact">Inquire <span class="arr">→</span></a>
+          </div>
+
+          <div class="eng eng--lilac">
+            <span class="eng-num">№ 03 — Advise</span>
+            <h3>Advisory Retainer <span class="it">— on call.</span></h3>
+            <p class="eng-desc">For founders &amp; CMOs who need a brand brain in the room. Monthly hours, working sessions, a sounding board on creative &amp; strategic decisions as they happen.</p>
+            <dl class="eng-meta">
+              <dt>Scope</dt><dd>Ongoing partnership</dd>
+              <dt>Duration</dt><dd>3-month minimum, renewable</dd>
+              <dt>Best for</dt><dd>Operators in motion</dd>
+            </dl>
+            <a class="inq" href="#contact">Inquire <span class="arr">→</span></a>
+          </div>
+
+          <div class="eng eng--cream">
+            <span class="eng-num">№ 04 — Speak</span>
+            <h3>Speaking &amp; Editorial <span class="it">— public voice.</span></h3>
+            <p class="eng-desc">Keynotes, panels, contributed essays, podcast appearances. Subjects: building consumer brands, the operator's view of creative, and what most decks miss.</p>
+            <dl class="eng-meta">
+              <dt>Scope</dt><dd>Single booking or series</dd>
+              <dt>Duration</dt><dd>Per engagement</dd>
+              <dt>Recent</dt><dd>Available on request</dd>
+            </dl>
+            <a class="inq" href="#contact">Inquire <span class="arr">→</span></a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ III · PRACTICE ════════════ -->
+    <section id="iii">
+      <div class="chapter">
+        <div class="roman">III</div>
+        <div class="title">Practice, <span class="it">a short statement.</span></div>
+        <div class="meta">Independent since <b>2020</b><br>Operator-trained<br>Strong opinions, loosely held</div>
+      </div>
+
+      <div class="practice">
+        <div class="p-portrait">
+          <div class="ph"></div>
+        </div>
+        <div class="p-text">
+          <p class="lead">I build brands the kind of way operators wish more strategists did — with the P&amp;L in one hand and the customer in the other.</p>
+
+          <p>Ten years inside Sephora, Forever 21's incubator, and the brand benches of <b>Target, Walmart, CVS &amp; Ulta</b> — and a handful of consumer startups that made it (and a few that didn't). I read decks, I read shelves, I read rooms. The work I'm proudest of is usually the work no one knew I touched.</p>
+
+          <p>I work <b>independently, with a small bench of trusted collaborators</b> — designers, copywriters, photographers, producers — assembled per engagement. No agency overhead, no junior staffing surprises. Just the right people for the build.</p>
+
+          <p>Based in Los Angeles. Available internationally. Most engagements begin with a call.</p>
+
+          <div class="p-sig">— hannah</div>
+
+          <dl class="p-meta">
+            <dt>Sectors</dt><dd>Consumer · Retail · Beauty · CPG · DTC · Hospitality</dd>
+            <dt>Operates from</dt><dd>Los Angeles · open to NYC &amp; international travel</dd>
+            <dt>Education</dt><dd>Cornell University — Communications &amp; Media Studies, Film</dd>
+          </dl>
+        </div>
+      </div>
+
+      <!-- Practice · Act II — Philosophy pull-quote -->
+      <div class="philosophy">
+        <div class="philosophy-inner">
+          <span class="phil-label">Philosophy</span>
+          <blockquote class="phil-quote">
+            Great brands must <span class="hl">first solve a real problem</span> that a lot of people care about — and will gladly pay money &amp; attention to <span class="em">you</span> (over others) to get help with.
+          </blockquote>
+          <p class="phil-coda">It's through this lens that the best identity, creative, and marketing can be born — <b>and a business can sustain.</b></p>
+        </div>
+      </div>
+
+      <!-- Practice · Act III — Brands = People (the signature analogy) -->
+      <div class="bp">
+        <div class="bp-inner">
+
+          <div class="bp-hd">
+            <div>
+              <span class="bp-label">A working theory</span>
+              <h3>Brands<span class="eq">=</span><span class="ppl">people.</span></h3>
+              <p class="bp-sub">I view brands the way I view people. Just like the best people, the best brands have distinctions that make you want to support them at first meeting — and stick around for the long haul.</p>
+            </div>
+            <div class="bp-figure">
+              <span class="ph-text">[ brands-people.gif ]</span>
+              <img src="./brands-people.gif" alt="Brands = People — a stick-figure analogy in three layers" onerror="this.style.display='none'">
+            </div>
+          </div>
+
+          <div class="bp-layers">
+            <div class="bp-layer">
+              <span class="num">№ 01</span>
+              <div class="lyr">With a <span class="it">look.</span></div>
+              <p>Packaging, aesthetic, color palette, typography — the surface signals that pull you in across a shelf, a feed, a search result.</p>
+            </div>
+            <div class="bp-layer">
+              <span class="num">№ 02</span>
+              <div class="lyr">And a <span class="it">personality.</span></div>
+              <p>Tone of voice, point of view, beliefs, social presence — what makes you stay once you've stopped to look.</p>
+            </div>
+            <div class="bp-layer">
+              <span class="num">№ 03</span>
+              <div class="lyr">And <span class="it">friends.</span></div>
+              <p>Choice of collaborators, partners, retailers — the company a brand keeps says more than its tagline.</p>
+            </div>
+          </div>
+
+          <div class="bp-cta">
+            I've given talks on this. <a href="mailto:hello@hannahmcgough.com?subject=Brands%20%3D%20People%20deck%20request">Email for the deck <span class="arr">→</span></a>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ════════════ IV · NOTES ════════════ -->
+    <section id="iv">
+      <div class="chapter">
+        <div class="roman">IV</div>
+        <div class="title">Field Notes, <span class="it">things I keep thinking about.</span><span class="sub">Published on LinkedIn · quarterly-ish.</span></div>
+        <div class="meta"></div>
+      </div>
+
+      <div class="notes">
+        <div class="notes-grid">
+
+          <a class="note tone-lime" href="https://www.linkedin.com/pulse/great-consumer-audit-here-its-coming-your-brand-hannah-mcgough-zky1c/" target="_blank" rel="noopener">
+            <span class="tag">CPG / Consumer Behavior</span>
+            <h4>The Great Consumer Audit <span class="it">Is Here</span></h4>
+            <p class="ex">The era of vibes-based branding is closing. We're entering the Great Consumer Audit — a mass reassessment of whether brands actually deserve the trust they've been coasting on.</p>
+            <span class="more">Read on LinkedIn <span class="arr">→</span></span>
+          </a>
+
+          <a class="note tone-lilac" href="https://www.linkedin.com/pulse/communities-new-brands-so-brand-them-hannah-mcgough-wvprc/" target="_blank" rel="noopener">
+            <span class="tag">Community / Brand Strategy</span>
+            <h4>Communities Are <span class="it">the New Brands</span></h4>
+            <p class="ex">Communities have become as culturally powerful as the brands trying to reach them — and in some cases, more trusted. The real work is partnership models where the fit is the point.</p>
+            <span class="more">Read on LinkedIn <span class="arr">→</span></span>
+          </a>
+
+          <a class="note tone-peach">
+            <span class="tag">Brand / What Makes People Care</span>
+            <h4>The Niche <span class="it">Advantage</span></h4>
+            <p class="ex">Most brands don't have an awareness problem — they have a sameness problem. The future isn't louder brands, it's sharper ones.</p>
+            <span class="coming">Coming Soon</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ TRUSTED BY ════════════ -->
+    <section class="trust" id="trust">
+      <div class="trust-hd">
+        <div class="lbl">Trusted by.</div>
+        <div></div>
+        <div class="ct">A working roster<br><b>50+ brands across 5 service areas</b></div>
+      </div>
+
+      <div class="logos">
+        <div class="logo"><span class="logo-ph">1.svg</span><img src="./1.svg" alt="Sephora" onerror="this.style.display='none'"></div>
+        <div class="logo"><span class="logo-ph">2.svg</span><img src="./2.svg" alt="Disney" onerror="this.style.display='none'"></div>
+        <div class="logo"><span class="logo-ph">3.svg</span><img src="./3.svg" alt="ChapStick" onerror="this.style.display='none'"></div>
+        <div class="logo"><span class="logo-ph">4.svg</span><img src="./4.svg" alt="Suave" onerror="this.style.display='none'"></div>
+        <div class="logo"><span class="logo-ph">5.svg</span><img src="./5.svg" alt="TOMS" onerror="this.style.display='none'"></div>
+        <div class="logo"><span class="logo-ph">6.svg</span><img src="./6.svg" alt="AT&amp;T" onerror="this.style.display='none'"></div>
+        <div class="logo"><span class="logo-ph">7.svg</span><img src="./7.svg" alt="Real Techniques" onerror="this.style.display='none'"></div>
+        <div class="logo"><span class="logo-ph">8.svg</span><img src="./8.svg" alt="Forever 21" onerror="this.style.display='none'"></div>
+      </div>
+
+      <button class="roster-toggle" data-roster>View full roster <span class="arr">→</span></button>
+
+      <div class="roster">
+
+        <div class="roster-row cat-creative">
+          <div class="pill">Creative</div>
+          <div class="roster-names">
+            <span>Alterna</span><span class="sep">·</span><span>AT&amp;T</span><span class="sep">·</span>
+            <span>ChapStick</span><span class="sep">·</span><span>Cycle Tea</span><span class="sep">·</span>
+            <span>Disney</span><span class="sep">·</span><span>Goldfaden MD</span><span class="sep">·</span>
+            <span>HPPY Skin</span><span class="sep">·</span><span>OurX</span><span class="sep">·</span>
+            <span>PancakeNow</span><span class="sep">·</span><span>Pure Kana</span><span class="sep">·</span>
+            <span>Puroast Coffee</span><span class="sep">·</span><span>Real Techniques</span><span class="sep">·</span>
+            <span>Suave</span><span class="sep">·</span><span>TIDL</span><span class="sep">·</span>
+            <span>Vida Cap</span><span class="sep">·</span><span>Windskin</span><span class="sep">·</span>
+            <span>Youngblood</span>
+          </div>
+        </div>
+
+        <div class="roster-row cat-ad">
+          <div class="pill">Advertising</div>
+          <div class="roster-names">
+            <span>Alpyn Beauty</span><span class="sep">·</span><span>Ashapops</span><span class="sep">·</span>
+            <span>Funny Water</span><span class="sep">·</span><span>MAËLYS</span><span class="sep">·</span>
+            <span>Sorel</span><span class="sep">·</span><span>TOMS</span><span class="sep">·</span>
+            <span>Varsity Spirit</span>
+          </div>
+        </div>
+
+        <div class="roster-row cat-360">
+          <div class="pill">360 Marketing</div>
+          <div class="roster-names">
+            <span>Beauty Bakerie</span><span class="sep">·</span><span>Blank Beauty</span><span class="sep">·</span>
+            <span>Ever</span><span class="sep">·</span><span>Leverden</span><span class="sep">·</span>
+            <span>Premium Jane</span>
+          </div>
+        </div>
+
+        <div class="roster-row cat-id">
+          <div class="pill">Brand Identity</div>
+          <div class="roster-names">
+            <span>Blossoming Box</span><span class="sep">·</span><span>Elevar</span><span class="sep">·</span>
+            <span>Fenix CBD</span><span class="sep">·</span><span>Hatfetti</span><span class="sep">·</span>
+            <span>One Earth Health</span>
+          </div>
+        </div>
+
+        <div class="roster-row cat-seph">
+          <div>
+            <div class="pill">Sephora Skincare Desk</div>
+            <span class="meta">Managed as Sephora merchant partner</span>
+          </div>
+          <div class="roster-names">
+            <span>belif</span><span class="sep">·</span><span>Clarins</span><span class="sep">·</span>
+            <span>COOLA</span><span class="sep">·</span><span>Erborian</span><span class="sep">·</span>
+            <span>Fresh</span><span class="sep">·</span><span>GLAMGLOW</span><span class="sep">·</span>
+            <span>Glow Recipe</span><span class="sep">·</span><span>Kopari</span><span class="sep">·</span>
+            <span>L'Occitane</span><span class="sep">·</span><span>Laneige</span><span class="sep">·</span>
+            <span>philosophy</span><span class="sep">·</span><span>Shiseido</span><span class="sep">·</span>
+            <span>Sol de Janeiro</span><span class="sep">·</span><span>St. Tropez</span><span class="sep">·</span>
+            <span>Supergoop</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ════════════ CONTACT ════════════ -->
+    <section class="contact" id="contact">
+      <div class="contact-inner">
+        <span class="label">Inquire</span>
+        <h2>Let's build something <span class="it">great.</span></h2>
+        <p class="sub">Whether you're building a brand, a platform, or something that needs to move — I'd love to hear what you're working on.</p>
+
+        <form class="form" onsubmit="event.preventDefault(); alert('Form submission wiring is a TODO — for the mock, this is a visual placeholder. The real form will POST to your existing endpoint or open mailto.');">
+          <div class="form-row">
+            <label for="f-name">Name</label>
+            <input id="f-name" type="text" placeholder="Your name" required>
+          </div>
+          <div class="form-row">
+            <label for="f-email">Email</label>
+            <input id="f-email" type="email" placeholder="you@company.com" required>
+          </div>
+          <div class="form-row">
+            <label for="f-co">Company</label>
+            <input id="f-co" type="text" placeholder="Optional">
+          </div>
+          <div class="form-row tall">
+            <label for="f-msg">What are you<br>working on?</label>
+            <textarea id="f-msg" placeholder="A brand, a launch, a turnaround, an advisory…" required></textarea>
+          </div>
+          <div class="submit-row">
+            <button type="submit" class="send">Send message <span class="arr">→</span></button>
+            <span style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(237,232,224,.4);font-weight:500">Replies within 48 hrs</span>
+          </div>
+        </form>
+
+        <div class="contact-meta">
+          <span><a href="mailto:hello@hannahmcgough.com">hello@hannahmcgough.com</a></span>
+          <span>Los Angeles, CA · Available globally</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-row">
+        <div class="footer-mark">hm<span class="ast">*</span></div>
+        <div class="footer-copy">© MMXXVI · Hannah McGough Studio · Los Angeles</div>
+        <div class="footer-links">
+          <a href="https://www.instagram.com/cpgirlie" target="_blank" rel="noopener">Instagram</a>
+          <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:hello@hannahmcgough.com?subject=CV%20request">Request CV (PDF)</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <div class="version">Mock <b>v4</b> · all changes</div>
+
+<script>
+/* cursor */
+(() => {
+  const c = document.getElementById('cursor');
+  if (!c) return;
+  let mx=-100,my=-100,x=-100,y=-100;
+  window.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; });
+  function loop(){ x+=(mx-x)*.22; y+=(my-y)*.22; c.style.transform=`translate(${x}px,${y}px)`; requestAnimationFrame(loop); }
+  loop();
+  document.querySelectorAll('a, button, [data-cursor]').forEach(el=>{
+    el.addEventListener('mouseenter',()=>c.classList.add('hover'));
+    el.addEventListener('mouseleave',()=>c.classList.remove('hover'));
+  });
+  ['.contact','.footer'].forEach(sel=>{
+    const dark = document.querySelector(sel);
+    if(!dark) return;
+    dark.addEventListener('mouseenter',()=>c.classList.add('lime'));
+    dark.addEventListener('mouseleave',()=>c.classList.remove('lime'));
+  });
+})();
+
+/* drawer toggle for work rows */
+(() => {
+  document.querySelectorAll('[data-row]').forEach(wrap => {
+    const trigger = wrap.querySelector('.row');
+    const close = wrap.querySelector('[data-close]');
+    trigger.addEventListener('click', e => {
+      e.preventDefault();
+      const wasOpen = wrap.classList.contains('open');
+      document.querySelectorAll('[data-row].open').forEach(w => w.classList.remove('open'));
+      if (!wasOpen) {
+        wrap.classList.add('open');
+        setTimeout(()=>wrap.scrollIntoView({behavior:'smooth',block:'start'}), 60);
+      }
+    });
+    if (close) close.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      wrap.classList.remove('open');
+      trigger.scrollIntoView({behavior:'smooth',block:'center'});
+    });
+    /* click on drawer background (not on inner content) closes drawer */
+    const drawer = wrap.querySelector('.drawer');
+    const drawerInner = wrap.querySelector('.drawer-inner');
+    if (drawer && drawerInner) {
+      const bgClasses = ['drawer','drawer-inner','cs-body','cs-text','cs-section','cs-head','cs-images','eb-section','eb-section-hd','eb-carousel','eb-track'];
+      drawer.addEventListener('click', e => {
+        const cl = e.target.classList;
+        if (cl && bgClasses.some(c => cl.contains(c))) {
+          wrap.classList.remove('open');
+          trigger.scrollIntoView({behavior:'smooth',block:'center'});
+        }
+      });
+    }
+  });
+})();
+
+/* trust roster expand */
+(() => {
+  const t = document.getElementById('trust');
+  const btn = document.querySelector('[data-roster]');
+  if (!t || !btn) return;
+  btn.addEventListener('click', () => {
+    t.classList.toggle('open');
+    btn.querySelector('span:first-of-type') || null;
+    btn.firstChild.nodeValue = t.classList.contains('open') ? 'Hide full roster ' : 'View full roster ';
+  });
+})();
+
+/* mobile expand-more for long "What I led" lists */
+(() => {
+  document.querySelectorAll('.drawer .cs-section').forEach(sec => {
+    const list = sec.querySelector('.cs-list:not(.cs-impact):not(.sephora-grid):not(.eb-grid)');
+    if (!list) return;
+    const items = list.querySelectorAll('li');
+    if (items.length <= 3) return;
+    const hidden = items.length - 3;
+    const btn = document.createElement('button');
+    btn.className = 'cs-more-btn';
+    btn.type = 'button';
+    btn.innerHTML = `+ ${hidden} more <span class="arr">→</span>`;
+    sec.appendChild(btn);
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const expanded = sec.classList.toggle('expanded');
+      btn.innerHTML = expanded
+        ? `Show less <span class="arr">↑</span>`
+        : `+ ${hidden} more <span class="arr">→</span>`;
+    });
+  });
+})();
+
+/* duplicate cards in eb-track for seamless marquee loop */
+(() => {
+  document.querySelectorAll('.eb-track').forEach(track => {
+    const cards = Array.from(track.children);
+    cards.forEach(c => track.appendChild(c.cloneNode(true)));
+  });
+})();
+
+/* boot remove */
+setTimeout(()=>{ const b=document.getElementById('boot'); if(b) b.remove(); },5200);
+</script>
+</body>
+</html>
