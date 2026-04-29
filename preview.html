@@ -738,7 +738,7 @@
                   </ul>
                 </div>
               </div>
-              <div class="cs-thumb">
+              <div class="cs-thumb" data-brand="sephora">
                 <img src="./sephora-1.jpeg" alt="Sephora" onerror="this.style.display='none'">
                 <button class="cs-thumb-btn" data-gallery="sephora">View full gallery <span class="cnt">(9)</span> <span class="ar">→</span></button>
               </div>
@@ -780,7 +780,7 @@
                   </ul>
                 </div>
               </div>
-              <div class="cs-thumb">
+              <div class="cs-thumb" data-brand="chapstick">
                 <img src="./chapstick-1.jpg" alt="ChapStick" onerror="this.style.display='none'">
                 <button class="cs-thumb-btn" data-gallery="chapstick">View full gallery <span class="cnt">(4)</span> <span class="ar">→</span></button>
               </div>
@@ -823,7 +823,7 @@
                   </ul>
                 </div>
               </div>
-              <div class="cs-thumb">
+              <div class="cs-thumb" data-brand="suave">
                 <img src="./suave-1.jpg" alt="Suave" onerror="this.style.display='none'">
                 <button class="cs-thumb-btn" data-gallery="suave">View full gallery <span class="cnt">(7)</span> <span class="ar">→</span></button>
               </div>
@@ -859,7 +859,7 @@
                 </details>
                 <p style="font-family:'Instrument Serif',serif;font-style:italic;color:var(--ink-mute);font-size:14px;line-height:1.5;border-left:2px solid var(--chartreuse);padding-left:14px">Editor's note: full case study being written. Email for current write-up.</p>
               </div>
-              <div class="cs-thumb">
+              <div class="cs-thumb" data-brand="riley-rose">
                 <img src="./riley-rose-1.jpg" alt="Riley Rose" onerror="this.style.display='none'">
                 <button class="cs-thumb-btn" data-gallery="riley-rose">View full gallery <span class="cnt">(10)</span> <span class="ar">→</span></button>
               </div>
@@ -904,7 +904,7 @@
                   </ul>
                 </div>
               </div>
-              <div class="cs-thumb">
+              <div class="cs-thumb" data-brand="blank-beauty">
                 <img src="./blank-beauty-1.jpg" alt="Blank Beauty" onerror="this.style.display='none'">
                 <button class="cs-thumb-btn" data-gallery="blank-beauty">View full gallery <span class="cnt">(4)</span> <span class="ar">→</span></button>
               </div>
@@ -1540,6 +1540,69 @@
     btn.querySelector('span:first-of-type') || null;
     btn.firstChild.nodeValue = t.classList.contains('open') ? 'Hide full roster ' : 'View full roster ';
   });
+})();
+
+/* AUTO-DISCOVER gallery images per brand.
+   Drop a new {brand}-N.{jpg|jpeg|png|gif|webp} file in the repo, refresh, it appears.
+   Tolerates gaps in numbering up to MAX_GAP consecutive misses. */
+(() => {
+  const EXTS = ['jpg','jpeg','png','gif','webp'];
+  const MAX_INDEX = 30;
+  const MAX_GAP = 4;
+
+  const imageExists = url => new Promise(resolve => {
+    const im = new Image();
+    im.onload = () => resolve(true);
+    im.onerror = () => resolve(false);
+    im.src = url;
+  });
+
+  const findAt = async (brand, i) => {
+    for (const ext of EXTS) {
+      const url = `./${brand}-${i}.${ext}`;
+      if (await imageExists(url)) return url;
+    }
+    return null;
+  };
+
+  const discover = async (brand) => {
+    const found = [];
+    let misses = 0;
+    for (let i = 1; i <= MAX_INDEX; i++) {
+      const url = await findAt(brand, i);
+      if (url) { found.push(url); misses = 0; }
+      else { misses++; if (misses >= MAX_GAP) break; }
+    }
+    return found;
+  };
+
+  const populate = async (brand) => {
+    const images = await discover(brand);
+    if (!images.length) return;
+
+    const thumbImg = document.querySelector(`.cs-thumb[data-brand="${brand}"] img`);
+    if (thumbImg) { thumbImg.src = images[0]; thumbImg.style.display = 'block'; }
+
+    const cnt = document.querySelector(`.cs-thumb[data-brand="${brand}"] .cnt`);
+    if (cnt) cnt.textContent = `(${images.length})`;
+
+    const strip = document.querySelector(`#gallery-${brand} .cs-gallery-strip`);
+    if (strip) {
+      strip.innerHTML = '';
+      images.forEach(src => {
+        const im = document.createElement('img');
+        im.src = src;
+        im.alt = '';
+        im.loading = 'lazy';
+        strip.appendChild(im);
+      });
+    }
+  };
+
+  const brands = [...new Set(
+    Array.from(document.querySelectorAll('.cs-thumb[data-brand]')).map(t => t.dataset.brand)
+  )];
+  brands.forEach(b => populate(b));
 })();
 
 /* gallery overlays — open on thumb-button click, close on X / outside / ESC */
