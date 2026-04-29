@@ -113,10 +113,10 @@
   .hero{padding:clamp(40px,7vh,80px) var(--gutter) clamp(60px,9vh,110px);display:grid;gap:clamp(36px,5vw,64px)}
   .hero-eyebrow{display:flex;align-items:center;gap:18px;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);font-weight:500;margin-bottom:32px}
   .hero-eyebrow .line{flex:1;height:1px;background:var(--hair);max-width:160px}
-  .hero-name{font-weight:700;font-size:clamp(78px,15vw,232px);line-height:.86;letter-spacing:-.045em}
-  .hero-grid{display:grid;grid-template-columns:.85fr 1fr;gap:clamp(36px,5vw,80px);align-items:end;margin-top:clamp(32px,5vh,56px)}
+  .hero-name{font-weight:700;font-size:clamp(58px,11vw,168px);line-height:.88;letter-spacing:-.04em}
+  .hero-grid{display:grid;grid-template-columns:.85fr 1fr;gap:clamp(36px,5vw,80px);align-items:stretch;margin-top:clamp(32px,5vh,56px)}
 
-  .portrait{position:relative;background:var(--lilac);aspect-ratio:4/5;overflow:hidden}
+  .portrait{position:relative;background:var(--lilac);overflow:hidden;min-height:340px}
   .portrait::before{content:"";position:absolute;inset:0;background:linear-gradient(165deg,rgba(244,201,168,.5) 0%,transparent 55%,rgba(194,186,236,.4) 100%);mix-blend-mode:screen}
   .portrait .ph{position:absolute;inset:0;display:flex;align-items:flex-end;padding:20px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(26,24,23,.45);font-weight:500}
   .portrait .ph::after{content:none}
@@ -202,7 +202,7 @@
 
   /* cs-thumb: single hero image per drawer */
   .cs-thumb{display:flex;flex-direction:column;gap:14px;align-self:start;align-items:flex-start}
-  .cs-thumb > img{width:auto;height:auto;max-width:100%;max-height:360px;display:block;background:rgba(26,24,23,.06)}
+  .cs-thumb > img,.cs-thumb > video{width:auto;height:auto;max-width:100%;max-height:360px;display:block;background:rgba(26,24,23,.06);object-fit:contain}
   .cs-thumb-btn{align-self:flex-start;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--ink);display:inline-flex;align-items:center;gap:10px;padding:10px 0 4px;border:none;border-bottom:1px solid var(--ink);background:transparent}
   .cs-thumb-btn .cnt{color:var(--ink-mute);font-weight:500;margin-left:-2px}
   .cs-thumb-btn .ar{font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;letter-spacing:0;text-transform:none;font-weight:400;transition:transform .3s var(--ease)}
@@ -218,7 +218,7 @@
   .cs-gallery-close .x{font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;letter-spacing:0;text-transform:none;font-weight:400}
   .cs-gallery-close:hover{background:var(--ink);color:var(--cream)}
   .cs-gallery-strip{flex:1;display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;padding:32px var(--gutter);align-items:center;scroll-behavior:smooth}
-  .cs-gallery-strip img{height:74vh;width:auto;display:block;flex-shrink:0;background:rgba(26,24,23,.06)}
+  .cs-gallery-strip img,.cs-gallery-strip video{height:74vh;width:auto;display:block;flex-shrink:0;background:rgba(26,24,23,.06)}
   .cs-gallery-strip::-webkit-scrollbar{height:4px}
   .cs-gallery-strip::-webkit-scrollbar-track{background:rgba(26,24,23,.06)}
   .cs-gallery-strip::-webkit-scrollbar-thumb{background:var(--ink);border-radius:4px}
@@ -227,7 +227,7 @@
     .cs-gallery-head{padding:14px var(--gutter)}
     .cs-gallery-title{font-size:18px}
     .cs-gallery-strip{padding:20px var(--gutter);gap:6px}
-    .cs-gallery-strip img{height:62vh}
+    .cs-gallery-strip img,.cs-gallery-strip video{height:62vh}
   }
   .cs-img.g-suave{background:linear-gradient(140deg,#C2BAEC 0%,#E5D8C5 100%)}
   .cs-img.g-chap{background:linear-gradient(140deg,#F4C9A8 0%,#E8D4B8 100%)}
@@ -264,7 +264,7 @@
   /* hide all leftover mock-stage filename placeholders */
   .logo-ph,.boot-tile-ph,.ph-text{display:none}
   /* let real images fill their frames */
-  .portrait>img,.p-portrait>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .portrait>img,.p-portrait>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%;z-index:0}
   .portrait::before,.p-portrait::before{z-index:1;pointer-events:none}
   .portrait .cap{z-index:2}
   .eb-card-img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1}
@@ -666,7 +666,6 @@
         <div class="portrait">
           <img src="./lilac-ringlight.png" alt="Hannah McGough" onerror="this.style.display='none'">
           <div class="ph"></div>
-          <div class="cap">f.1 — portrait, 2026</div>
         </div>
 
         <div class="deck">
@@ -1542,13 +1541,16 @@
   });
 })();
 
-/* AUTO-DISCOVER gallery images per brand.
-   Drop a new {brand}-N.{jpg|jpeg|png|gif|webp} file in the repo, refresh, it appears.
-   Tolerates gaps in numbering up to MAX_GAP consecutive misses. */
+/* AUTO-DISCOVER gallery media per brand. Images + videos.
+   Drop a new {brand}-N.{jpg|jpeg|png|gif|webp|mp4|webm|mov|m4v} file in the repo, refresh, it appears.
+   Videos autoplay muted on loop. Tolerates gaps up to MAX_GAP consecutive misses. */
 (() => {
-  const EXTS = ['jpg','jpeg','png','gif','webp'];
+  const IMAGE_EXTS = ['jpg','jpeg','png','gif','webp'];
+  const VIDEO_EXTS = ['mp4','webm','mov','m4v'];
+  const ALL_EXTS = [...IMAGE_EXTS, ...VIDEO_EXTS];
   const MAX_INDEX = 30;
   const MAX_GAP = 4;
+  const isVideo = ext => VIDEO_EXTS.includes(ext);
 
   const imageExists = url => new Promise(resolve => {
     const im = new Image();
@@ -1556,11 +1558,14 @@
     im.onerror = () => resolve(false);
     im.src = url;
   });
+  const fileExists = url => fetch(url, { method: 'HEAD' })
+    .then(r => r.ok).catch(() => false);
 
   const findAt = async (brand, i) => {
-    for (const ext of EXTS) {
+    for (const ext of ALL_EXTS) {
       const url = `./${brand}-${i}.${ext}`;
-      if (await imageExists(url)) return url;
+      const exists = isVideo(ext) ? await fileExists(url) : await imageExists(url);
+      if (exists) return { url, ext };
     }
     return null;
   };
@@ -1569,33 +1574,53 @@
     const found = [];
     let misses = 0;
     for (let i = 1; i <= MAX_INDEX; i++) {
-      const url = await findAt(brand, i);
-      if (url) { found.push(url); misses = 0; }
+      const item = await findAt(brand, i);
+      if (item) { found.push(item); misses = 0; }
       else { misses++; if (misses >= MAX_GAP) break; }
     }
     return found;
   };
 
+  const makeEl = ({ url, ext }) => {
+    if (isVideo(ext)) {
+      const v = document.createElement('video');
+      v.src = url;
+      v.muted = true; v.loop = true; v.autoplay = true;
+      v.playsInline = true;
+      v.setAttribute('playsinline', '');
+      v.preload = 'metadata';
+      return v;
+    }
+    const im = document.createElement('img');
+    im.src = url;
+    im.alt = '';
+    im.loading = 'lazy';
+    return im;
+  };
+
   const populate = async (brand) => {
-    const images = await discover(brand);
-    if (!images.length) return;
+    const items = await discover(brand);
+    if (!items.length) return;
 
-    const thumbImg = document.querySelector(`.cs-thumb[data-brand="${brand}"] img`);
-    if (thumbImg) { thumbImg.src = images[0]; thumbImg.style.display = 'block'; }
+    // Thumb: replace existing img/video with the first item (whichever type)
+    const thumb = document.querySelector(`.cs-thumb[data-brand="${brand}"]`);
+    if (thumb) {
+      const existing = thumb.querySelector(':scope > img, :scope > video');
+      const newEl = makeEl(items[0]);
+      newEl.style.display = 'block';
+      if (existing) existing.replaceWith(newEl);
+      else thumb.prepend(newEl);
+    }
 
+    // Count
     const cnt = document.querySelector(`.cs-thumb[data-brand="${brand}"] .cnt`);
-    if (cnt) cnt.textContent = `(${images.length})`;
+    if (cnt) cnt.textContent = `(${items.length})`;
 
+    // Gallery strip
     const strip = document.querySelector(`#gallery-${brand} .cs-gallery-strip`);
     if (strip) {
       strip.innerHTML = '';
-      images.forEach(src => {
-        const im = document.createElement('img');
-        im.src = src;
-        im.alt = '';
-        im.loading = 'lazy';
-        strip.appendChild(im);
-      });
+      items.forEach(item => strip.appendChild(makeEl(item)));
     }
   };
 
