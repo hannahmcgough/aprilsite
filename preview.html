@@ -150,7 +150,7 @@
   /* WORK TABLE + DRAWERS */
   .index-list{padding:0 var(--gutter)}
   .row-wrap{display:block}
-  .row{display:grid;grid-template-columns:64px 1.2fr 2fr 80px 64px;align-items:center;gap:24px;padding:28px 0;border-top:1px solid var(--hair);position:relative;z-index:0;transition:padding .35s var(--ease),background .35s var(--ease);cursor:none;width:100%;text-align:left}
+  .row{display:grid;grid-template-columns:64px 1.2fr 2fr 64px;align-items:center;gap:24px;padding:28px 0;border-top:1px solid var(--hair);position:relative;z-index:0;transition:padding .35s var(--ease),background .35s var(--ease);cursor:none;width:100%;text-align:left}
   .row-wrap:last-of-type .row{border-bottom:1px solid var(--hair)}
   .row::before{content:"";position:absolute;inset:0;z-index:-1;background:transparent;transition:background .4s var(--ease)}
   .row:hover{padding-left:24px;padding-right:24px}
@@ -200,9 +200,35 @@
   .cs-impact li{color:var(--ink);font-weight:500}
   .cs-impact li::before{background:var(--ink);height:2px;top:8px}
 
-  /* uniform 2-column masonry — every image shown at its natural aspect ratio, no cropping */
-  .cs-images{column-count:2;column-gap:8px}
-  .cs-img{break-inside:avoid;margin-bottom:8px;background:rgba(26,24,23,.06);position:relative;overflow:hidden;min-height:140px}
+  /* cs-thumb: single hero image per drawer */
+  .cs-thumb{display:flex;flex-direction:column;gap:16px;align-self:start}
+  .cs-thumb > img{width:100%;height:auto;display:block;background:rgba(26,24,23,.06);max-height:560px;object-fit:contain}
+  .cs-thumb-btn{align-self:flex-start;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--ink);display:inline-flex;align-items:center;gap:10px;padding:10px 0 4px;border:none;border-bottom:1px solid var(--ink);background:transparent}
+  .cs-thumb-btn .cnt{color:var(--ink-mute);font-weight:500;margin-left:-2px}
+  .cs-thumb-btn .ar{font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;letter-spacing:0;text-transform:none;font-weight:400;transition:transform .3s var(--ease)}
+  .cs-thumb-btn:hover .ar{transform:translateX(6px)}
+
+  /* cs-gallery: full-screen slide-in overlay */
+  .cs-gallery{position:fixed;inset:0;background:var(--cream);z-index:9999;transform:translateX(100%);transition:transform .55s cubic-bezier(.7,0,.2,1);display:flex;flex-direction:column;visibility:hidden}
+  .cs-gallery.open{transform:translateX(0);visibility:visible}
+  .cs-gallery-head{display:flex;justify-content:space-between;align-items:center;padding:20px var(--gutter);border-bottom:1px solid var(--hair);flex-shrink:0;gap:16px}
+  .cs-gallery-meta{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;display:block;margin-bottom:4px}
+  .cs-gallery-title{font-weight:700;font-size:24px;letter-spacing:-.02em;line-height:1}
+  .cs-gallery-close{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);font-weight:600;display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border:1px solid var(--ink);background:transparent;transition:background .2s,color .2s}
+  .cs-gallery-close .x{font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;letter-spacing:0;text-transform:none;font-weight:400}
+  .cs-gallery-close:hover{background:var(--ink);color:var(--cream)}
+  .cs-gallery-strip{flex:1;display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;padding:32px var(--gutter);align-items:center;scroll-behavior:smooth}
+  .cs-gallery-strip img{height:74vh;width:auto;display:block;flex-shrink:0;background:rgba(26,24,23,.06)}
+  .cs-gallery-strip::-webkit-scrollbar{height:4px}
+  .cs-gallery-strip::-webkit-scrollbar-track{background:rgba(26,24,23,.06)}
+  .cs-gallery-strip::-webkit-scrollbar-thumb{background:var(--ink);border-radius:4px}
+
+  @media (max-width: 640px){
+    .cs-gallery-head{padding:14px var(--gutter)}
+    .cs-gallery-title{font-size:18px}
+    .cs-gallery-strip{padding:20px var(--gutter);gap:6px}
+    .cs-gallery-strip img{height:62vh}
+  }
   .cs-img.g-suave{background:linear-gradient(140deg,#C2BAEC 0%,#E5D8C5 100%)}
   .cs-img.g-chap{background:linear-gradient(140deg,#F4C9A8 0%,#E8D4B8 100%)}
   .cs-img.g-bb{background:linear-gradient(155deg,#E5D8C5 0%,#F4C9A8 100%)}
@@ -213,14 +239,22 @@
   .cs-close{margin-top:36px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;display:inline-flex;align-items:center;gap:10px;border:none;background:none}
   .cs-close .x{font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;letter-spacing:0;text-transform:none;font-weight:400}
 
-  /* mobile expand-more button (hidden on desktop) */
-  .cs-more-btn{
-    display:none;
-    font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;
-    color:var(--ink);padding:8px 0 6px;align-self:flex-start;
-    border:none;border-bottom:1px solid var(--ink);margin-top:6px;
+  /* "What I led" collapsible — kept tucked away by default */
+  details.cs-collapsible{padding-top:8px}
+  details.cs-collapsible > summary{
+    cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:10px;
+    font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--ink);
+    padding:8px 0;border-bottom:1px solid var(--ink);
   }
-  .cs-more-btn .arr{font-family:'Instrument Serif',serif;font-style:italic;font-size:15px;letter-spacing:0;text-transform:none;font-weight:400;margin-left:6px}
+  details.cs-collapsible > summary::-webkit-details-marker{display:none}
+  details.cs-collapsible > summary::after{
+    content:"↓";font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;
+    letter-spacing:0;text-transform:none;font-weight:400;
+    transition:transform .3s var(--ease);
+  }
+  details.cs-collapsible[open] > summary::after{transform:rotate(180deg)}
+  details.cs-collapsible[open] > summary{margin-bottom:14px}
+  details.cs-collapsible > .cs-list{margin-top:0}
 
   /* hide all leftover mock-stage filename placeholders */
   .logo-ph,.boot-tile-ph,.ph-text{display:none}
@@ -502,7 +536,7 @@
   @media (max-width:980px){
     .hero-grid{grid-template-columns:1fr;gap:36px}
     .deck{padding-bottom:0;max-width:none}
-    .row{grid-template-columns:48px 1fr 60px 32px;gap:14px}
+    .row{grid-template-columns:48px 1fr 32px;gap:14px}
     .row .desc{display:none}
     .cs-body{grid-template-columns:1fr}
     .eng-grid{grid-template-columns:1fr}
@@ -537,13 +571,10 @@
     .cs-impact li{font-size:13px;line-height:1.45}
     .cs-impact li::before{top:7px}
 
-    /* truncate "What I led" lists to first 3 bullets, expand on click */
-    .cs-section .cs-list:not(.cs-impact):not(.sephora-grid):not(.eb-grid) li:nth-child(n+4){display:none}
-    .cs-section.expanded .cs-list:not(.cs-impact):not(.sephora-grid):not(.eb-grid) li:nth-child(n+4){display:list-item}
-    .cs-more-btn{display:inline-flex;align-items:center}
+    /* (mobile bullet truncation removed — details collapsible handles this now) */
 
-    /* shorten the right-side images on mobile so they don't dominate */
-    .cs-images{margin-top:12px;column-count:1}
+    /* mobile: thumb + button stacks naturally below text */
+    .cs-thumb{margin-top:8px}
 
     /* sephora & emerging brand list-grids — tighter */
     .sephora-grid li{font-size:12.5px}
@@ -661,7 +692,7 @@
     <section id="i">
       <div class="chapter">
         <div class="roman">I</div>
-        <div class="title">Selected Work, <span class="it">2016—2026.</span><span class="sub">Engagements that shaped the studio.</span></div>
+        <div class="title">Selected Work.<span class="sub">Engagements that shaped the studio.</span></div>
         <div class="meta">Case studies &amp;<br><b>Full portfolio on request</b><br><span class="it">Click a project to open. Click outside to close.</span></div>
       </div>
 
@@ -674,7 +705,6 @@
             <span class="n">№ 01</span>
             <span class="brand">Sephora</span>
             <span class="desc">Identifying &amp; launching breakout brands into retail at scale.</span>
-            <span class="yr">2024 —</span>
             <span class="arr">→</span>
           </button>
           <div class="drawer"><div class="drawer-inner">
@@ -685,15 +715,15 @@
             <div class="cs-body">
               <div class="cs-text">
                 <p class="cs-intro">As a Sephora merchant partner, I identify, vet, and launch breakout skincare brands into Sephora's national retail footprint — bridging brand teams and the merchant desk.</p>
-                <div class="cs-section">
-                  <span class="cs-label">What I lead</span>
+                <details class="cs-section cs-collapsible">
+                  <summary>What I lead</summary>
                   <ul class="cs-list">
                     <li>Brand vetting and merchant fit assessment for the Sephora Skincare Desk</li>
                     <li>Launch readiness — positioning, GTM, retail-creative alignment</li>
                     <li>Cross-functional choreography between brand teams &amp; Sephora buyers</li>
                     <li>Post-launch performance review &amp; expansion strategy</li>
                   </ul>
-                </div>
+                </details>
                 <div class="cs-section">
                   <span class="cs-label">Brands launched / managed</span>
                   <ul class="cs-list sephora-grid">
@@ -703,9 +733,9 @@
                   </ul>
                 </div>
               </div>
-              <div class="cs-images">
-                <div class="cs-img g-sephora">[ sephora.gif ]</div>
-                <div class="cs-img g-sephora">[ sephorahq.png ]</div>
+              <div class="cs-thumb">
+                <img src="./sephora-1.jpeg" alt="Sephora" onerror="this.style.display='none'">
+                <button class="cs-thumb-btn" data-gallery="sephora">View full gallery <span class="cnt">(9)</span> <span class="ar">→</span></button>
               </div>
             </div>
             <button class="cs-close" data-close>Close <span class="x">×</span></button>
@@ -718,7 +748,6 @@
             <span class="n">№ 02</span>
             <span class="brand">ChapStick</span>
             <span class="desc">Reviving a legacy brand and rebuilding cultural relevance.</span>
-            <span class="yr">2023</span>
             <span class="arr">→</span>
           </button>
           <div class="drawer"><div class="drawer-inner">
@@ -729,15 +758,15 @@
             <div class="cs-body">
               <div class="cs-text">
                 <p class="cs-intro">Acquired by Suave's new holding company, ChapStick needed to feel relevant to a generation that had aged out of it. The work: a social-first brand reset, a flagship product launch, and an early creator program built from scratch.</p>
-                <div class="cs-section">
-                  <span class="cs-label">What I led</span>
+                <details class="cs-section cs-collapsible">
+                  <summary>What I led</summary>
                   <ul class="cs-list">
                     <li>Social-first content strategy and full brand reset across IG &amp; TikTok</li>
                     <li>Produced ChapStick's <em>Honey Nourish</em> launch — first major innovation as a heritage brand</li>
                     <li>Built ChapStick's creator program: briefs, benchmarks, and early community building</li>
                     <li>Visual direction for product reanimation &amp; campaign assets</li>
                   </ul>
-                </div>
+                </details>
                 <div class="cs-section">
                   <span class="cs-label">Impact</span>
                   <ul class="cs-list cs-impact">
@@ -746,10 +775,9 @@
                   </ul>
                 </div>
               </div>
-              <div class="cs-images">
-                <div class="cs-img g-chap">[ chapstick-4.jpg ]</div>
-                <div class="cs-img g-chap">[ chapstick-2.jpg ]</div>
-                <div class="cs-img g-chap">[ chapstick-3.jpg ]</div>
+              <div class="cs-thumb">
+                <img src="./chapstick-1.jpg" alt="ChapStick" onerror="this.style.display='none'">
+                <button class="cs-thumb-btn" data-gallery="chapstick">View full gallery <span class="cnt">(4)</span> <span class="ar">→</span></button>
               </div>
             </div>
             <button class="cs-close" data-close>Close <span class="x">×</span></button>
@@ -762,7 +790,6 @@
             <span class="n">№ 03</span>
             <span class="brand">Suave</span>
             <span class="desc">Scaling a mass brand through modern creative &amp; integrated campaigns.</span>
-            <span class="yr">2023</span>
             <span class="arr">→</span>
           </button>
           <div class="drawer"><div class="drawer-inner">
@@ -773,8 +800,8 @@
             <div class="cs-body">
               <div class="cs-text">
                 <p class="cs-intro">When Suave was sold by Unilever and emerged as its own holding company, it needed a creative reset to reach a new generation. A Times Square launch became an ongoing multi-brand production contract.</p>
-                <div class="cs-section">
-                  <span class="cs-label">What I led</span>
+                <details class="cs-section cs-collapsible">
+                  <summary>What I led</summary>
                   <ul class="cs-list">
                     <li>New creative direction across all Suave product categories</li>
                     <li>Produced the Times Square digital billboard launch campaign</li>
@@ -782,7 +809,7 @@
                     <li>Visual direction for product reanimation &amp; packaging refreshes</li>
                     <li>Monthly creator content across Hair, Bath &amp; Body, Personal Care, Men's, Kids</li>
                   </ul>
-                </div>
+                </details>
                 <div class="cs-section">
                   <span class="cs-label">Impact</span>
                   <ul class="cs-list cs-impact">
@@ -791,12 +818,9 @@
                   </ul>
                 </div>
               </div>
-              <div class="cs-images">
-                <div class="cs-img g-suave">[ suave-5.jpg ]</div>
-                <div class="cs-img g-suave">[ suave-3.jpg ]</div>
-                <div class="cs-img g-suave">[ suave-6.jpeg ]</div>
-                <div class="cs-img g-suave">[ suave-6.jpg ]</div>
-                <div class="cs-img g-suave">[ suave-7.jpeg ]</div>
+              <div class="cs-thumb">
+                <img src="./suave-1.jpg" alt="Suave" onerror="this.style.display='none'">
+                <button class="cs-thumb-btn" data-gallery="suave">View full gallery <span class="cnt">(7)</span> <span class="ar">→</span></button>
               </div>
             </div>
             <button class="cs-close" data-close>Close <span class="x">×</span></button>
@@ -809,7 +833,6 @@
             <span class="n">№ 04</span>
             <span class="brand">Riley Rose</span>
             <span class="desc">Building a new retail concept &amp; in-store brand experience from the ground up.</span>
-            <span class="yr">2018</span>
             <span class="arr">→</span>
           </button>
           <div class="drawer"><div class="drawer-inner">
@@ -820,20 +843,20 @@
             <div class="cs-body">
               <div class="cs-text">
                 <p class="cs-intro">An entirely new beauty retail concept built inside Forever 21's incubator — from naming and brand world to in-store experience design and merchandising strategy.</p>
-                <div class="cs-section">
-                  <span class="cs-label">What I led</span>
+                <details class="cs-section cs-collapsible">
+                  <summary>What I led</summary>
                   <ul class="cs-list">
                     <li>Brand foundation: name, voice, identity, in-store experience principles</li>
                     <li>Merchandising strategy across beauty, gifting &amp; lifestyle SKUs</li>
                     <li>Launch marketing &amp; PR across digital and retail</li>
                     <li>In-store brand experience design</li>
                   </ul>
-                </div>
+                </details>
                 <p style="font-family:'Instrument Serif',serif;font-style:italic;color:var(--ink-mute);font-size:14px;line-height:1.5;border-left:2px solid var(--chartreuse);padding-left:14px">Editor's note: full case study being written. Email for current write-up.</p>
               </div>
-              <div class="cs-images">
-                <div class="cs-img g-rr">[ riley-rose.gif ]</div>
-                <div class="cs-img g-rr">[ rileyhq.png ]</div>
+              <div class="cs-thumb">
+                <img src="./riley-rose-1.jpg" alt="Riley Rose" onerror="this.style.display='none'">
+                <button class="cs-thumb-btn" data-gallery="riley-rose">View full gallery <span class="cnt">(10)</span> <span class="ar">→</span></button>
               </div>
             </div>
             <button class="cs-close" data-close>Close <span class="x">×</span></button>
@@ -846,7 +869,6 @@
             <span class="n">№ 05</span>
             <span class="brand">Blank Beauty</span>
             <span class="desc">Translating new technology into a consumer-facing brand &amp; go-to-market strategy.</span>
-            <span class="yr">2022 — 2024</span>
             <span class="arr">→</span>
           </button>
           <div class="drawer"><div class="drawer-inner">
@@ -857,8 +879,8 @@
             <div class="cs-body">
               <div class="cs-text">
                 <p class="cs-intro">The product was real. The brand wasn't. I joined Blank Beauty at zero and built the brand infrastructure from scratch — positioning, consumer research, full website &amp; social redesign, and the marketing systems that drove $30K/month in DTC sales within the first quarter.</p>
-                <div class="cs-section">
-                  <span class="cs-label">What I led</span>
+                <details class="cs-section cs-collapsible">
+                  <summary>What I led</summary>
                   <ul class="cs-list">
                     <li>End-to-end brand strategy &amp; GTM for a beauty tech platform — cross-functional across product, eng &amp; marketing</li>
                     <li>Consumer research across Reddit &amp; private focus groups; built a Customer Advisory Board</li>
@@ -867,7 +889,7 @@
                     <li>Website, landing pages &amp; conversion flows for multiple consumer personas</li>
                     <li>Complexion category expansion playbook — debuted at CosmoProf Miami, Jan 2026</li>
                   </ul>
-                </div>
+                </details>
                 <div class="cs-section">
                   <span class="cs-label">Impact</span>
                   <ul class="cs-list cs-impact">
@@ -877,11 +899,9 @@
                   </ul>
                 </div>
               </div>
-              <div class="cs-images">
-                <div class="cs-img g-bb">[ bb-2.jpg ]</div>
-                <div class="cs-img g-bb">[ bb-3.jpg ]</div>
-                <div class="cs-img g-bb">[ bb-4.jpg ]</div>
-                <div class="cs-img g-bb">[ bb-5.jpg ]</div>
+              <div class="cs-thumb">
+                <img src="./blank-beauty-1.jpg" alt="Blank Beauty" onerror="this.style.display='none'">
+                <button class="cs-thumb-btn" data-gallery="blank-beauty">View full gallery <span class="cnt">(4)</span> <span class="ar">→</span></button>
               </div>
             </div>
             <button class="cs-close" data-close>Close <span class="x">×</span></button>
@@ -894,7 +914,6 @@
             <span class="n">№ 06</span>
             <span class="brand">Emerging Brands</span>
             <span class="desc">End-to-end brand building across early-stage consumer companies.</span>
-            <span class="yr">2020 —</span>
             <span class="arr">→</span>
           </button>
           <div class="drawer"><div class="drawer-inner">
@@ -905,15 +924,15 @@
             <div class="cs-body cs-body--solo">
               <div class="cs-text">
                 <p class="cs-intro">Building from 0 is a throughline, not a one-time assignment. These are engagements where I came in early and built the foundation: positioning, naming, GTM playbooks, and the early-stage brand system the team can run.</p>
-                <div class="cs-section">
-                  <span class="cs-label">What "early-stage" means here</span>
+                <details class="cs-section cs-collapsible">
+                  <summary>What "early-stage" means here</summary>
                   <ul class="cs-list">
                     <li>Brand foundation — name, voice, positioning, identity guardrails</li>
                     <li>GTM playbook the founder can run without me</li>
                     <li>Conversion-aware creative system for paid &amp; organic</li>
                     <li>Hiring &amp; agency-selection guidance for the next 12 months</li>
                   </ul>
-                </div>
+                </details>
               </div>
             </div>
 
@@ -1368,6 +1387,86 @@
 
   </div>
 
+  <!-- ════════════ GALLERY OVERLAYS — slide in from the right ════════════ -->
+  <aside class="cs-gallery" id="gallery-sephora" hidden>
+    <header class="cs-gallery-head">
+      <div><span class="cs-gallery-meta">№ 01 · Selected Work</span><h4 class="cs-gallery-title">Sephora</h4></div>
+      <button class="cs-gallery-close" data-close-gallery>Close <span class="x">×</span></button>
+    </header>
+    <div class="cs-gallery-strip">
+      <img src="./sephora-1.jpeg" alt="" onerror="this.style.display='none'">
+      <img src="./sephora-2.jpeg" alt="" onerror="this.style.display='none'">
+      <img src="./sephora-3.jpeg" alt="" onerror="this.style.display='none'">
+      <img src="./sephora-4.jpeg" alt="" onerror="this.style.display='none'">
+      <img src="./sephora-5.jpeg" alt="" onerror="this.style.display='none'">
+      <img src="./sephora-6.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./sephora-7.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./sephora-8.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./sephora-10.jpg" alt="" onerror="this.style.display='none'">
+    </div>
+  </aside>
+
+  <aside class="cs-gallery" id="gallery-chapstick" hidden>
+    <header class="cs-gallery-head">
+      <div><span class="cs-gallery-meta">№ 02 · Selected Work</span><h4 class="cs-gallery-title">ChapStick</h4></div>
+      <button class="cs-gallery-close" data-close-gallery>Close <span class="x">×</span></button>
+    </header>
+    <div class="cs-gallery-strip">
+      <img src="./chapstick-1.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./chapstick-2.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./chapstick-3.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./chapstick-4.jpg" alt="" onerror="this.style.display='none'">
+    </div>
+  </aside>
+
+  <aside class="cs-gallery" id="gallery-suave" hidden>
+    <header class="cs-gallery-head">
+      <div><span class="cs-gallery-meta">№ 03 · Selected Work</span><h4 class="cs-gallery-title">Suave</h4></div>
+      <button class="cs-gallery-close" data-close-gallery>Close <span class="x">×</span></button>
+    </header>
+    <div class="cs-gallery-strip">
+      <img src="./suave-1.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./suave-2.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./suave-3.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./suave-4.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./suave-5.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./suave-6.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./suave-7.jpg" alt="" onerror="this.style.display='none'">
+    </div>
+  </aside>
+
+  <aside class="cs-gallery" id="gallery-riley-rose" hidden>
+    <header class="cs-gallery-head">
+      <div><span class="cs-gallery-meta">№ 04 · Selected Work</span><h4 class="cs-gallery-title">Riley Rose</h4></div>
+      <button class="cs-gallery-close" data-close-gallery>Close <span class="x">×</span></button>
+    </header>
+    <div class="cs-gallery-strip">
+      <img src="./riley-rose-1.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./riley-rose-2.jpeg" alt="" onerror="this.style.display='none'">
+      <img src="./riley-rose-3.jpeg" alt="" onerror="this.style.display='none'">
+      <img src="./riley-rose-4.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./riley-rose-5.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./riley-rose-7.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./riley-rose-8.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./riley-rose-9.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./riley-rose-10.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./riley-rose-11.jpg" alt="" onerror="this.style.display='none'">
+    </div>
+  </aside>
+
+  <aside class="cs-gallery" id="gallery-blank-beauty" hidden>
+    <header class="cs-gallery-head">
+      <div><span class="cs-gallery-meta">№ 05 · Selected Work</span><h4 class="cs-gallery-title">Blank Beauty</h4></div>
+      <button class="cs-gallery-close" data-close-gallery>Close <span class="x">×</span></button>
+    </header>
+    <div class="cs-gallery-strip">
+      <img src="./blank-beauty-1.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./blank-beauty-2.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./blank-beauty-3.jpg" alt="" onerror="this.style.display='none'">
+      <img src="./blank-beauty-4.jpg" alt="" onerror="this.style.display='none'">
+    </div>
+  </aside>
+
   <div class="version">Mock <b>v4</b> · all changes</div>
 
 <script>
@@ -1438,26 +1537,31 @@
   });
 })();
 
-/* mobile expand-more for long "What I led" lists */
+/* gallery overlays — open on thumb-button click, close on X / outside / ESC */
 (() => {
-  document.querySelectorAll('.drawer .cs-section').forEach(sec => {
-    const list = sec.querySelector('.cs-list:not(.cs-impact):not(.sephora-grid):not(.eb-grid)');
-    if (!list) return;
-    const items = list.querySelectorAll('li');
-    if (items.length <= 3) return;
-    const hidden = items.length - 3;
-    const btn = document.createElement('button');
-    btn.className = 'cs-more-btn';
-    btn.type = 'button';
-    btn.innerHTML = `+ ${hidden} more <span class="arr">→</span>`;
-    sec.appendChild(btn);
+  const closeAll = () => {
+    document.querySelectorAll('.cs-gallery.open').forEach(g => {
+      g.classList.remove('open');
+      setTimeout(() => g.setAttribute('hidden',''), 550);
+    });
+    document.body.style.overflow = '';
+  };
+  document.querySelectorAll('.cs-thumb-btn').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
-      const expanded = sec.classList.toggle('expanded');
-      btn.innerHTML = expanded
-        ? `Show less <span class="arr">↑</span>`
-        : `+ ${hidden} more <span class="arr">→</span>`;
+      const id = 'gallery-' + btn.dataset.gallery;
+      const g = document.getElementById(id);
+      if (!g) return;
+      g.removeAttribute('hidden');
+      requestAnimationFrame(() => g.classList.add('open'));
+      document.body.style.overflow = 'hidden';
     });
+  });
+  document.querySelectorAll('[data-close-gallery]').forEach(btn => {
+    btn.addEventListener('click', e => { e.stopPropagation(); closeAll(); });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeAll();
   });
 })();
 
