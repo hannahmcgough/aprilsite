@@ -114,9 +114,9 @@
   .hero-eyebrow{display:flex;align-items:center;gap:18px;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);font-weight:500;margin-bottom:32px}
   .hero-eyebrow .line{flex:1;height:1px;background:var(--hair);max-width:160px}
   .hero-name{font-weight:700;font-size:clamp(58px,11vw,168px);line-height:.88;letter-spacing:-.04em}
-  .hero-grid{display:grid;grid-template-columns:.85fr 1fr;gap:clamp(36px,5vw,80px);align-items:stretch;margin-top:clamp(32px,5vh,56px)}
+  .hero-grid{display:grid;grid-template-columns:.85fr 1fr;gap:clamp(36px,5vw,80px);align-items:end;margin-top:clamp(32px,5vh,56px)}
 
-  .portrait{position:relative;background:var(--lilac);overflow:hidden;min-height:340px}
+  .portrait{position:relative;background:var(--lilac);overflow:hidden;aspect-ratio:4/5;max-width:220px;width:100%;justify-self:end}
   .portrait::before{content:"";position:absolute;inset:0;background:linear-gradient(165deg,rgba(244,201,168,.5) 0%,transparent 55%,rgba(194,186,236,.4) 100%);mix-blend-mode:screen}
   .portrait .ph{position:absolute;inset:0;display:flex;align-items:flex-end;padding:20px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(26,24,23,.45);font-weight:500}
   .portrait .ph::after{content:none}
@@ -264,7 +264,7 @@
   /* hide all leftover mock-stage filename placeholders */
   .logo-ph,.boot-tile-ph,.ph-text{display:none}
   /* let real images fill their frames */
-  .portrait>img,.p-portrait>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%;z-index:0}
+  .portrait>img,.p-portrait>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0}
   .portrait::before,.p-portrait::before{z-index:1;pointer-events:none}
   .portrait .cap{z-index:2}
   .eb-card-img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1}
@@ -363,8 +363,8 @@
   .eng:hover .inq .arr{transform:translateX(8px)}
 
   /* PRACTICE */
-  .practice{padding:0 var(--gutter) clamp(60px,8vh,100px);display:grid;grid-template-columns:.85fr 1fr;gap:clamp(40px,5vw,80px);align-items:start}
-  .p-portrait{aspect-ratio:4/5;background:var(--peach);position:relative;overflow:hidden}
+  .practice{padding:0 var(--gutter) clamp(60px,8vh,100px);display:grid;grid-template-columns:1fr;gap:28px;max-width:820px;margin:0 auto}
+  .p-portrait{width:140px;height:140px;border-radius:50%;background:var(--peach);position:relative;overflow:hidden}
   .p-portrait::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(244,201,168,0) 0%,rgba(194,186,236,.45) 100%);mix-blend-mode:multiply}
   .p-portrait .ph{position:absolute;inset:0;display:flex;align-items:flex-end;padding:20px;color:rgba(26,24,23,.4);font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:500}
   .p-portrait .ph::after{content:none}
@@ -677,18 +677,101 @@
             <span class="k">Practice</span>
             <span>Brand strategy, naming, positioning, go-to-market &amp; creative direction. From 0→1 launches to legacy revivals.</span>
 
-            <span class="k">Selected</span>
-            <span>Sephora · ChapStick · Suave · Riley Rose · Blank Beauty</span>
-
             <span class="k">Principal</span>
             <span>Hannah McGough — based in Los Angeles, working internationally.</span>
           </div>
 
           <div class="actions">
-            <a href="#i" class="btn-line">Read the work <span class="arr">→</span></a>
-            <span class="availability"><span class="pulse"></span>Booking two engagements this quarter</span>
+            <a href="#i" class="btn-line">Studio collaborations <span class="arr">→</span></a>
+            <span class="availability"><span class="pulse"></span>Now booking Spring 2026</span>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ════════════ TRUSTED BY ════════════ -->
+    <section class="trust" id="trust">
+      <div class="trust-hd">
+        <div class="lbl">Trusted by.</div>
+        <div></div>
+        <div class="ct">A working roster<br><b>50+ brands across 5 service areas</b></div>
+      </div>
+
+      <div class="logos">
+        <div class="logo"><span class="logo-ph">1.svg</span><img src="./1.svg" alt="Sephora" onerror="this.style.display='none'"></div>
+        <div class="logo"><span class="logo-ph">2.svg</span><img src="./2.svg" alt="Disney" onerror="this.style.display='none'"></div>
+        <div class="logo"><span class="logo-ph">3.svg</span><img src="./3.svg" alt="ChapStick" onerror="this.style.display='none'"></div>
+        <div class="logo"><span class="logo-ph">4.svg</span><img src="./4.svg" alt="Suave" onerror="this.style.display='none'"></div>
+        <div class="logo"><span class="logo-ph">5.svg</span><img src="./5.svg" alt="TOMS" onerror="this.style.display='none'"></div>
+        <div class="logo"><span class="logo-ph">6.svg</span><img src="./6.svg" alt="AT&amp;T" onerror="this.style.display='none'"></div>
+        <div class="logo"><span class="logo-ph">7.svg</span><img src="./7.svg" alt="Real Techniques" onerror="this.style.display='none'"></div>
+        <div class="logo"><span class="logo-ph">8.svg</span><img src="./8.svg" alt="Forever 21" onerror="this.style.display='none'"></div>
+      </div>
+
+      <button class="roster-toggle" data-roster>View full roster <span class="arr">→</span></button>
+
+      <div class="roster">
+
+        <div class="roster-row cat-creative">
+          <div class="pill">Creative</div>
+          <div class="roster-names">
+            <span>Alterna</span><span class="sep">·</span><span>AT&amp;T</span><span class="sep">·</span>
+            <span>ChapStick</span><span class="sep">·</span><span>Cycle Tea</span><span class="sep">·</span>
+            <span>Disney</span><span class="sep">·</span><span>Goldfaden MD</span><span class="sep">·</span>
+            <span>HPPY Skin</span><span class="sep">·</span><span>OurX</span><span class="sep">·</span>
+            <span>PancakeNow</span><span class="sep">·</span><span>Pure Kana</span><span class="sep">·</span>
+            <span>Puroast Coffee</span><span class="sep">·</span><span>Real Techniques</span><span class="sep">·</span>
+            <span>Suave</span><span class="sep">·</span><span>TIDL</span><span class="sep">·</span>
+            <span>Vida Cap</span><span class="sep">·</span><span>Windskin</span><span class="sep">·</span>
+            <span>Youngblood</span>
+          </div>
+        </div>
+
+        <div class="roster-row cat-ad">
+          <div class="pill">Advertising</div>
+          <div class="roster-names">
+            <span>Alpyn Beauty</span><span class="sep">·</span><span>Ashapops</span><span class="sep">·</span>
+            <span>Funny Water</span><span class="sep">·</span><span>MAËLYS</span><span class="sep">·</span>
+            <span>Sorel</span><span class="sep">·</span><span>TOMS</span><span class="sep">·</span>
+            <span>Varsity Spirit</span>
+          </div>
+        </div>
+
+        <div class="roster-row cat-360">
+          <div class="pill">360 Marketing</div>
+          <div class="roster-names">
+            <span>Beauty Bakerie</span><span class="sep">·</span><span>Blank Beauty</span><span class="sep">·</span>
+            <span>Ever</span><span class="sep">·</span><span>Leverden</span><span class="sep">·</span>
+            <span>Premium Jane</span>
+          </div>
+        </div>
+
+        <div class="roster-row cat-id">
+          <div class="pill">Brand Identity</div>
+          <div class="roster-names">
+            <span>Blossoming Box</span><span class="sep">·</span><span>Elevar</span><span class="sep">·</span>
+            <span>Fenix CBD</span><span class="sep">·</span><span>Hatfetti</span><span class="sep">·</span>
+            <span>One Earth Health</span>
+          </div>
+        </div>
+
+        <div class="roster-row cat-seph">
+          <div>
+            <div class="pill">Sephora Skincare Desk</div>
+            <span class="meta">Managed as Sephora merchant partner</span>
+          </div>
+          <div class="roster-names">
+            <span>belif</span><span class="sep">·</span><span>Clarins</span><span class="sep">·</span>
+            <span>COOLA</span><span class="sep">·</span><span>Erborian</span><span class="sep">·</span>
+            <span>Fresh</span><span class="sep">·</span><span>GLAMGLOW</span><span class="sep">·</span>
+            <span>Glow Recipe</span><span class="sep">·</span><span>Kopari</span><span class="sep">·</span>
+            <span>L'Occitane</span><span class="sep">·</span><span>Laneige</span><span class="sep">·</span>
+            <span>philosophy</span><span class="sep">·</span><span>Shiseido</span><span class="sep">·</span>
+            <span>Sol de Janeiro</span><span class="sep">·</span><span>St. Tropez</span><span class="sep">·</span>
+            <span>Supergoop</span>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -739,7 +822,7 @@
               </div>
               <div class="cs-thumb" data-brand="sephora">
                 <img src="./sephora-1.jpeg" alt="Sephora" onerror="this.style.display='none'">
-                <button class="cs-thumb-btn" data-gallery="sephora">View full gallery <span class="cnt">(9)</span> <span class="ar">→</span></button>
+                <button class="cs-thumb-btn" data-gallery="sephora">View gallery <span class="cnt">(9)</span> <span class="ar">→</span></button>
               </div>
             </div>
             <button class="cs-close" data-close>Close <span class="x">×</span></button>
@@ -781,7 +864,7 @@
               </div>
               <div class="cs-thumb" data-brand="chapstick">
                 <img src="./chapstick-1.jpg" alt="ChapStick" onerror="this.style.display='none'">
-                <button class="cs-thumb-btn" data-gallery="chapstick">View full gallery <span class="cnt">(4)</span> <span class="ar">→</span></button>
+                <button class="cs-thumb-btn" data-gallery="chapstick">View gallery <span class="cnt">(4)</span> <span class="ar">→</span></button>
               </div>
             </div>
             <button class="cs-close" data-close>Close <span class="x">×</span></button>
@@ -824,7 +907,7 @@
               </div>
               <div class="cs-thumb" data-brand="suave">
                 <img src="./suave-1.jpg" alt="Suave" onerror="this.style.display='none'">
-                <button class="cs-thumb-btn" data-gallery="suave">View full gallery <span class="cnt">(7)</span> <span class="ar">→</span></button>
+                <button class="cs-thumb-btn" data-gallery="suave">View gallery <span class="cnt">(7)</span> <span class="ar">→</span></button>
               </div>
             </div>
             <button class="cs-close" data-close>Close <span class="x">×</span></button>
@@ -860,7 +943,7 @@
               </div>
               <div class="cs-thumb" data-brand="riley-rose">
                 <img src="./riley-rose-1.jpg" alt="Riley Rose" onerror="this.style.display='none'">
-                <button class="cs-thumb-btn" data-gallery="riley-rose">View full gallery <span class="cnt">(10)</span> <span class="ar">→</span></button>
+                <button class="cs-thumb-btn" data-gallery="riley-rose">View gallery <span class="cnt">(10)</span> <span class="ar">→</span></button>
               </div>
             </div>
             <button class="cs-close" data-close>Close <span class="x">×</span></button>
@@ -905,7 +988,7 @@
               </div>
               <div class="cs-thumb" data-brand="blank-beauty">
                 <img src="./blank-beauty-1.jpg" alt="Blank Beauty" onerror="this.style.display='none'">
-                <button class="cs-thumb-btn" data-gallery="blank-beauty">View full gallery <span class="cnt">(4)</span> <span class="ar">→</span></button>
+                <button class="cs-thumb-btn" data-gallery="blank-beauty">View gallery <span class="cnt">(4)</span> <span class="ar">→</span></button>
               </div>
             </div>
             <button class="cs-close" data-close>Close <span class="x">×</span></button>
@@ -1253,91 +1336,6 @@
       </div>
     </section>
 
-    <!-- ════════════ TRUSTED BY ════════════ -->
-    <section class="trust" id="trust">
-      <div class="trust-hd">
-        <div class="lbl">Trusted by.</div>
-        <div></div>
-        <div class="ct">A working roster<br><b>50+ brands across 5 service areas</b></div>
-      </div>
-
-      <div class="logos">
-        <div class="logo"><span class="logo-ph">1.svg</span><img src="./1.svg" alt="Sephora" onerror="this.style.display='none'"></div>
-        <div class="logo"><span class="logo-ph">2.svg</span><img src="./2.svg" alt="Disney" onerror="this.style.display='none'"></div>
-        <div class="logo"><span class="logo-ph">3.svg</span><img src="./3.svg" alt="ChapStick" onerror="this.style.display='none'"></div>
-        <div class="logo"><span class="logo-ph">4.svg</span><img src="./4.svg" alt="Suave" onerror="this.style.display='none'"></div>
-        <div class="logo"><span class="logo-ph">5.svg</span><img src="./5.svg" alt="TOMS" onerror="this.style.display='none'"></div>
-        <div class="logo"><span class="logo-ph">6.svg</span><img src="./6.svg" alt="AT&amp;T" onerror="this.style.display='none'"></div>
-        <div class="logo"><span class="logo-ph">7.svg</span><img src="./7.svg" alt="Real Techniques" onerror="this.style.display='none'"></div>
-        <div class="logo"><span class="logo-ph">8.svg</span><img src="./8.svg" alt="Forever 21" onerror="this.style.display='none'"></div>
-      </div>
-
-      <button class="roster-toggle" data-roster>View full roster <span class="arr">→</span></button>
-
-      <div class="roster">
-
-        <div class="roster-row cat-creative">
-          <div class="pill">Creative</div>
-          <div class="roster-names">
-            <span>Alterna</span><span class="sep">·</span><span>AT&amp;T</span><span class="sep">·</span>
-            <span>ChapStick</span><span class="sep">·</span><span>Cycle Tea</span><span class="sep">·</span>
-            <span>Disney</span><span class="sep">·</span><span>Goldfaden MD</span><span class="sep">·</span>
-            <span>HPPY Skin</span><span class="sep">·</span><span>OurX</span><span class="sep">·</span>
-            <span>PancakeNow</span><span class="sep">·</span><span>Pure Kana</span><span class="sep">·</span>
-            <span>Puroast Coffee</span><span class="sep">·</span><span>Real Techniques</span><span class="sep">·</span>
-            <span>Suave</span><span class="sep">·</span><span>TIDL</span><span class="sep">·</span>
-            <span>Vida Cap</span><span class="sep">·</span><span>Windskin</span><span class="sep">·</span>
-            <span>Youngblood</span>
-          </div>
-        </div>
-
-        <div class="roster-row cat-ad">
-          <div class="pill">Advertising</div>
-          <div class="roster-names">
-            <span>Alpyn Beauty</span><span class="sep">·</span><span>Ashapops</span><span class="sep">·</span>
-            <span>Funny Water</span><span class="sep">·</span><span>MAËLYS</span><span class="sep">·</span>
-            <span>Sorel</span><span class="sep">·</span><span>TOMS</span><span class="sep">·</span>
-            <span>Varsity Spirit</span>
-          </div>
-        </div>
-
-        <div class="roster-row cat-360">
-          <div class="pill">360 Marketing</div>
-          <div class="roster-names">
-            <span>Beauty Bakerie</span><span class="sep">·</span><span>Blank Beauty</span><span class="sep">·</span>
-            <span>Ever</span><span class="sep">·</span><span>Leverden</span><span class="sep">·</span>
-            <span>Premium Jane</span>
-          </div>
-        </div>
-
-        <div class="roster-row cat-id">
-          <div class="pill">Brand Identity</div>
-          <div class="roster-names">
-            <span>Blossoming Box</span><span class="sep">·</span><span>Elevar</span><span class="sep">·</span>
-            <span>Fenix CBD</span><span class="sep">·</span><span>Hatfetti</span><span class="sep">·</span>
-            <span>One Earth Health</span>
-          </div>
-        </div>
-
-        <div class="roster-row cat-seph">
-          <div>
-            <div class="pill">Sephora Skincare Desk</div>
-            <span class="meta">Managed as Sephora merchant partner</span>
-          </div>
-          <div class="roster-names">
-            <span>belif</span><span class="sep">·</span><span>Clarins</span><span class="sep">·</span>
-            <span>COOLA</span><span class="sep">·</span><span>Erborian</span><span class="sep">·</span>
-            <span>Fresh</span><span class="sep">·</span><span>GLAMGLOW</span><span class="sep">·</span>
-            <span>Glow Recipe</span><span class="sep">·</span><span>Kopari</span><span class="sep">·</span>
-            <span>L'Occitane</span><span class="sep">·</span><span>Laneige</span><span class="sep">·</span>
-            <span>philosophy</span><span class="sep">·</span><span>Shiseido</span><span class="sep">·</span>
-            <span>Sol de Janeiro</span><span class="sep">·</span><span>St. Tropez</span><span class="sep">·</span>
-            <span>Supergoop</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
 
     <!-- ════════════ CONTACT ════════════ -->
     <section class="contact" id="contact">
