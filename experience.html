@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hannah McGough — Experience &amp; CV</title>
+<meta name="description" content="Career timeline + experience for Hannah McGough — Brand & Creative Director.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  /* ───── TOKENS ───── */
+  :root{
+    --chartreuse:#DDEF44; --lilac:#C2BAEC; --cream:#F4EDE7; --cream-deep:#E2DBCE;
+    --peach:#F4C9A8; --ink:#1A1817; --ink-soft:#5C504C; --ink-mute:#8C8079;
+    --hair:rgba(26,24,23,.16); --gutter:clamp(24px,4vw,72px);
+    --ease:cubic-bezier(.7,0,.2,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:var(--cream);color:var(--ink);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;font-size:16px}
+  body{cursor:none}
+  a,button{color:inherit;text-decoration:none;cursor:none;background:none;border:none;font:inherit}
+  ul,ol{list-style:none}
+
+  /* CURSOR */
+  .cursor{position:fixed;left:0;top:0;pointer-events:none;z-index:99998;will-change:transform}
+  .cursor-i{width:8px;height:8px;margin:-4px 0 0 -4px;background:var(--ink);border-radius:50%;transition:transform .35s var(--ease),background .25s,border .25s}
+  .cursor.hover .cursor-i{transform:scale(4);background:transparent;border:1px solid var(--ink)}
+  .cursor.lime .cursor-i{background:var(--chartreuse)}
+  .cursor.lime.hover .cursor-i{background:transparent;border-color:var(--chartreuse)}
+  @media (hover:none){.cursor{display:none}html,body,a,button{cursor:auto}}
+
+  /* page fade-in */
+  .page{opacity:0;animation:page-in .6s .1s forwards var(--ease)}
+  @keyframes page-in{to{opacity:1}}
+
+  /* TOP BANNER */
+  .banner{background:var(--chartreuse);padding:9px var(--gutter);display:flex;align-items:center;justify-content:center;font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink);font-weight:600;border-bottom:1px solid var(--ink);gap:10px}
+  .banner::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 0 rgba(26,24,23,.55);animation:pulse-dark 2s infinite}
+  .banner a{color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:1px;margin-left:6px}
+  @keyframes pulse-dark{0%{box-shadow:0 0 0 0 rgba(26,24,23,.45)}70%{box-shadow:0 0 0 8px rgba(26,24,23,0)}100%{box-shadow:0 0 0 0 rgba(26,24,23,0)}}
+
+  /* NAV */
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:24px var(--gutter)}
+  .wordmark{display:inline-flex;align-items:center}
+  .wordmark img{height:63px;width:auto;display:block}
+  .nav-links{display:flex;gap:36px}
+  .nav-links a{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);position:relative;padding-bottom:3px;font-weight:500}
+  .nav-links a:hover,.nav-links a.active{color:var(--ink)}
+  .nav-links a.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--ink)}
+  .nav-cta{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);font-weight:600;display:inline-flex;align-items:center;gap:8px}
+  .nav-cta .arr{font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;letter-spacing:0;text-transform:none;font-weight:400}
+
+  /* HERO */
+  .hero{padding:clamp(40px,7vh,80px) var(--gutter) clamp(60px,9vh,110px);max-width:1280px;margin:0 auto}
+  .hero-eyebrow{display:flex;align-items:center;gap:18px;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);font-weight:500;margin-bottom:32px}
+  .hero-eyebrow .line{flex:1;height:1px;background:var(--hair);max-width:160px}
+  .hero-name{font-weight:700;font-size:clamp(48px,8vw,120px);line-height:.88;letter-spacing:-.04em}
+  .hero-title{font-size:clamp(16px,1.6vw,20px);font-weight:600;letter-spacing:-.005em;color:var(--ink);margin-top:18px}
+  .hero-title .sep{color:var(--chartreuse);margin:0 6px}
+  .hero-deck{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(20px,2vw,26px);line-height:1.4;color:var(--ink);max-width:760px;margin-top:32px}
+
+  /* CHAPTER HEADER */
+  .chapter{padding:clamp(60px,9vh,110px) var(--gutter) clamp(28px,4vh,56px);border-top:1px solid var(--hair);max-width:1280px;margin:0 auto}
+  .chapter-inner{display:grid;grid-template-columns:auto 1fr auto;align-items:end;gap:32px}
+  .chapter .roman{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(60px,8vw,120px);line-height:.85;letter-spacing:-.02em}
+  .chapter .title{font-weight:700;font-size:clamp(28px,3.4vw,46px);line-height:1;letter-spacing:-.025em}
+  .chapter .title .it{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--ink-soft)}
+  .chapter .meta{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;text-align:right;line-height:1.9}
+  .chapter .meta b{color:var(--ink);font-weight:600}
+
+  /* CAREER TIMELINE */
+  .timeline{padding:0 var(--gutter) clamp(40px,6vh,80px);max-width:1280px;margin:0 auto}
+  .role{display:grid;grid-template-columns:200px 1fr;gap:clamp(24px,3vw,56px);padding:36px 0;border-top:1px solid var(--hair);position:relative}
+  .role:last-child{border-bottom:1px solid var(--hair)}
+  .role-meta{display:flex;flex-direction:column;gap:8px}
+  .role-dates{font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--ink)}
+  .role-dates .duration{display:block;color:var(--ink-mute);font-weight:500;font-size:10px;margin-top:3px}
+  .role-tag{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--ink-soft);padding:4px 10px;background:rgba(26,24,23,.07);border-radius:100px;align-self:flex-start;line-height:1.2}
+  .role-tag.current{background:var(--chartreuse);color:var(--ink)}
+  .role-body{display:flex;flex-direction:column;gap:14px;max-width:760px}
+  .role-title{font-weight:700;font-size:clamp(22px,2.4vw,32px);letter-spacing:-.025em;line-height:1.1}
+  .role-title .it{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--ink-soft);font-size:.85em;display:block;margin-top:4px}
+  .role-company{font-size:14px;color:var(--ink-soft);font-weight:500}
+  .role-desc{font-size:15px;line-height:1.65;color:var(--ink-soft);margin-top:8px}
+  .role-desc b{color:var(--ink);font-weight:600}
+  .role-wins{margin-top:14px;display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.55}
+  .role-wins li{display:flex;gap:10px;align-items:flex-start;color:var(--ink)}
+  .role-wins li::before{content:"✦";color:var(--chartreuse);font-style:normal;font-size:13px;flex-shrink:0;padding-top:2px}
+  .role-cover{margin-top:18px;background:rgba(26,24,23,.06);overflow:hidden;display:flex;align-items:center;justify-content:flex-start}
+  .role-cover img{max-width:100%;max-height:280px;width:auto;height:auto;display:block}
+
+  /* TIER LABEL */
+  .tier-label{padding:clamp(40px,5vh,64px) var(--gutter) 14px;display:flex;align-items:baseline;gap:14px;font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-mute);font-weight:600;max-width:1280px;margin:0 auto}
+  .tier-label::before{content:"";display:inline-block;width:24px;height:1px;background:var(--ink-mute)}
+  .tier-label .it{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-soft);font-size:14px}
+
+  /* BIG-BRAND CAMPAIGNS */
+  .bbc-strip{padding:0 var(--gutter) clamp(40px,6vh,80px);max-width:1280px;margin:0 auto}
+  .bbc-list{border-top:1px solid var(--ink);border-bottom:1px solid var(--hair)}
+  .bbc-row{display:grid;grid-template-columns:160px 90px 1fr 100px;gap:24px;align-items:center;padding:22px 0;border-bottom:1px solid var(--hair)}
+  .bbc-row:last-child{border-bottom:none}
+  .bbc-logo{display:flex;align-items:center;justify-content:flex-start;height:36px}
+  .bbc-logo .text{font-weight:700;font-size:18px;letter-spacing:-.015em}
+  .bbc-year{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500}
+  .bbc-desc{font-family:'Instrument Serif',serif;font-style:italic;font-size:16px;line-height:1.45;color:var(--ink-soft)}
+  .bbc-role{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);font-weight:600;text-align:right}
+
+  /* TWO-COL LIST SECTION (Speaking + Advisory) */
+  .two-col{padding:0 var(--gutter) clamp(40px,6vh,80px);max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px)}
+  .two-col h3{font-weight:700;font-size:clamp(22px,2.4vw,32px);letter-spacing:-.025em;line-height:1;margin-bottom:14px}
+  .two-col h3 .it{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--ink-soft);font-size:.85em;display:inline}
+  .col-sub{font-size:14px;color:var(--ink-soft);line-height:1.55;margin-bottom:24px}
+  .list-item{padding:14px 0;border-top:1px solid var(--hair);font-size:14.5px;line-height:1.5;color:var(--ink-soft)}
+  .list-item:first-of-type{border-top:1px solid var(--ink)}
+  .list-item:last-of-type{border-bottom:1px solid var(--hair)}
+  .list-item b{color:var(--ink);font-weight:600;display:block;margin-bottom:2px;font-size:15px}
+  .list-item .meta{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;margin-bottom:4px;display:block}
+
+  /* EDUCATION SIMPLE BLOCK */
+  .edu{padding:clamp(40px,6vh,72px) var(--gutter);max-width:1280px;margin:0 auto;border-top:1px solid var(--hair)}
+  .edu h3{font-weight:700;font-size:clamp(22px,2.4vw,32px);letter-spacing:-.025em;margin-bottom:18px}
+  .edu-row{display:grid;grid-template-columns:200px 1fr;gap:clamp(24px,3vw,56px);padding:14px 0;border-top:1px solid var(--hair)}
+  .edu-row:last-child{border-bottom:1px solid var(--hair)}
+  .edu-school{font-weight:700;font-size:18px;letter-spacing:-.015em}
+  .edu-detail{font-size:14px;color:var(--ink-soft);line-height:1.55;margin-top:4px}
+
+  /* CTA */
+  .cta{background:var(--ink);color:var(--cream);padding:clamp(60px,8vh,100px) var(--gutter)}
+  .cta-inner{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:24px;text-align:center;align-items:center}
+  .cta .label{font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:rgba(238,233,226,.5);font-weight:500;display:inline-flex;align-items:center;gap:10px}
+  .cta .label::before{content:"";display:inline-block;width:6px;height:6px;background:var(--chartreuse);border-radius:50%}
+  .cta h2{font-weight:700;font-size:clamp(32px,4.5vw,52px);line-height:1.05;letter-spacing:-.03em;color:var(--cream);max-width:680px}
+  .cta h2 .it{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--chartreuse)}
+  .cta-actions{display:flex;align-items:center;gap:24px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+  .cta-btn{font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--chartreuse);display:inline-flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--chartreuse)}
+  .cta-btn .arr{font-family:'Instrument Serif',serif;font-style:italic;font-size:20px;letter-spacing:0;text-transform:none;font-weight:400;transition:transform .3s var(--ease)}
+  .cta-btn:hover .arr{transform:translateX(8px)}
+  .cta-btn-alt{color:rgba(238,233,226,.6);border-bottom-color:rgba(238,233,226,.4)}
+
+  /* FOOTER */
+  .footer{padding:36px var(--gutter);background:var(--ink);color:var(--cream);border-top:1px solid rgba(238,233,226,.1)}
+  .footer-row{display:grid;grid-template-columns:1fr auto 1fr;gap:32px;align-items:center}
+  .footer-mark img{height:54px;width:auto;display:block}
+  .footer-copy{text-align:center;font-size:10.5px;color:rgba(238,233,226,.5);letter-spacing:.18em;text-transform:uppercase;font-weight:500}
+  .footer-links{display:flex;justify-content:flex-end;gap:24px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(238,233,226,.6);font-weight:500}
+  .footer-links a{border-bottom:1px solid transparent;padding-bottom:1px;transition:color .2s,border-color .2s}
+  .footer-links a:hover{color:var(--chartreuse);border-color:var(--chartreuse)}
+
+  /* RESPONSIVE */
+  @media (max-width:980px){
+    .role{grid-template-columns:1fr;gap:14px}
+    .role-meta{flex-direction:row;align-items:center;gap:14px;flex-wrap:wrap}
+    .two-col{grid-template-columns:1fr;gap:48px}
+    .edu-row{grid-template-columns:1fr;gap:6px}
+    .bbc-row{grid-template-columns:1fr 1fr;gap:8px 16px}
+    .bbc-role{text-align:left}
+    .nav-links{display:none}
+    .chapter-inner{grid-template-columns:1fr;gap:14px}
+    .chapter .meta{text-align:left}
+    .footer-row{grid-template-columns:1fr;text-align:left}
+    .footer-copy{text-align:left}
+    .footer-links{justify-content:flex-start;flex-wrap:wrap}
+  }
+
+  /* version chip */
+  .version{position:fixed;bottom:14px;left:14px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;padding:7px 12px;border:1px solid var(--hair);color:var(--ink-mute);background:var(--cream);font-weight:500;z-index:10}
+  .version b{color:var(--ink)}
+</style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"><div class="cursor-i"></div></div>
+
+  <div class="page">
+
+    <div class="banner">Open to new roles <a href="index.html#contact">Let's talk</a></div>
+
+    <nav class="nav">
+      <a href="index.html" class="wordmark"><img src="./logo.png" alt="hm*" onerror="this.style.display='none'"></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Work</a></li>
+        <li><a href="index.html#ii">Practice</a></li>
+        <li><a href="index.html#iii">Notes</a></li>
+        <li><a href="experience.html" class="active">Experience</a></li>
+      </ul>
+      <a href="index.html#contact" class="nav-cta">Get in touch <span class="arr">→</span></a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-eyebrow">
+        <span>Career &amp; CV</span>
+        <span class="line"></span>
+        <span>Hannah McGough</span>
+      </div>
+      <h1 class="hero-name">Experience.</h1>
+      <div class="hero-title">Brand &amp; Creative Director <span class="sep">·</span> 10+ years in consumer brands</div>
+      <p class="hero-deck">A working résumé — current independent practice, prior in-house leadership, big-brand campaigns I've produced, and where I'm headed next.</p>
+    </section>
+
+    <!-- ════════════ I · CAREER ════════════ -->
+    <div class="chapter">
+      <div class="chapter-inner">
+        <div class="roman">I</div>
+        <div class="title">Career.<br><span class="it" style="font-size:.5em">Most recent first.</span></div>
+        <div class="meta">10+ years<br><b>Beauty · CPG · Retail</b><br>Independent + In-house</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+
+      <!-- HANNAH MCGOUGH STUDIO (current) -->
+      <div class="role">
+        <div class="role-meta">
+          <span class="role-dates">Aug 2020 — Present <span class="duration">5 yrs 10 mos</span></span>
+          <span class="role-tag current">Current</span>
+        </div>
+        <div class="role-body">
+          <h3 class="role-title">Founder<span class="it">Brand &amp; Creative Director</span></h3>
+          <span class="role-company">Hannah McGough — Brand &amp; Marketing Studio · Los Angeles</span>
+          <p class="role-desc">Independent practice serving 30+ consumer brands across beauty, CPG, fashion, wellness &amp; lifestyle. End-to-end ownership of <b>creative direction, production,</b> and <b>brand marketing</b> — from 0→1 launches to legacy revivals. Operating as a hybrid creative lead, producer, and marketer on every engagement.</p>
+          <ul class="role-wins">
+            <li>Built brand worlds for early-stage names including Beauty Bakerie ($200K/mo DTC, acquisition exit), Pancake Now (Shark Tank), Premium Jane, HPPY Skin, EVER (acquisition exit), La Peony, Windskin.</li>
+            <li>Produced national campaigns for ChapStick, Suave, Disney × Walmart (Moana 2), and AT&amp;T.</li>
+            <li>Established repeatable creative + production systems clients run after engagements close.</li>
+          </ul>
+          <div class="role-cover"><img src="./experience-studio-1.jpg" alt="" onerror="this.style.display='none'"></div>
+        </div>
+      </div>
+
+      <!-- BLANK BEAUTY CMO -->
+      <div class="role">
+        <div class="role-meta">
+          <span class="role-dates">2022 — 2024</span>
+          <span class="role-tag">In-house · CMO</span>
+        </div>
+        <div class="role-body">
+          <h3 class="role-title">Chief Marketing Officer<span class="it">Beauty Tech · 0→1 brand build</span></h3>
+          <span class="role-company">Blank Beauty · Los Angeles</span>
+          <p class="role-desc">Joined a beauty tech platform at zero and built the brand infrastructure from scratch — positioning, consumer research, full website &amp; social redesign, full-funnel marketing engine. Cross-functional across product, engineering, marketing.</p>
+          <ul class="role-wins">
+            <li>Grew DTC revenue from near-zero to consistent <b>$30K/month</b> within the first quarter.</li>
+            <li>Earned editorial coverage in <b>WSJ, Forbes, Vogue Business, Entrepreneur</b> — pickup was editorial, not bought.</li>
+            <li>Launched proprietary <b>"Huey"</b> customizable nail polish technology.</li>
+            <li>Developed the <b>Complexion category expansion</b> playbook — debuted CosmoProf Miami, Jan 2026.</li>
+            <li>Built the Customer Advisory Board and consumer research engine across Reddit + private focus groups.</li>
+          </ul>
+          <div class="role-cover"><img src="./experience-blankbeauty-1.jpg" alt="" onerror="this.style.display='none'"></div>
+        </div>
+      </div>
+
+      <!-- SEPHORA -->
+      <div class="role">
+        <div class="role-meta">
+          <span class="role-dates">[Year — Year]</span>
+          <span class="role-tag">Merchant Partner</span>
+        </div>
+        <div class="role-body">
+          <h3 class="role-title">Skincare Desk Merchant Partner<span class="it">Brand vetting · Launch readiness</span></h3>
+          <span class="role-company">Sephora</span>
+          <p class="role-desc">Identified, vetted, and launched breakout skincare brands into Sephora's national retail footprint — bridging brand teams and the merchant desk. Brands launched/managed include belif, Clarins, COOLA, Erborian, Fresh, GLAMGLOW, Glow Recipe, Kopari, L'Occitane, Laneige, philosophy, Shiseido, Sol de Janeiro, St. Tropez, Supergoop.</p>
+          <ul class="role-wins">
+            <li>Brand vetting and merchant fit assessment for the Sephora Skincare Desk.</li>
+            <li>Cross-functional choreography between brand teams &amp; Sephora buyers.</li>
+            <li>Launch readiness — positioning, GTM, retail-creative alignment.</li>
+            <li>Post-launch performance review &amp; expansion strategy.</li>
+          </ul>
+          <div class="role-cover"><img src="./experience-sephora-1.jpg" alt="" onerror="this.style.display='none'"></div>
+        </div>
+      </div>
+
+      <!-- RILEY ROSE -->
+      <div class="role">
+        <div class="role-meta">
+          <span class="role-dates">2018</span>
+          <span class="role-tag">Forever 21 Incubator</span>
+        </div>
+        <div class="role-body">
+          <h3 class="role-title">Brand Lead — Riley Rose<span class="it">Retail concept · 0→1</span></h3>
+          <span class="role-company">Forever 21 Incubator · Los Angeles</span>
+          <p class="role-desc">Built an entirely new beauty retail concept inside Forever 21's incubator — from naming and brand world to in-store experience design and merchandising strategy across beauty, gifting &amp; lifestyle SKUs.</p>
+          <ul class="role-wins">
+            <li>Brand foundation: name, voice, identity, in-store experience principles.</li>
+            <li>Merchandising strategy across beauty, gifting &amp; lifestyle SKUs.</li>
+            <li>Launch marketing &amp; PR across digital and retail.</li>
+            <li>In-store brand experience design.</li>
+          </ul>
+          <div class="role-cover"><img src="./experience-rileyrose-1.jpg" alt="" onerror="this.style.display='none'"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ════════════ II · BIG-BRAND CAMPAIGNS ════════════ -->
+    <div class="chapter">
+      <div class="chapter-inner">
+        <div class="roman">II</div>
+        <div class="title">Big-Brand Campaigns.<br><span class="it" style="font-size:.5em">Production for recognized names.</span></div>
+        <div class="meta">Full production<br><b>Single + ongoing</b></div>
+      </div>
+    </div>
+
+    <div class="bbc-strip">
+      <div class="bbc-list">
+        <div class="bbc-row">
+          <div class="bbc-logo"><span class="text">ChapStick</span></div>
+          <div class="bbc-year">2023</div>
+          <div class="bbc-desc">Cultural reset, social-first creative direction, <em>Honey Nourish</em> launch.</div>
+          <div class="bbc-role">Creative Direction · Production</div>
+        </div>
+        <div class="bbc-row">
+          <div class="bbc-logo"><span class="text">Suave</span></div>
+          <div class="bbc-year">2023</div>
+          <div class="bbc-desc">Times Square launch + ongoing creative production. Deployed at Walmart, Target, CVS &amp; Dollar General.</div>
+          <div class="bbc-role">Creative Direction · Production</div>
+        </div>
+        <div class="bbc-row">
+          <div class="bbc-logo"><span class="text">Disney × Walmart</span></div>
+          <div class="bbc-year">2024</div>
+          <div class="bbc-desc">End-to-end production of the <em>Moana 2</em> national retail campaign — full delivery in a one-week production window.</div>
+          <div class="bbc-role">Production · Casting</div>
+        </div>
+        <div class="bbc-row">
+          <div class="bbc-logo"><span class="text">AT&amp;T</span></div>
+          <div class="bbc-year">2022</div>
+          <div class="bbc-desc">National brand campaign shoot — single-engagement production.</div>
+          <div class="bbc-role">Production</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════ III · SPEAKING + ADVISORY ════════════ -->
+    <div class="chapter">
+      <div class="chapter-inner">
+        <div class="roman">III</div>
+        <div class="title">Speaking &amp; Advisory.<br><span class="it" style="font-size:.5em">Public voice + brand counsel.</span></div>
+        <div class="meta">Available on request</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <h3>Speaking &amp; <span class="it">Editorial</span></h3>
+        <p class="col-sub">Keynotes, panels, contributed essays, podcast appearances. Subjects: building consumer brands, the operator's view of creative, and what most decks miss.</p>
+        <div class="list-item">
+          <span class="meta">Keynote · 2025</span>
+          <b>[Talk title placeholder]</b>
+          [Venue · brief description]
+        </div>
+        <div class="list-item">
+          <span class="meta">Panel · 2024</span>
+          <b>[Panel title placeholder]</b>
+          [Venue · brief description]
+        </div>
+        <div class="list-item">
+          <span class="meta">Podcast · 2024</span>
+          <b>[Podcast name placeholder]</b>
+          [Episode title]
+        </div>
+        <div class="list-item">
+          <span class="meta">Editorial · 2023</span>
+          <b>[Article title placeholder]</b>
+          [Publication]
+        </div>
+      </div>
+      <div>
+        <h3>Brand <span class="it">Advisory</span></h3>
+        <p class="col-sub">Ongoing brand counsel for founders &amp; CMOs — monthly working sessions, sounding board on creative &amp; strategic decisions, hiring guidance.</p>
+        <div class="list-item">
+          <span class="meta">Active retainer</span>
+          <b>[Brand placeholder]</b>
+          Brand strategy &amp; creative oversight
+        </div>
+        <div class="list-item">
+          <span class="meta">Past engagement</span>
+          <b>[Brand placeholder]</b>
+          Brand reset advisory
+        </div>
+        <div class="list-item">
+          <span class="meta">Past engagement</span>
+          <b>[Brand placeholder]</b>
+          GTM advisory
+        </div>
+        <p class="col-sub" style="margin-top:18px;font-size:13px"><em>Names available on request — most engagements operate under NDA.</em></p>
+      </div>
+    </div>
+
+    <!-- ════════════ IV · EDUCATION ════════════ -->
+    <div class="edu">
+      <h3>Education</h3>
+      <div class="edu-row">
+        <div class="role-dates">[Year — Year]</div>
+        <div>
+          <div class="edu-school">Cornell University</div>
+          <div class="edu-detail">Communications &amp; Media Studies, Film</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="cta-inner">
+        <span class="label">Open to what's next</span>
+        <h2>Looking for the next chapter — <span class="it">let's talk.</span></h2>
+        <p style="font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;color:rgba(238,233,226,.7);max-width:520px">Full-time roles, project work, advisory engagements, or just an introduction. I'll reply within 48 hours.</p>
+        <div class="cta-actions">
+          <a href="mailto:hello@hannahmcgough.com" class="cta-btn">hello@hannahmcgough.com <span class="arr">→</span></a>
+          <a href="mailto:hello@hannahmcgough.com?subject=CV%20request" class="cta-btn cta-btn-alt">Request full CV (PDF) <span class="arr">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-row">
+        <div class="footer-mark"><img src="./logo.png" alt="hm*" onerror="this.style.display='none'"></div>
+        <div class="footer-copy">© MMXXVI · Hannah McGough · Los Angeles</div>
+        <div class="footer-links">
+          <a href="index.html">Work</a>
+          <a href="https://www.instagram.com/cpgirlie" target="_blank" rel="noopener">Instagram</a>
+          <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:hello@hannahmcgough.com">Email</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <div class="version">Mock <b>v5</b> · experience</div>
+
+<script>
+(() => {
+  const c = document.getElementById('cursor');
+  if (!c) return;
+  let mx=-100,my=-100,x=-100,y=-100;
+  window.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; });
+  function loop(){ x+=(mx-x)*.22; y+=(my-y)*.22; c.style.transform=`translate(${x}px,${y}px)`; requestAnimationFrame(loop); }
+  loop();
+  document.querySelectorAll('a, button, [data-cursor]').forEach(el=>{
+    el.addEventListener('mouseenter',()=>c.classList.add('hover'));
+    el.addEventListener('mouseleave',()=>c.classList.remove('hover'));
+  });
+  ['.cta','.footer'].forEach(sel=>{
+    const dark = document.querySelector(sel);
+    if(!dark) return;
+    dark.addEventListener('mouseenter',()=>c.classList.add('lime'));
+    dark.addEventListener('mouseleave',()=>c.classList.remove('lime'));
+  });
+})();
+</script>
+</body>
+</html>
