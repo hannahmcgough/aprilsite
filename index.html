@@ -109,7 +109,7 @@
   details.client-list[open] > summary .ico{content:"−"}
   details.client-list[open] > summary{margin-bottom:18px;color:var(--ink);border-color:var(--ink)}
   .roster{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--hair)}
-  .roster-row{display:grid;grid-template-columns:160px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid var(--hair);align-items:start}
+  .roster-row{display:grid;grid-template-columns:max-content 1fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--hair);align-items:start}
   .roster-row .pill{display:inline-block;font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;padding:5px 10px;border-radius:100px;line-height:1.2;align-self:start;white-space:nowrap}
   .roster-row .pill.pill-lime{background:var(--chartreuse);color:var(--ink)}
   .roster-row .pill.pill-lilac{background:var(--lilac);color:var(--ink)}
@@ -275,6 +275,7 @@
   .bp-section-line{width:1px;height:48px;background:var(--ink)}
   .bp-section-label{font-size:11px;letter-spacing:.4em;text-transform:uppercase;font-weight:700;color:var(--ink);background:var(--chartreuse);padding:8px 16px;border-radius:100px;line-height:1.2}
   .bp-section-sub{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(15px,1.4vw,18px);color:var(--ink-soft);max-width:560px;line-height:1.4}
+  .bp-section-marker + .chapter{border-top:none;padding-top:clamp(28px,4vh,56px)}
 
   /* ───── PRACTICE ───── */
   .practice{padding:0 var(--gutter) clamp(60px,8vh,100px);display:grid;grid-template-columns:1fr;gap:28px;max-width:820px;margin:0 auto}
@@ -524,6 +525,7 @@
           <div class="actions">
             <a href="#i" class="btn-line">See the work <span class="arr">→</span></a>
             <a href="experience.html" class="btn-line">Career &amp; CV <span class="arr">→</span></a>
+            <a href="mailto:hello@hannahmcgough.com?subject=Portfolio%20request&amp;body=Hi%20Hannah%20%E2%80%94%20I%27d%20like%20to%20see%20your%20full%20portfolio." class="btn-line">Request full portfolio <span class="arr">↗</span></a>
           </div>
 
           <details class="client-list">
