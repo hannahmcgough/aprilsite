@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hannah McGough — Brand & Creative Director</title>
 <meta name="description" content="Brand & Creative Director — Creative direction, production & brand marketing for consumer brands. Open to new roles.">
+<script>if(sessionStorage.getItem('hmBooted')){document.documentElement.classList.add('skip-boot')}else{sessionStorage.setItem('hmBooted','1')}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -52,6 +53,9 @@
   @media (max-width:640px){.boot-grid{grid-template-columns:repeat(4,1fr)}}
   .page{opacity:0;animation:page-in .8s 4.5s forwards var(--ease)}
   @keyframes page-in{to{opacity:1}}
+  /* skip boot when navigating between site pages within same session */
+  .skip-boot .boot{display:none}
+  .skip-boot .page{opacity:1;animation:none}
 
   /* ───── CHARTREUSE BANNER (job-search status) ───── */
   .banner{background:var(--chartreuse);padding:9px var(--gutter);display:flex;align-items:center;justify-content:center;font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink);font-weight:600;border-bottom:1px solid var(--ink);gap:10px}
@@ -111,8 +115,8 @@
   .tier-label::before{content:"";display:inline-block;width:24px;height:1px;background:var(--ink-mute)}
   .tier-label .it{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-soft);font-size:14px}
 
-  /* ───── HERO BUILDS — VISUAL CARD GRID ───── */
-  .hb-grid{padding:0 var(--gutter) clamp(40px,6vh,72px);display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(36px,4vh,56px) clamp(20px,2vw,28px)}
+  /* ───── HERO BUILDS — VISUAL CARD GRID (12 brands, 3 per row) ───── */
+  .hb-grid{padding:0 var(--gutter) clamp(40px,6vh,72px);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,3vh,40px) clamp(16px,1.5vw,22px)}
   /* card order — leading with beauty for recruiter pattern-match */
   .hb-item[data-card-brand="hppy-skin"]{order:1}
   .hb-item[data-card-brand="beauty-bakerie"]{order:2}
@@ -121,6 +125,11 @@
   .hb-item[data-card-brand="premium-jane"]{order:5}
   .hb-item[data-card-brand="la-peony"]{order:6}
   .hb-item[data-card-brand="pancake-now"]{order:7}
+  .hb-item[data-card-brand="khelp"]{order:8}
+  .hb-item[data-card-brand="forest-riot"]{order:9}
+  .hb-item[data-card-brand="leverden"]{order:10}
+  .hb-item[data-card-brand="tidl"]{order:11}
+  .hb-item[data-card-brand="cycle-tea"]{order:12}
   .hb-item{display:flex;flex-direction:column;align-self:start}
   .hb-item.open{grid-column:1 / -1}
   .hb-card{display:flex;flex-direction:column;background:transparent;border:none;padding:0;text-align:left;width:100%;cursor:none;position:relative;gap:18px}
@@ -151,8 +160,17 @@
   .hb-item.open.tone-lilac .hb-detail{background:var(--pale-lilac)}
   .hb-item.open.tone-cream .hb-detail{background:var(--pale-cream)}
   .hb-detail-inner{padding:clamp(36px,5vh,64px) clamp(24px,3vw,48px)}
+  /* when open: hide the duplicate cover image inside drawer, expand 3-act to full width */
+  .hb-item.open .cs-acts{grid-template-columns:1fr;max-width:780px}
+  .hb-item.open .cs-thumb > img,
+  .hb-item.open .cs-thumb > video{display:none}
+  .hb-item.open .cs-thumb{padding:0;background:transparent;margin-top:8px}
 
   @media (max-width:980px){
+    .hb-grid{grid-template-columns:repeat(2,1fr)}
+    .hb-item.open{grid-column:1 / -1}
+  }
+  @media (max-width:640px){
     .hb-grid{grid-template-columns:1fr}
     .hb-item.open{grid-column:1}
   }
@@ -831,77 +849,268 @@
           </div></div>
         </article>
 
+        <!-- 08 KHELP -->
+        <article class="hb-item tone-peach" data-row data-card-brand="khelp">
+          <button class="hb-card">
+            <div class="hb-cover t-peach" data-cover="khelp">
+              <img src="./mini-khelp.jpg" alt="Khelp" onerror="this.style.display='none'">
+              <span class="hb-cover-cta">Open case <span class="ar">→</span></span>
+            </div>
+            <div class="hb-body">
+              <span class="hb-num">№ 08 · Wellness / Supplements</span>
+              <h3 class="hb-name">Khelp</h3>
+              <p class="hb-desc">Repositioned a heartburn supplement toward a high-converting niche — Erewhon, health-food retail.</p>
+            </div>
+          </button>
+          <div class="hb-detail"><div class="hb-detail-inner">
+            <div class="cs-head">
+              <h3>Khelp <span class="it">— functional to lifestyle.</span></h3>
+              <div class="tag">Wellness / Supplements<br><b>Reposition · niche audience</b></div>
+            </div>
+            <div class="cs-acts">
+              <div class="cs-acts-text">
+                <div class="cs-act">
+                  <span class="cs-act-num">I</span>
+                  <span class="cs-act-label">The Opportunity</span>
+                  <p>Supplement for heartburn and acid reflux needed a more compelling, lifestyle-forward brand identity in a clinical category.</p>
+                </div>
+                <div class="cs-act">
+                  <span class="cs-act-num">II</span>
+                  <span class="cs-act-label">The Strategy</span>
+                  <p>Led <b>creative direction</b> and narrowed positioning to <b>pregnant women, new mothers,</b> and health-conscious shoppers — making a functional product feel aspirational.</p>
+                </div>
+                <div class="cs-act">
+                  <span class="cs-act-num">III</span>
+                  <span class="cs-act-label">The Work</span>
+                  <p>Brand identity refresh, lifestyle photography, packaging direction, retail-ready collateral.</p>
+                </div>
+                <div class="cs-impact-bar"><b>Result</b>Repositioned toward a high-converting niche audience aligned with Erewhon &amp; health-food retail channels.</div>
+              </div>
+              <div class="cs-thumb" data-brand="khelp">
+                <img src="./mini-khelp.jpg" alt="Khelp" onerror="this.style.display='none'">
+                <button class="cs-thumb-btn" data-gallery="khelp">View gallery <span class="cnt">(…)</span> <span class="ar">→</span></button>
+              </div>
+            </div>
+            <button class="cs-close" data-close>Close <span class="x">×</span></button>
+          </div></div>
+        </article>
+
+        <!-- 09 FOREST RIOT -->
+        <article class="hb-item tone-lime" data-row data-card-brand="forest-riot">
+          <button class="hb-card">
+            <div class="hb-cover t-lime" data-cover="forest-riot">
+              <img src="./mini-forest-riot.jpg" alt="Forest Riot" onerror="this.style.display='none'">
+              <span class="hb-cover-cta">Open case <span class="ar">→</span></span>
+            </div>
+            <div class="hb-body">
+              <span class="hb-num">№ 09 · Beauty / Skincare</span>
+              <h3 class="hb-name">Forest Riot</h3>
+              <p class="hb-desc">European skincare brand transitioned for US market — full web &amp; launch suite.</p>
+            </div>
+          </button>
+          <div class="hb-detail"><div class="hb-detail-inner">
+            <div class="cs-head">
+              <h3>Forest Riot <span class="it">— EU to US entry.</span></h3>
+              <div class="tag">Beauty / Skincare<br><b>Market entry · Reposition</b></div>
+            </div>
+            <div class="cs-acts">
+              <div class="cs-acts-text">
+                <div class="cs-act">
+                  <span class="cs-act-num">I</span>
+                  <span class="cs-act-label">The Opportunity</span>
+                  <p>Skincare brand powered by Nordic soil extract — previously Europe-only — needed a full transition for the US consumer market.</p>
+                </div>
+                <div class="cs-act">
+                  <span class="cs-act-num">II</span>
+                  <span class="cs-act-label">The Strategy</span>
+                  <p>Prepped <b>all web assets, US launch copy, and brand positioning</b> to translate from a European-distributed product into an American consumer market.</p>
+                </div>
+                <div class="cs-act">
+                  <span class="cs-act-num">III</span>
+                  <span class="cs-act-label">The Work</span>
+                  <p>Web design, launch campaign assets, brand positioning, US-market messaging.</p>
+                </div>
+                <div class="cs-impact-bar"><b>Result</b>Repositioned brand identity &amp; messaging for US entry; full web and launch asset suite delivered.</div>
+              </div>
+              <div class="cs-thumb" data-brand="forest-riot">
+                <img src="./mini-forest-riot.jpg" alt="Forest Riot" onerror="this.style.display='none'">
+                <button class="cs-thumb-btn" data-gallery="forest-riot">View gallery <span class="cnt">(…)</span> <span class="ar">→</span></button>
+              </div>
+            </div>
+            <button class="cs-close" data-close>Close <span class="x">×</span></button>
+          </div></div>
+        </article>
+
+        <!-- 10 LEVERDEN -->
+        <article class="hb-item tone-cream" data-row data-card-brand="leverden">
+          <button class="hb-card">
+            <div class="hb-cover t-cream" data-cover="leverden">
+              <img src="./mini-leverden.jpg" alt="Leverden" onerror="this.style.display='none'">
+              <span class="hb-cover-cta">Open case <span class="ar">→</span></span>
+            </div>
+            <div class="hb-body">
+              <span class="hb-num">№ 10 · Luxury Home Goods</span>
+              <h3 class="hb-name">Leverden</h3>
+              <p class="hb-desc">Luxury healing home goods — CB2 launch, NYC + Seoul activations, Vogue feature.</p>
+            </div>
+          </button>
+          <div class="hb-detail"><div class="hb-detail-inner">
+            <div class="cs-head">
+              <h3>Leverden <span class="it">— retail + IRL launch.</span></h3>
+              <div class="tag">Luxury Home Goods<br><b>Brand launch · Retail + activations</b></div>
+            </div>
+            <div class="cs-acts">
+              <div class="cs-acts-text">
+                <div class="cs-act">
+                  <span class="cs-act-num">I</span>
+                  <span class="cs-act-label">The Opportunity</span>
+                  <p>Luxury home-goods brand inspired by world rituals and cultures needed a brand launch into both retail and IRL presence.</p>
+                </div>
+                <div class="cs-act">
+                  <span class="cs-act-num">II</span>
+                  <span class="cs-act-label">The Strategy</span>
+                  <p>Handled <b>campaigns, site copy, visuals and social content</b> — helping launch the brand into <b>CB2</b> and building IRL presence through brand activations in NYC and Seoul.</p>
+                </div>
+                <div class="cs-act">
+                  <span class="cs-act-num">III</span>
+                  <span class="cs-act-label">The Work</span>
+                  <p>Campaign creative, e-commerce site, social system, brand activation production for two markets.</p>
+                </div>
+                <div class="cs-impact-bar"><b>Result</b>CB2 retail placement; Vogue feature; brand activations in New York &amp; Seoul.</div>
+              </div>
+              <div class="cs-thumb" data-brand="leverden">
+                <img src="./mini-leverden.jpg" alt="Leverden" onerror="this.style.display='none'">
+                <button class="cs-thumb-btn" data-gallery="leverden">View gallery <span class="cnt">(…)</span> <span class="ar">→</span></button>
+              </div>
+            </div>
+            <button class="cs-close" data-close>Close <span class="x">×</span></button>
+          </div></div>
+        </article>
+
+        <!-- 11 TIDL -->
+        <article class="hb-item tone-lilac" data-row data-card-brand="tidl">
+          <button class="hb-card">
+            <div class="hb-cover t-lilac" data-cover="tidl">
+              <img src="./mini-tidl.jpg" alt="TIDL" onerror="this.style.display='none'">
+              <span class="hb-cover-cta">Open case <span class="ar">→</span></span>
+            </div>
+            <div class="hb-body">
+              <span class="hb-num">№ 11 · Wellness</span>
+              <h3 class="hb-name">TIDL</h3>
+              <p class="hb-desc"><em>[paste your one-liner]</em></p>
+            </div>
+          </button>
+          <div class="hb-detail"><div class="hb-detail-inner">
+            <div class="cs-head">
+              <h3>TIDL <span class="it">— [paste sub-line].</span></h3>
+              <div class="tag">Wellness<br><b>[paste tag]</b></div>
+            </div>
+            <div class="cs-acts">
+              <div class="cs-acts-text">
+                <div class="cs-act">
+                  <span class="cs-act-num">I</span>
+                  <span class="cs-act-label">The Opportunity</span>
+                  <p><em>[Paste the brief — what landed in your inbox.]</em></p>
+                </div>
+                <div class="cs-act">
+                  <span class="cs-act-num">II</span>
+                  <span class="cs-act-label">The Strategy</span>
+                  <p><em>[Paste what you did as producer/marketer.]</em></p>
+                </div>
+                <div class="cs-act">
+                  <span class="cs-act-num">III</span>
+                  <span class="cs-act-label">The Work</span>
+                  <p><em>[Paste the visual deliverables.]</em></p>
+                </div>
+                <div class="cs-impact-bar"><b>Result</b><em>[Paste outcome / numbers.]</em></div>
+              </div>
+              <div class="cs-thumb" data-brand="tidl">
+                <img src="./mini-tidl.jpg" alt="TIDL" onerror="this.style.display='none'">
+                <button class="cs-thumb-btn" data-gallery="tidl">View gallery <span class="cnt">(…)</span> <span class="ar">→</span></button>
+              </div>
+            </div>
+            <button class="cs-close" data-close>Close <span class="x">×</span></button>
+          </div></div>
+        </article>
+
+        <!-- 12 CYCLE TEA -->
+        <article class="hb-item tone-lime" data-row data-card-brand="cycle-tea">
+          <button class="hb-card">
+            <div class="hb-cover t-lime" data-cover="cycle-tea">
+              <img src="./mini-cycle-tea.jpg" alt="Cycle Tea" onerror="this.style.display='none'">
+              <span class="hb-cover-cta">Open case <span class="ar">→</span></span>
+            </div>
+            <div class="hb-body">
+              <span class="hb-num">№ 12 · Food + Beverage</span>
+              <h3 class="hb-name">Cycle Tea</h3>
+              <p class="hb-desc"><em>[paste your one-liner]</em></p>
+            </div>
+          </button>
+          <div class="hb-detail"><div class="hb-detail-inner">
+            <div class="cs-head">
+              <h3>Cycle Tea <span class="it">— [paste sub-line].</span></h3>
+              <div class="tag">Food + Beverage<br><b>[paste tag]</b></div>
+            </div>
+            <div class="cs-acts">
+              <div class="cs-acts-text">
+                <div class="cs-act">
+                  <span class="cs-act-num">I</span>
+                  <span class="cs-act-label">The Opportunity</span>
+                  <p><em>[Paste the brief — what landed in your inbox.]</em></p>
+                </div>
+                <div class="cs-act">
+                  <span class="cs-act-num">II</span>
+                  <span class="cs-act-label">The Strategy</span>
+                  <p><em>[Paste what you did as producer/marketer.]</em></p>
+                </div>
+                <div class="cs-act">
+                  <span class="cs-act-num">III</span>
+                  <span class="cs-act-label">The Work</span>
+                  <p><em>[Paste the visual deliverables.]</em></p>
+                </div>
+                <div class="cs-impact-bar"><b>Result</b><em>[Paste outcome / numbers.]</em></div>
+              </div>
+              <div class="cs-thumb" data-brand="cycle-tea">
+                <img src="./mini-cycle-tea.jpg" alt="Cycle Tea" onerror="this.style.display='none'">
+                <button class="cs-thumb-btn" data-gallery="cycle-tea">View gallery <span class="cnt">(…)</span> <span class="ar">→</span></button>
+              </div>
+            </div>
+            <button class="cs-close" data-close>Close <span class="x">×</span></button>
+          </div></div>
+        </article>
+
       </div>
 
-      <!-- TIER B: Capsule -->
-      <div class="tier-label">Capsule Builds <span class="it">— shipped at volume</span></div>
+      <!-- TIER B: Capsule (founded / co-founded) -->
+      <div class="tier-label">Founded &amp; Co-Founded <span class="it">— brands I launched with the team</span></div>
 
       <div class="capsule-grid">
         <div class="capsule">
           <div class="capsule-cover t-lilac"><img src="./mini-selfies.jpg" alt="Selfies Prerolls" onerror="this.style.display='none'"></div>
           <div class="capsule-body">
-            <span class="capsule-num">№ 08</span>
+            <span class="capsule-num">№ 13</span>
             <span class="capsule-cat">Cannabis</span>
             <span class="capsule-name">Selfies Prerolls</span>
             <span class="capsule-impact">Co-founded a cannabis brand in an emerging legal category. <b>#1 product at MedMen, multiple Forbes features.</b></span>
           </div>
         </div>
         <div class="capsule">
-          <div class="capsule-cover t-peach"><img src="./mini-khelp.jpg" alt="Khelp" onerror="this.style.display='none'"></div>
-          <div class="capsule-body">
-            <span class="capsule-num">№ 09</span>
-            <span class="capsule-cat">Wellness / Supplements</span>
-            <span class="capsule-name">Khelp</span>
-            <span class="capsule-impact">Repositioned a heartburn supplement toward a high-converting niche audience — aligned with Erewhon &amp; health-food retail channels.</span>
-          </div>
-        </div>
-        <div class="capsule">
-          <div class="capsule-cover t-lime"><img src="./mini-forest-riot.jpg" alt="Forest Riot" onerror="this.style.display='none'"></div>
-          <div class="capsule-body">
-            <span class="capsule-num">№ 10</span>
-            <span class="capsule-cat">Beauty / Skincare</span>
-            <span class="capsule-name">Forest Riot</span>
-            <span class="capsule-impact">Repositioned a European skincare brand for US entry. Full web &amp; launch asset suite delivered.</span>
-          </div>
-        </div>
-        <div class="capsule">
-          <div class="capsule-cover t-cream"><img src="./mini-leverden.jpg" alt="Leverden" onerror="this.style.display='none'"></div>
-          <div class="capsule-body">
-            <span class="capsule-num">№ 11</span>
-            <span class="capsule-cat">Luxury Home Goods</span>
-            <span class="capsule-name">Leverden</span>
-            <span class="capsule-impact">Helped launch into CB2 and built IRL presence in NYC &amp; Seoul. <b>Vogue feature.</b></span>
-          </div>
-        </div>
-        <div class="capsule">
           <div class="capsule-cover t-peach"><img src="./mini-hatfetti.jpg" alt="Hatfetti" onerror="this.style.display='none'"></div>
           <div class="capsule-body">
-            <span class="capsule-num">№ 12</span>
+            <span class="capsule-num">№ 14</span>
             <span class="capsule-cat">Fashion / Accessories</span>
             <span class="capsule-name">Hatfetti</span>
             <span class="capsule-impact">Original luxury sun-hat concept built from scratch. Pop-ups at Saguaro Hotel; corporate gifting + wholesale.</span>
           </div>
         </div>
         <div class="capsule">
-          <div class="capsule-cover t-lilac"><img src="./mini-tidl.jpg" alt="TIDL" onerror="this.style.display='none'"></div>
+          <div class="capsule-cover t-lime"><img src="./mini-zen-nest.jpg" alt="Zen Nest" onerror="this.style.display='none'"></div>
           <div class="capsule-body">
-            <span class="capsule-num">№ 13</span>
-            <span class="capsule-cat">Wellness</span>
-            <span class="capsule-name">TIDL</span>
-            <span class="capsule-impact"><em>[brief description placeholder — paste your one-liner]</em></span>
+            <span class="capsule-num">№ 15</span>
+            <span class="capsule-cat">Home Goods / Wellness</span>
+            <span class="capsule-name">Zen Nest</span>
+            <span class="capsule-impact">Portable, weatherproof beanbags built for meditation — at home, beach, anywhere; for all ages. <b>Major artist collaborations; immersive pop-ups at The Flower Fields, Carlsbad.</b></span>
           </div>
-        </div>
-        <div class="capsule">
-          <div class="capsule-cover t-lime"><img src="./mini-cycle-tea.jpg" alt="Cycle Tea" onerror="this.style.display='none'"></div>
-          <div class="capsule-body">
-            <span class="capsule-num">№ 14</span>
-            <span class="capsule-cat">Food + Beverage</span>
-            <span class="capsule-name">Cycle Tea</span>
-            <span class="capsule-impact"><em>[brief description placeholder — paste your one-liner]</em></span>
-          </div>
-        </div>
-        <div class="capsule t-empty">
-          <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:14px;color:var(--ink-mute)">+ more on request</span>
         </div>
       </div>
 
@@ -1178,6 +1387,41 @@
     </header>
     <div class="cs-gallery-strip" data-brand="suave"></div>
   </aside>
+  <aside class="cs-gallery" id="gallery-khelp" hidden>
+    <header class="cs-gallery-head">
+      <div><span class="cs-gallery-meta">№ 08 · Brand Builds</span><h4 class="cs-gallery-title">Khelp</h4></div>
+      <button class="cs-gallery-close" data-close-gallery>Close <span class="x">×</span></button>
+    </header>
+    <div class="cs-gallery-strip" data-brand="khelp"></div>
+  </aside>
+  <aside class="cs-gallery" id="gallery-forest-riot" hidden>
+    <header class="cs-gallery-head">
+      <div><span class="cs-gallery-meta">№ 09 · Brand Builds</span><h4 class="cs-gallery-title">Forest Riot</h4></div>
+      <button class="cs-gallery-close" data-close-gallery>Close <span class="x">×</span></button>
+    </header>
+    <div class="cs-gallery-strip" data-brand="forest-riot"></div>
+  </aside>
+  <aside class="cs-gallery" id="gallery-leverden" hidden>
+    <header class="cs-gallery-head">
+      <div><span class="cs-gallery-meta">№ 10 · Brand Builds</span><h4 class="cs-gallery-title">Leverden</h4></div>
+      <button class="cs-gallery-close" data-close-gallery>Close <span class="x">×</span></button>
+    </header>
+    <div class="cs-gallery-strip" data-brand="leverden"></div>
+  </aside>
+  <aside class="cs-gallery" id="gallery-tidl" hidden>
+    <header class="cs-gallery-head">
+      <div><span class="cs-gallery-meta">№ 11 · Brand Builds</span><h4 class="cs-gallery-title">TIDL</h4></div>
+      <button class="cs-gallery-close" data-close-gallery>Close <span class="x">×</span></button>
+    </header>
+    <div class="cs-gallery-strip" data-brand="tidl"></div>
+  </aside>
+  <aside class="cs-gallery" id="gallery-cycle-tea" hidden>
+    <header class="cs-gallery-head">
+      <div><span class="cs-gallery-meta">№ 12 · Brand Builds</span><h4 class="cs-gallery-title">Cycle Tea</h4></div>
+      <button class="cs-gallery-close" data-close-gallery>Close <span class="x">×</span></button>
+    </header>
+    <div class="cs-gallery-strip" data-brand="cycle-tea"></div>
+  </aside>
 
   <div class="version">Mock <b>v5</b> · candidate</div>
 
@@ -1288,7 +1532,14 @@
   };
   const populate = async (brand) => {
     const items = await discover(brand);
-    if (!items.length) return;
+    if (!items.length) {
+      /* hide gallery button until brand has discoverable {brand}-N.jpg files */
+      const btn = document.querySelector(`.cs-thumb-btn[data-gallery="${brand}"]`);
+      if (btn) btn.style.display = 'none';
+      const bbcBtn = document.querySelector(`[data-bbc-gallery="${brand}"] .bbc-cta`);
+      if (bbcBtn) bbcBtn.style.display = 'none';
+      return;
+    }
     const thumb = document.querySelector(`.cs-thumb[data-brand="${brand}"]`);
     if (thumb) {
       const existing = thumb.querySelector(':scope > img, :scope > video');

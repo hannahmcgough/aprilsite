@@ -87,8 +87,8 @@
   .role-wins{margin-top:14px;display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.55}
   .role-wins li{display:flex;gap:10px;align-items:flex-start;color:var(--ink)}
   .role-wins li::before{content:"✦";color:var(--chartreuse);font-style:normal;font-size:13px;flex-shrink:0;padding-top:2px}
-  .role-cover{margin-top:18px;background:rgba(26,24,23,.06);overflow:hidden;display:flex;align-items:center;justify-content:flex-start}
-  .role-cover img{max-width:100%;max-height:280px;width:auto;height:auto;display:block}
+  .role-cover{margin-top:18px;background:rgba(26,24,23,.06);overflow:hidden;width:100%;max-width:780px;aspect-ratio:16/10}
+  .role-cover img{width:100%;height:100%;object-fit:cover;display:block}
 
   /* TIER LABEL */
   .tier-label{padding:clamp(40px,5vh,64px) var(--gutter) 14px;display:flex;align-items:baseline;gap:14px;font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-mute);font-weight:600;max-width:1280px;margin:0 auto}
