@@ -100,6 +100,25 @@
   .btn-line .arr{font-family:'Instrument Serif',serif;font-style:italic;font-size:20px;letter-spacing:0;text-transform:none;font-weight:400;transition:transform .3s var(--ease)}
   .btn-line:hover .arr{transform:translateX(8px)}
 
+  /* ───── CLIENT LIST (collapsible) ───── */
+  details.client-list{margin-top:24px;max-width:680px}
+  details.client-list > summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--ink-soft);padding:10px 0;border-bottom:1px solid var(--hair);transition:color .2s,border-color .2s}
+  details.client-list > summary::-webkit-details-marker{display:none}
+  details.client-list > summary:hover{color:var(--ink);border-color:var(--ink)}
+  details.client-list > summary .ico{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:1;transition:transform .25s var(--ease)}
+  details.client-list[open] > summary .ico{content:"−"}
+  details.client-list[open] > summary{margin-bottom:18px;color:var(--ink);border-color:var(--ink)}
+  .roster{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--hair)}
+  .roster-row{display:grid;grid-template-columns:160px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid var(--hair);align-items:start}
+  .roster-row .pill{display:inline-block;font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;padding:5px 10px;border-radius:100px;line-height:1.2;align-self:start;white-space:nowrap}
+  .roster-row .pill.pill-lime{background:var(--chartreuse);color:var(--ink)}
+  .roster-row .pill.pill-lilac{background:var(--lilac);color:var(--ink)}
+  .roster-row .pill.pill-peach{background:var(--peach);color:var(--ink)}
+  .roster-row .pill.pill-cream{background:var(--cream-deep);color:var(--ink)}
+  .roster-row .pill.pill-dark{background:var(--ink);color:var(--chartreuse)}
+  .roster-names{font-size:13.5px;line-height:1.65;color:var(--ink-soft)}
+  @media (max-width:640px){.roster-row{grid-template-columns:1fr;gap:6px}}
+
   /* ───── CHAPTER ───── */
   .chapter{padding:clamp(60px,9vh,110px) var(--gutter) clamp(28px,4vh,56px);border-top:1px solid var(--hair);display:grid;grid-template-columns:auto 1fr auto;align-items:end;gap:32px}
   .chapter .roman{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(72px,10vw,148px);line-height:.85;letter-spacing:-.02em}
@@ -204,10 +223,9 @@
 
   /* ───── CAPSULE TIER (compact tile grid w/ thumbs) ───── */
   .capsule-grid{padding:0 var(--gutter) clamp(40px,6vh,72px);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,2vw,28px)}
-  .capsule{background:var(--cream);padding:0;display:flex;flex-direction:column;min-height:280px;transition:background .4s var(--ease);position:relative;overflow:hidden;border:1px solid var(--hair)}
+  .capsule{background:var(--cream);padding:0;display:flex;flex-direction:column;min-height:280px;position:relative;overflow:hidden;border:1px solid var(--hair)}
   .capsule-cover{aspect-ratio:4/3;position:relative;overflow:hidden;background:rgba(26,24,23,.06)}
-  .capsule-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
-  .capsule:hover .capsule-cover img{transform:scale(1.04)}
+  .capsule-cover img{width:100%;height:100%;object-fit:cover;display:block}
   .capsule-cover.t-lilac{background:linear-gradient(155deg,#C2BAEC,#E2DBCE)}
   .capsule-cover.t-peach{background:linear-gradient(155deg,#F4C9A8,#E2DBCE)}
   .capsule-cover.t-lime{background:linear-gradient(155deg,#DDEF44,#E2DBCE)}
@@ -226,7 +244,7 @@
   /* ───── BIG-BRAND CAMPAIGNS ───── */
   .bbc-strip{padding:0 var(--gutter) clamp(60px,8vh,100px)}
   .bbc-list{border-top:1px solid var(--ink);border-bottom:1px solid var(--hair)}
-  .bbc-row{display:grid;grid-template-columns:108px 130px 80px 1fr auto;gap:20px;align-items:center;padding:18px 0;border-bottom:1px solid var(--hair);width:100%;text-align:left;background:transparent;transition:background .3s var(--ease),padding .3s var(--ease)}
+  .bbc-row{display:grid;grid-template-columns:108px 160px 1fr auto;gap:20px;align-items:center;padding:18px 0;border-bottom:1px solid var(--hair);width:100%;text-align:left;background:transparent;transition:background .3s var(--ease),padding .3s var(--ease)}
   .bbc-row:last-child{border-bottom:none}
   button.bbc-row{cursor:none}
   button.bbc-row:hover{background:rgba(26,24,23,.04);padding-left:14px;padding-right:14px}
@@ -507,6 +525,32 @@
             <a href="#i" class="btn-line">See the work <span class="arr">→</span></a>
             <a href="experience.html" class="btn-line">Career &amp; CV <span class="arr">→</span></a>
           </div>
+
+          <details class="client-list">
+            <summary>View full client list <span class="ico">+</span></summary>
+            <div class="roster">
+              <div class="roster-row">
+                <span class="pill pill-lime">Creative</span>
+                <div class="roster-names">Alterna · AT&amp;T · ChapStick · Cycle Tea · Disney · Goldfaden MD · HPPY Skin · OurX · PancakeNow · Pure Kana · Puroast Coffee · Real Techniques · Suave · TIDL · Vida Cap · Windskin · Youngblood</div>
+              </div>
+              <div class="roster-row">
+                <span class="pill pill-lilac">Advertising</span>
+                <div class="roster-names">Alpyn Beauty · Ashapops · Funny Water · MAËLYS · Sorel · TOMS · Varsity Spirit</div>
+              </div>
+              <div class="roster-row">
+                <span class="pill pill-peach">360 Marketing</span>
+                <div class="roster-names">Beauty Bakerie · Blank Beauty · Ever · Leverden · Premium Jane</div>
+              </div>
+              <div class="roster-row">
+                <span class="pill pill-cream">Brand Identity</span>
+                <div class="roster-names">Blossoming Box · Elevar · Fenix CBD · Hatfetti · One Earth Health · Zen Nest</div>
+              </div>
+              <div class="roster-row">
+                <span class="pill pill-dark">Sephora Skincare Desk</span>
+                <div class="roster-names">belif · Clarins · COOLA · Erborian · Fresh · GLAMGLOW · Glow Recipe · Kopari · L'Occitane · Laneige · philosophy · Shiseido · Sol de Janeiro · St. Tropez · Supergoop</div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
     </section>
@@ -1098,7 +1142,7 @@
             <span class="capsule-num">№ 14</span>
             <span class="capsule-cat">Fashion / Accessories</span>
             <span class="capsule-name">Hatfetti</span>
-            <span class="capsule-impact">Original luxury sun-hat concept built from scratch. Pop-ups at Saguaro Hotel; corporate gifting + wholesale.</span>
+            <span class="capsule-impact">Original luxury sun-hat concept built from scratch. <b>Pop-ups at Saguaro Hotel;</b> corporate gifting + wholesale.</span>
           </div>
         </div>
         <div class="capsule">
@@ -1120,30 +1164,50 @@
           <button class="bbc-row" data-bbc-gallery="chapstick">
             <div class="bbc-thumb t-peach"><img src="./chapstick-1.jpg" alt="ChapStick" onerror="this.style.display='none'"></div>
             <div class="bbc-logo"><span class="text">ChapStick</span></div>
-            <div class="bbc-year">2023</div>
-            <div class="bbc-desc">Cultural reset, social-first creative direction, <em>Honey Nourish</em> launch.</div>
-            <div><div class="bbc-role">Creative Direction · Production</div><span class="bbc-cta">View gallery <span class="ar">→</span></span></div>
+            <div class="bbc-desc"><b>Multi-month retainer.</b> Full cultural reset, social-first creative direction, brand voice rebuild, and the <em>Honey Nourish</em> product launch — including creator program, IG/TikTok strategy, and campaign production.</div>
+            <div><div class="bbc-role">Creative Direction · Production · Casting</div><span class="bbc-cta">View gallery <span class="ar">→</span></span></div>
           </button>
           <button class="bbc-row" data-bbc-gallery="suave">
             <div class="bbc-thumb t-lilac"><img src="./suave-1.jpg" alt="Suave" onerror="this.style.display='none'"></div>
             <div class="bbc-logo"><span class="text">Suave</span></div>
-            <div class="bbc-year">2023</div>
-            <div class="bbc-desc">Times Square launch + ongoing creative production. Deployed at Walmart, Target, CVS &amp; Dollar General.</div>
-            <div><div class="bbc-role">Creative Direction · Production</div><span class="bbc-cta">View gallery <span class="ar">→</span></span></div>
+            <div class="bbc-desc"><b>Multi-month retainer.</b> Brand world refresh and Times Square digital billboard launch, plus ongoing creative production deployed at Walmart, Target, CVS &amp; Dollar General. Monthly creator content across Hair, Bath &amp; Body, Personal Care, Men's, and Kids.</div>
+            <div><div class="bbc-role">Creative Direction · Production · Casting</div><span class="bbc-cta">View gallery <span class="ar">→</span></span></div>
           </button>
           <div class="bbc-row">
             <div class="bbc-thumb t-lime"><img src="./disney-2.jpg" alt="Disney" onerror="this.style.display='none'"></div>
             <div class="bbc-logo"><span class="text">Disney × Walmart</span></div>
-            <div class="bbc-year">2024</div>
-            <div class="bbc-desc">End-to-end production of the <em>Moana 2</em> national retail campaign — full delivery in a one-week production window.</div>
-            <div class="bbc-role">Production · Casting</div>
+            <div class="bbc-desc">End-to-end production of the <em>Moana 2</em> national retail campaign — cast, shot, and delivered in a one-week production window. Logistics + compliance for working with minors under Disney guidelines.</div>
+            <div class="bbc-role">Creative Direction · Production · Casting</div>
+          </div>
+          <div class="bbc-row">
+            <div class="bbc-thumb t-peach"><img src="./toms-1.jpg" alt="TOMS" onerror="this.style.display='none'"></div>
+            <div class="bbc-logo"><span class="text">TOMS</span></div>
+            <div class="bbc-desc">New product launch campaigns for footwear — outdoor lifestyle productions on location.</div>
+            <div class="bbc-role">Creative Direction · Production · Casting</div>
+          </div>
+          <div class="bbc-row">
+            <div class="bbc-thumb t-cream"><img src="./real-techniques-1.jpg" alt="Real Techniques" onerror="this.style.display='none'"></div>
+            <div class="bbc-logo"><span class="text">Real Techniques</span></div>
+            <div class="bbc-desc">Creative production for the makeup tools brand — campaign and product imagery for new launches.</div>
+            <div class="bbc-role">Creative Direction · Production · Casting</div>
+          </div>
+          <div class="bbc-row">
+            <div class="bbc-thumb t-lilac"><img src="./alterna-1.jpg" alt="Alterna Haircare" onerror="this.style.display='none'"></div>
+            <div class="bbc-logo"><span class="text">Alterna Haircare</span></div>
+            <div class="bbc-desc">New product launch campaigns — haircare studio productions in partnership with Henkel.</div>
+            <div class="bbc-role">Creative Direction · Production · Casting</div>
+          </div>
+          <div class="bbc-row">
+            <div class="bbc-thumb t-lime"><img src="./youngblood-1.jpg" alt="YoungBlood Cosmetics" onerror="this.style.display='none'"></div>
+            <div class="bbc-logo"><span class="text">YoungBlood Cosmetics</span></div>
+            <div class="bbc-desc">New product launch campaigns — skincare and cosmetics studio productions.</div>
+            <div class="bbc-role">Creative Direction · Production · Casting</div>
           </div>
           <div class="bbc-row">
             <div class="bbc-thumb t-cream"><img src="./att-1.jpg" alt="AT&amp;T" onerror="this.style.display='none'"></div>
             <div class="bbc-logo"><span class="text">AT&amp;T</span></div>
-            <div class="bbc-year">2022</div>
             <div class="bbc-desc">National brand campaign shoot — single-engagement production.</div>
-            <div class="bbc-role">Production</div>
+            <div class="bbc-role">Creative Direction · Production · Casting</div>
           </div>
         </div>
       </div>
@@ -1441,6 +1505,14 @@
     if(!dark) return;
     dark.addEventListener('mouseenter',()=>c.classList.add('lime'));
     dark.addEventListener('mouseleave',()=>c.classList.remove('lime'));
+  });
+})();
+
+/* client list +/− toggle */
+(()=>{
+  document.querySelectorAll('details.client-list').forEach(d=>{
+    const ico=d.querySelector('.ico');if(!ico)return;
+    d.addEventListener('toggle',()=>{ico.textContent=d.open?'−':'+'});
   });
 })();
 
