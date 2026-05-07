@@ -1345,28 +1345,30 @@
         <h2>Open to <span class="it">what's next.</span></h2>
         <p class="sub">Full-time roles, project work, advisory, or just an introduction. Tell me what you're working on or what you're hiring for, and I'll reply within 48 hours.</p>
 
-        <form class="form" onsubmit="event.preventDefault(); alert('Form submission wiring is a TODO.');">
-          <div class="form-row">
-            <label for="f-name">Name</label>
-            <input id="f-name" type="text" placeholder="Your name" required>
-          </div>
-          <div class="form-row">
-            <label for="f-email">Email</label>
-            <input id="f-email" type="email" placeholder="you@company.com" required>
-          </div>
-          <div class="form-row">
-            <label for="f-co">Company / Role</label>
-            <input id="f-co" type="text" placeholder="Optional">
-          </div>
-          <div class="form-row tall">
-            <label for="f-msg">What are you<br>working on / hiring for?</label>
-            <textarea id="f-msg" placeholder="A role, a brand, a project, a chat…" required></textarea>
-          </div>
-          <div class="submit-row">
-            <button type="submit" class="send">Send message <span class="arr">→</span></button>
-            <span style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(238,233,226,.4);font-weight:500">Replies within 48 hrs</span>
-          </div>
-        </form>
+     <form class="form" action="https://formspree.io/f/xjglegbj" method="POST">
+  <div class="form-row">
+    <label for="f-name">Name</label>
+    <input id="f-name" name="name" type="text" placeholder="Your name" required>
+  </div>
+  <div class="form-row">
+    <label for="f-email">Email</label>
+    <input id="f-email" name="email" type="email" placeholder="you@company.com" required>
+  </div>
+  <div class="form-row">
+    <label for="f-co">Company / Role</label>
+    <input id="f-co" name="company" type="text" placeholder="Optional">
+  </div>
+  <div class="form-row tall">
+    <label for="f-msg">What are you<br>working on / hiring for?</label>
+    <textarea id="f-msg" name="message" placeholder="A role, a brand, a project, a chat…" required></textarea>
+  </div>
+  <input type="hidden" name="_subject" value="New message from hannahmcgough.com">
+  <input type="hidden" name="_next" value="https://hannahmcgough.com/?sent=1">
+  <div class="submit-row">
+    <button type="submit" class="send">Send message <span class="arr">→</span></button>
+    <span style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(238,233,226,.4);font-weight:500">Replies within 48 hrs</span>
+  </div>
+</form>
 
         <div class="contact-meta">
           <span><a href="mailto:hello@hannahmcgough.com">hello@hannahmcgough.com</a></span>
