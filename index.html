@@ -160,11 +160,9 @@
   .hb-item.open.tone-lilac .hb-detail{background:var(--pale-lilac)}
   .hb-item.open.tone-cream .hb-detail{background:var(--pale-cream)}
   .hb-detail-inner{padding:clamp(36px,5vh,64px) clamp(24px,3vw,48px)}
-  /* when open: hide the duplicate cover image inside drawer, expand 3-act to full width */
-  .hb-item.open .cs-acts{grid-template-columns:1fr;max-width:780px}
-  .hb-item.open .cs-thumb > img,
-  .hb-item.open .cs-thumb > video{display:none}
-  .hb-item.open .cs-thumb{padding:0;background:transparent;margin-top:8px}
+  /* when open: keep the card at its original size — don't enlarge the cover across the full-width row.
+     The cs-thumb image stays visible on the right of the copy inside the drawer. */
+  .hb-item.open .hb-card{max-width:380px}
 
   @media (max-width:980px){
     .hb-grid{grid-template-columns:repeat(2,1fr)}
@@ -205,8 +203,8 @@
   .cs-close .x{font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;letter-spacing:0;text-transform:none;font-weight:400}
 
   /* ───── CAPSULE TIER (compact tile grid w/ thumbs) ───── */
-  .capsule-grid{padding:0 var(--gutter) clamp(40px,6vh,72px);display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair)}
-  .capsule{background:var(--cream);padding:0;display:flex;flex-direction:column;min-height:280px;transition:background .4s var(--ease);position:relative;overflow:hidden}
+  .capsule-grid{padding:0 var(--gutter) clamp(40px,6vh,72px);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,2vw,28px)}
+  .capsule{background:var(--cream);padding:0;display:flex;flex-direction:column;min-height:280px;transition:background .4s var(--ease);position:relative;overflow:hidden;border:1px solid var(--hair)}
   .capsule-cover{aspect-ratio:4/3;position:relative;overflow:hidden;background:rgba(26,24,23,.06)}
   .capsule-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
   .capsule:hover .capsule-cover img{transform:scale(1.04)}
