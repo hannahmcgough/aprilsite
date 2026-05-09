@@ -12,10 +12,10 @@
 <style>
   /* ───── TOKENS ───── */
   :root{
-    --chartreuse:#DDEF44; --lilac:#C2BAEC; --cream:#F4EDE7; --cream-deep:#E2DBCE;
+    --chartreuse:#EBFB79; --lilac:#C2BAEC; --cream:#F4EDE7; --cream-deep:#E2DBCE;
     --peach:#F4C9A8; --ink:#1A1817; --ink-soft:#5C504C; --ink-mute:#8C8079;
     --hair:rgba(26,24,23,.16); --gutter:clamp(24px,4vw,72px);
-    --pale-lime:#F0F2D2; --pale-peach:#F4E2D0; --pale-lilac:#E2DCED; --pale-cream:#E2DBCE;
+    --pale-lime:#F0F2D2; --pale-peach:#F4E2D0; --pale-lilac:#E2DCED; --pale-cream:#E2DBCE; --neon-soft:#F9FFC8;
     --ease:cubic-bezier(.7,0,.2,1);
   }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -41,7 +41,7 @@
   .boot-tile:nth-child(6n+2){background:linear-gradient(140deg,#C2BAEC,#3A3230)}
   .boot-tile:nth-child(6n+3){background:linear-gradient(160deg,#F4C9A8,#5C504C)}
   .boot-tile:nth-child(6n+4){background:linear-gradient(155deg,#1A1817,#5C504C)}
-  .boot-tile:nth-child(6n+5){background:linear-gradient(145deg,#DDEF44,#3A3230)}
+  .boot-tile:nth-child(6n+5){background:linear-gradient(145deg,#EBFB79,#3A3230)}
   .boot-tile:nth-child(6n+6){background:linear-gradient(165deg,#9B8B83,#1A1817)}
   .boot-wash{position:absolute;inset:0;background:var(--cream);opacity:0;z-index:2;animation:boot-wash-in .75s 3.2s forwards var(--ease)}
   .boot-mark{position:relative;z-index:3;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink);font-weight:500;opacity:0;animation:boot-mark-in .6s 3.7s forwards var(--ease)}
@@ -155,7 +155,7 @@
   .hb-cover{aspect-ratio:4/3;background:rgba(26,24,23,.06);position:relative;overflow:hidden}
   .hb-cover img,.hb-cover video{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease)}
   .hb-card:hover .hb-cover img,.hb-card:hover .hb-cover video{transform:scale(1.03)}
-  .hb-cover.t-lime{background:linear-gradient(155deg,#DDEF44,#E2DBCE)}
+  .hb-cover.t-lime{background:linear-gradient(155deg,#EBFB79,#E2DBCE)}
   .hb-cover.t-peach{background:linear-gradient(155deg,#F4C9A8,#E2DBCE)}
   .hb-cover.t-lilac{background:linear-gradient(155deg,#C2BAEC,#E2DBCE)}
   .hb-cover.t-cream{background:linear-gradient(155deg,#9B8B83,#E2DBCE)}
@@ -223,12 +223,13 @@
 
   /* ───── CAPSULE TIER (compact tile grid w/ thumbs) ───── */
   .capsule-grid{padding:0 var(--gutter) clamp(40px,6vh,72px);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,2vw,28px)}
+  .capsule-band{background:var(--neon-soft);padding-bottom:clamp(20px,3vh,40px)}
   .capsule{background:var(--cream);padding:0;display:flex;flex-direction:column;min-height:280px;position:relative;overflow:hidden;border:1px solid var(--hair)}
   .capsule-cover{aspect-ratio:4/3;position:relative;overflow:hidden;background:rgba(26,24,23,.06)}
   .capsule-cover img{width:100%;height:100%;object-fit:cover;display:block}
   .capsule-cover.t-lilac{background:linear-gradient(155deg,#C2BAEC,#E2DBCE)}
   .capsule-cover.t-peach{background:linear-gradient(155deg,#F4C9A8,#E2DBCE)}
-  .capsule-cover.t-lime{background:linear-gradient(155deg,#DDEF44,#E2DBCE)}
+  .capsule-cover.t-lime{background:linear-gradient(155deg,#EBFB79,#E2DBCE)}
   .capsule-cover.t-cream{background:linear-gradient(155deg,#9B8B83,#E2DBCE)}
   .capsule-body{padding:clamp(18px,2vw,22px) clamp(18px,2vw,22px) clamp(20px,2.4vw,26px);display:flex;flex-direction:column;gap:10px;flex:1}
   .capsule.t-empty{padding:clamp(20px,2.4vw,28px);justify-content:center;align-items:center;text-align:center;color:var(--ink-mute);min-height:280px}
@@ -254,7 +255,7 @@
   .bbc-thumb{width:108px;height:80px;background:rgba(26,24,23,.06);overflow:hidden;position:relative;flex-shrink:0}
   .bbc-thumb img,.bbc-thumb video{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s var(--ease)}
   button.bbc-row:hover .bbc-thumb img,button.bbc-row:hover .bbc-thumb video{transform:scale(1.05)}
-  .bbc-thumb.t-lime{background:linear-gradient(155deg,#DDEF44,#9B8B83)}
+  .bbc-thumb.t-lime{background:linear-gradient(155deg,#EBFB79,#9B8B83)}
   .bbc-thumb.t-peach{background:linear-gradient(155deg,#F4C9A8,#5C504C)}
   .bbc-thumb.t-lilac{background:linear-gradient(155deg,#C2BAEC,#3A3230)}
   .bbc-thumb.t-cream{background:linear-gradient(155deg,#9B8B83,#1A1817)}
@@ -1129,6 +1130,7 @@
       </div>
 
       <!-- TIER B: Capsule (founded / co-founded) -->
+      <section class="capsule-band">
       <div class="tier-label">Founded &amp; Co-Founded <span class="it">— brands I built, then launched</span></div>
 
       <div class="capsule-grid">
@@ -1161,6 +1163,7 @@
           </div>
         </div>
       </div>
+      </section>
 
       <!-- TIER C: Big-Brand Campaigns -->
       <div class="tier-label">Big-Brand Campaigns <span class="it">— production for recognized names</span></div>
