@@ -266,6 +266,7 @@
   .bbc-role{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);font-weight:600;text-align:right;white-space:nowrap}
   .bbc-cta{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--chartreuse);background:var(--ink);padding:6px 10px;border-radius:100px;font-weight:700;display:inline-flex;align-items:center;gap:6px;line-height:1.2;margin-top:4px}
   .bbc-cta .ar{font-family:'Instrument Serif',serif;font-style:italic;font-size:14px;letter-spacing:0;text-transform:none;font-weight:400}
+  .bbc-row > div:last-child{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
   @media (max-width:980px){
     .bbc-row{grid-template-columns:80px 1fr;gap:14px;align-items:start}
     .bbc-thumb{width:80px;height:60px}
@@ -1655,13 +1656,13 @@
   };
   const populate = async (brand) => {
     const items = await discover(brand);
-    if (!items.length) {
-      /* hide gallery button until brand has discoverable {brand}-N.jpg files */
+    if (items.length < 2) {
+      /* hide gallery button until brand has 2+ discoverable {brand}-N.jpg files */
       const btn = document.querySelector(`.cs-thumb-btn[data-gallery="${brand}"]`);
       if (btn) btn.style.display = 'none';
       const bbcBtn = document.querySelector(`[data-bbc-gallery="${brand}"] .bbc-cta`);
       if (bbcBtn) bbcBtn.style.display = 'none';
-      return;
+      if (!items.length) return;
     }
     const thumb = document.querySelector(`.cs-thumb[data-brand="${brand}"]`);
     if (thumb) {
