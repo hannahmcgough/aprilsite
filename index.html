@@ -409,7 +409,6 @@
     .row .desc{display:none}
     .cs-acts{grid-template-columns:1fr}
     .capsule-grid{grid-template-columns:repeat(2,1fr)}
-    .bbc-row{grid-template-columns:1fr 1fr;gap:8px 16px}
     .bbc-role{text-align:left}
     .bp-hd{grid-template-columns:1fr;gap:28px}
     .bp-layers{grid-template-columns:1fr;border-top:1px solid var(--hair)}
@@ -429,6 +428,11 @@
   }
   @media (max-width:640px){
     .capsule-grid{grid-template-columns:1fr}
+    .bbc-row{grid-template-columns:1fr;gap:10px;padding:16px 0}
+    .bbc-thumb{width:100%;height:auto;aspect-ratio:16/9;max-width:none}
+    .bbc-desc,.bbc-role{grid-column:1}
+    .bbc-logo{height:28px}
+    .bbc-row>div:last-child{align-items:flex-start;flex-direction:row;flex-wrap:wrap;gap:8px}
     .bp h3{font-size:60px}
     .phil-quote{font-size:24px;line-height:1.3}
     .cs-gallery-head{padding:14px var(--gutter)}
