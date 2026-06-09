@@ -129,6 +129,19 @@
   .chapter .meta b{color:var(--ink);font-weight:600}
   .chapter .meta .it{font-family:'Instrument Serif',serif;font-style:normal;font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-soft);font-size:14px;display:block;margin-top:6px;line-height:1.4}
 
+
+  /* ───── SECTION JUMP NAV ───── */
+  .section-nav{border-top:1px solid var(--ink);border-bottom:1px solid var(--hair)}
+  .snav-inner{display:flex;align-items:stretch;flex-wrap:wrap;max-width:1280px;margin:0 auto;padding:0 var(--gutter)}
+  .snav-item{display:flex;align-items:center;gap:10px;padding:14px 20px;text-decoration:none;flex:1;min-width:150px;border-right:1px solid var(--hair);transition:background .2s var(--ease)}
+  .snav-item:hover{background:rgba(26,24,23,.04)}
+  .snav-roman{font-family:'Instrument Serif',serif;font-style:normal;font-weight:400;font-size:30px;color:rgba(26,24,23,.18);line-height:1;flex-shrink:0}
+  .snav-text{display:flex;flex-direction:column;gap:1px}
+  .snav-title{font-size:13px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+  .snav-sub{font-size:10px;color:var(--ink-mute)}
+  .snav-cta{display:flex;align-items:center;padding:14px 20px;font-size:10.5px;letter-spacing:.06em;color:var(--ink-mute);font-style:italic;flex-shrink:0;pointer-events:none;user-select:none}
+  @media (max-width:640px){.snav-item{min-width:120px;padding:10px 14px}.snav-roman{font-size:22px}.snav-cta{display:none}}
+
   /* ───── TIER LABEL (between sub-sections) ───── */
   .tier-label{padding:clamp(40px,5vh,64px) var(--gutter) 14px;display:flex;align-items:baseline;gap:14px;font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-mute);font-weight:600}
   .tier-label::before{content:"";display:inline-block;width:24px;height:1px;background:var(--ink-mute)}
@@ -286,6 +299,24 @@
   .bp-section-label{font-size:11px;letter-spacing:.4em;text-transform:uppercase;font-weight:700;color:var(--ink);background:var(--chartreuse);padding:8px 16px;border-radius:100px;line-height:1.2}
   .bp-section-sub{font-family:'Instrument Serif',serif;font-style:normal;font-size:clamp(15px,1.4vw,18px);color:var(--ink-soft);max-width:560px;line-height:1.4}
   .bp-section-marker + .chapter{border-top:none;padding-top:clamp(28px,4vh,56px)}
+
+  /* ───── BRAND IDENTITY & PACKAGING ───── */
+  .bi-band{padding:0 var(--gutter) clamp(60px,8vh,100px)}
+  .bi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px)}
+  .bi-card{background:var(--cream-deep);border-radius:6px;overflow:hidden}
+  .bi-card-body{padding:14px 16px 16px}
+  .bi-client{font-size:15px;font-weight:700;color:var(--ink);letter-spacing:-.01em;margin-bottom:2px}
+  .bi-category{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);font-weight:600}
+  .bi-slider{position:relative;overflow:hidden;aspect-ratio:4/3;cursor:ew-resize;user-select:none;-webkit-user-select:none;background:var(--ink)}
+  .bi-slider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+  .bi-s-after{z-index:1}
+  .bi-s-before{z-index:2}
+  .bi-s-handle{position:absolute;top:0;bottom:0;z-index:10;width:2px;background:#fff;transform:translateX(-50%);cursor:ew-resize;left:30%}
+  .bi-s-knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--ink);box-shadow:0 1px 6px rgba(26,24,23,.2)}
+  .bi-s-pill{position:absolute;bottom:10px;font-size:8px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:100px}
+  .bi-s-pill.before{left:10px;background:rgba(26,24,23,.55);color:var(--cream)}
+  .bi-s-pill.after{right:10px;background:var(--chartreuse);color:var(--ink)}
+  @media (max-width:980px){.bi-grid{grid-template-columns:1fr}}
 
   /* ───── PRACTICE ───── */
   .practice{padding:0 var(--gutter) clamp(60px,8vh,100px);display:grid;grid-template-columns:220px 1fr;gap:48px;align-items:start;max-width:900px;margin:0 auto}
@@ -575,7 +606,26 @@
       </div>
     </section>
 
-    <!-- ════════════ I · BRAND BUILDS ════════════ -->
+    <!-- ════════════ SECTION NAV ════════════ -->
+    <nav class="section-nav" aria-label="Page sections">
+      <div class="snav-inner">
+        <a href="#i" class="snav-item">
+          <span class="snav-roman">I</span>
+          <div class="snav-text"><span class="snav-title">Brand Builds</span><span class="snav-sub">0→1 · campaigns · identity</span></div>
+        </a>
+        <a href="#ii" class="snav-item">
+          <span class="snav-roman">II</span>
+          <div class="snav-text"><span class="snav-title">Practice</span><span class="snav-sub">how I work &middot; USPs</span></div>
+        </a>
+        <a href="#iii" class="snav-item">
+          <span class="snav-roman">III</span>
+          <div class="snav-text"><span class="snav-title">Field Notes</span><span class="snav-sub">writing &middot; thinking</span></div>
+        </a>
+        <span class="snav-cta">&larr; click to jump</span>
+      </div>
+    </nav>
+
+        <!-- ════════════ I · BRAND BUILDS ════════════ -->
     <section id="i">
       <div class="chapter">
         <div class="roman">I</div>
@@ -1240,6 +1290,56 @@
         </div>
       </div>
 
+      <!-- TIER D: Brand Identity & Packaging -->
+      <div class="tier-label">Brand Identity &amp; Packaging <span class="it">— drag to reveal</span></div>
+      <div class="bi-band">
+        <div class="bi-grid">
+
+          <div class="bi-card">
+            <div class="bi-slider">
+              <img src="./blossomingbox-after.jpg" alt="Blossoming Box after" class="bi-s-after" onerror="this.style.display='none'">
+              <img src="./blossomingbox-before.jpg" alt="Blossoming Box before" class="bi-s-before" style="clip-path:inset(0 70% 0 0)" onerror="this.style.display='none'">
+              <span class="bi-s-pill before">before</span>
+              <span class="bi-s-pill after">after</span>
+              <div class="bi-s-handle" style="left:30%"><div class="bi-s-knob">&#9664;&#9654;</div></div>
+            </div>
+            <div class="bi-card-body">
+              <div class="bi-client">Blossoming Box</div>
+              <div class="bi-category">Brand Identity &middot; Packaging</div>
+            </div>
+          </div>
+
+          <div class="bi-card">
+            <div class="bi-slider">
+              <img src="./oneearthhealth-after.jpg" alt="One Earth Health after" class="bi-s-after" onerror="this.style.display='none'">
+              <img src="./oneearthhealth-before.jpg" alt="One Earth Health before" class="bi-s-before" style="clip-path:inset(0 70% 0 0)" onerror="this.style.display='none'">
+              <span class="bi-s-pill before">before</span>
+              <span class="bi-s-pill after">after</span>
+              <div class="bi-s-handle" style="left:30%"><div class="bi-s-knob">&#9664;&#9654;</div></div>
+            </div>
+            <div class="bi-card-body">
+              <div class="bi-client">One Earth Health</div>
+              <div class="bi-category">Label Redesign</div>
+            </div>
+          </div>
+
+          <div class="bi-card">
+            <div class="bi-slider">
+              <img src="./elevar-after.jpg" alt="Elevar Wellness after" class="bi-s-after" onerror="this.style.display='none'">
+              <img src="./elevar-before.jpg" alt="Elevar Wellness before" class="bi-s-before" style="clip-path:inset(0 70% 0 0)" onerror="this.style.display='none'">
+              <span class="bi-s-pill before">before</span>
+              <span class="bi-s-pill after">after</span>
+              <div class="bi-s-handle" style="left:30%"><div class="bi-s-knob">&#9664;&#9654;</div></div>
+            </div>
+            <div class="bi-card-body">
+              <div class="bi-client">Elevar Wellness</div>
+              <div class="bi-category">Label Redesign</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </section>
 
     <!-- ════════════ II · BRAND PERSPECTIVE ════════════ -->
@@ -1751,6 +1851,28 @@
   });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
 })();
+
+
+/* BRAND IDENTITY SLIDERS */
+document.querySelectorAll('.bi-slider').forEach(function(wrap){
+  var before=wrap.querySelector('.bi-s-before');
+  var handle=wrap.querySelector('.bi-s-handle');
+  var dragging=false;
+  function setPos(clientX){
+    var r=wrap.getBoundingClientRect();
+    var pct=Math.min(Math.max((clientX-r.left)/r.width*100,2),98);
+    before.style.clipPath='inset(0 '+(100-pct)+'% 0 0)';
+    handle.style.left=pct+'%';
+  }
+  handle.addEventListener('mousedown',function(e){dragging=true;e.preventDefault();});
+  wrap.addEventListener('mousedown',function(e){dragging=true;setPos(e.clientX);e.preventDefault();});
+  document.addEventListener('mousemove',function(e){if(dragging)setPos(e.clientX);});
+  document.addEventListener('mouseup',function(){dragging=false;});
+  handle.addEventListener('touchstart',function(e){dragging=true;e.preventDefault();},{passive:false});
+  wrap.addEventListener('touchstart',function(e){dragging=true;setPos(e.touches[0].clientX);},{passive:true});
+  document.addEventListener('touchmove',function(e){if(dragging)setPos(e.touches[0].clientX);},{passive:true});
+  document.addEventListener('touchend',function(){dragging=false;});
+});
 
 /* BOOT REMOVE */
 setTimeout(()=>{ const b=document.getElementById('boot'); if(b) b.remove(); },5200);
