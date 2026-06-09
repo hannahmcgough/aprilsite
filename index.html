@@ -132,6 +132,10 @@
 
   /* ───── SECTION JUMP NAV ───── */
   .section-nav{border-top:1px solid var(--ink);border-bottom:1px solid var(--hair)}
+  .snav-intro{padding:9px var(--gutter);border-bottom:1px solid var(--hair);display:flex;align-items:center}
+  .snav-intro-pill{display:inline-flex;align-items:center;gap:7px;background:var(--chartreuse);color:var(--ink);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;padding:5px 13px;border-radius:100px}
+  .snav-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ink);flex-shrink:0;box-shadow:0 0 0 0 rgba(26,24,23,.5);animation:snav-pulse 2s infinite}
+  @keyframes snav-pulse{0%{box-shadow:0 0 0 0 rgba(26,24,23,.45)}70%{box-shadow:0 0 0 7px rgba(26,24,23,0)}100%{box-shadow:0 0 0 0 rgba(26,24,23,0)}}
   .snav-inner{display:flex;align-items:stretch;flex-wrap:wrap;max-width:1280px;margin:0 auto;padding:0 var(--gutter)}
   .snav-item{display:flex;align-items:center;gap:10px;padding:14px 20px;text-decoration:none;flex:1;min-width:150px;border-right:1px solid var(--hair);transition:background .2s var(--ease)}
   .snav-item:hover{background:rgba(26,24,23,.04)}
@@ -143,9 +147,9 @@
   @media (max-width:640px){.snav-item{min-width:120px;padding:10px 14px}.snav-roman{font-size:22px}.snav-cta{display:none}}
 
   /* ───── TIER LABEL (between sub-sections) ───── */
-  .tier-label{padding:clamp(40px,5vh,64px) var(--gutter) 14px;display:flex;align-items:baseline;gap:14px;font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-mute);font-weight:600}
-  .tier-label::before{content:"";display:inline-block;width:24px;height:1px;background:var(--ink-mute)}
-  .tier-label .it{font-family:'Instrument Serif',serif;font-style:normal;font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-soft);font-size:14px}
+  .tier-label{padding:clamp(40px,5vh,64px) var(--gutter) 14px;display:flex;align-items:baseline;gap:14px;font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink);font-weight:700}
+  .tier-label::before{content:"";display:inline-block;width:24px;height:1px;background:var(--ink);margin-bottom:3px;flex-shrink:0}
+  .tier-label .it{font-family:'Instrument Serif',serif;font-style:normal;font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-mute);font-size:14px}
 
   /* ───── HERO BUILDS — VISUAL CARD GRID (12 brands, 3 per row) ───── */
   .hb-grid{padding:0 var(--gutter) clamp(40px,6vh,72px);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,3vh,40px) clamp(16px,1.5vw,22px)}
@@ -608,6 +612,9 @@
 
     <!-- ════════════ SECTION NAV ════════════ -->
     <nav class="section-nav" aria-label="Page sections">
+      <div class="snav-intro">
+        <span class="snav-intro-pill"><span class="snav-dot"></span>Jump around &darr;</span>
+      </div>
       <div class="snav-inner">
         <a href="#i" class="snav-item">
           <span class="snav-roman">I</span>
