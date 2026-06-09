@@ -89,6 +89,7 @@
   .role-wins li::before{content:"✦";color:var(--chartreuse);font-style:normal;font-size:13px;flex-shrink:0;padding-top:2px}
   .role-cover{margin-top:18px;background:rgba(26,24,23,.06);overflow:hidden;width:100%;max-width:380px;aspect-ratio:16/10;border-radius:6px;border:1px solid var(--hair)}
   .role-cover img{width:100%;height:100%;object-fit:cover;display:block}
+  .role-cover-cap{font-size:11px;font-style:italic;color:var(--ink-mute);margin-top:6px;letter-spacing:.01em}
 
   /* CLIENT LIST (collapsible) */
   details.client-list{margin-top:24px;max-width:760px}
@@ -127,6 +128,8 @@
   /* TWO-COL LIST SECTION (Speaking + Advisory) */
   .two-col{padding:0 var(--gutter) clamp(40px,6vh,80px);max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px)}
   .two-col h3{font-weight:700;font-size:clamp(22px,2.4vw,32px);letter-spacing:-.025em;line-height:1;margin-bottom:14px}
+  .two-col>div:first-child h3{border-left:3px solid var(--lilac);padding-left:12px}
+  .two-col>div:last-child h3{border-left:3px solid var(--chartreuse);padding-left:12px}
   .two-col h3 .it{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--ink-soft);font-size:.85em;display:inline}
   .col-sub{font-size:14px;color:var(--ink-soft);line-height:1.55;margin-bottom:24px}
   .list-item{padding:14px 0;border-top:1px solid var(--hair);font-size:14.5px;line-height:1.5;color:var(--ink-soft)}
@@ -140,6 +143,8 @@
   .edu h3{font-weight:700;font-size:clamp(22px,2.4vw,32px);letter-spacing:-.025em;margin-bottom:18px}
   .edu-row{display:grid;grid-template-columns:200px 1fr;gap:clamp(24px,3vw,56px);padding:14px 0;border-top:1px solid var(--hair)}
   .edu-row:last-child{border-bottom:1px solid var(--hair)}
+  .edu-honors{font-size:12.5px;color:var(--ink-mute);margin-top:6px;line-height:1.5}
+  .edu-cert{font-size:9px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:100px;background:var(--lilac);color:var(--ink);display:inline-block;margin-bottom:6px}
   .edu-school{font-weight:700;font-size:18px;letter-spacing:-.015em}
   .edu-detail{font-size:14px;color:var(--ink-soft);line-height:1.55;margin-top:4px}
 
@@ -244,6 +249,7 @@
             <li>Established repeatable creative + production systems clients run after engagements close.</li>
           </ul>
           <div class="role-cover"><img src="./experience-studio-1.jpg" alt="" onerror="this.style.display='none'"></div>
+          <p class="role-cover-cap">produced by <em>hm*</em></p>
 
           <details class="client-list" style="margin-top:24px">
             <summary>View full client roster <span class="ico">+</span></summary>
@@ -291,6 +297,7 @@
             <li>Built the Customer Advisory Board and consumer research engine across Reddit + private focus groups.</li>
           </ul>
           <div class="role-cover"><img src="./experience-blankbeauty-1.jpg" alt="" onerror="this.style.display='none'"></div>
+          <p class="role-cover-cap">produced by <em>hm*</em></p>
         </div>
       </div>
 
@@ -310,6 +317,7 @@
             <li>Brand sold in acquisition during tenure.</li>
           </ul>
           <div class="role-cover"><img src="./experience-beauty-bakerie-1.jpg" alt="" onerror="this.style.display='none'"></div>
+          <p class="role-cover-cap">produced by <em>hm*</em></p>
         </div>
       </div>
 
@@ -389,6 +397,11 @@
         <h3>Brand <span class="it">Advisory</span></h3>
         <p class="col-sub">Ongoing brand counsel for founders &amp; product teams — sounding board on creative, strategic, and operational decisions.</p>
         <div class="list-item">
+          <span class="meta">Brand Advisor &middot; Nov 2024 &ndash; Apr 2025</span>
+          <b>Venture Out</b>
+          Brand identity, partnership architecture &amp; sponsorship pipeline for an LA-based adventure community. Proof-of-concept sponsor deal with Vacation Inc.; launch event at Burton Santa Monica.
+        </div>
+        <div class="list-item">
           <span class="meta">Advisor · 2022</span>
           <b>Soona</b>
           Business development &amp; new studio openings
@@ -408,7 +421,17 @@
         <div class="role-dates">2011 — 2015</div>
         <div>
           <div class="edu-school">Cornell University</div>
-          <div class="edu-detail">Communications &amp; Media Studies, Film</div>
+          <div class="edu-detail">B.S. Communications &amp; Media Studies, Film</div>
+          <div class="edu-honors">Dean's List 3&times; &middot; Award-winning Resident Advisor &middot; VP of Campus Media &middot; Sr. Editor, Campus Newspaper</div>
+        </div>
+      </div>
+      <div class="edu-row">
+        <div class="role-dates">Aug 2023</div>
+        <div>
+          <span class="edu-cert">Certification</span>
+          <div class="edu-school">Belong Institute</div>
+          <div class="edu-detail">Inaugural Cohort &mdash; Community Leadership</div>
+          <div class="edu-detail" style="color:var(--ink-mute);font-style:italic;margin-top:2px">Led by Radha Agrawal (Daybreaker &middot; Thinx)</div>
         </div>
       </div>
     </div>
