@@ -125,6 +125,13 @@
   .bbc-desc{font-family:'Instrument Serif',serif;font-style:italic;font-size:16px;line-height:1.45;color:var(--ink-soft)}
   .bbc-role{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);font-weight:600;text-align:right}
 
+  /* HERO CREDENTIALS STRIP */
+  .hero-creds{display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;margin-top:28px;padding-top:22px;border-top:1px solid var(--hair)}
+  .hero-cred{font-size:13px;color:var(--ink-soft);letter-spacing:.01em}
+  .cred-dot{color:var(--ink-mute);font-size:11px}
+  .cred-link{color:var(--ink);border-bottom:1px solid var(--hair);padding-bottom:1px;transition:border-color .2s}
+  .cred-link:hover{border-color:var(--ink)}
+
   /* TWO-COL LIST SECTION (Speaking + Advisory) */
   .two-col{padding:0 var(--gutter) clamp(40px,6vh,80px);max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px)}
   .two-col h3{font-weight:700;font-size:clamp(22px,2.4vw,32px);letter-spacing:-.025em;line-height:1;margin-bottom:14px}
@@ -220,6 +227,13 @@
       <h1 class="hero-name">Experience.</h1>
       <div class="hero-title">Brand &amp; Creative Director <span class="sep">·</span> 10+ years in consumer brands</div>
       <p class="hero-deck">A working résumé — current independent practice, prior in-house leadership, and where I'm headed next.</p>
+      <div class="hero-creds">
+        <span class="hero-cred">Cornell University, B.S. &rsquo;15</span>
+        <span class="cred-dot">&middot;</span>
+        <span class="hero-cred">Belong Institute Certified &rsquo;23</span>
+        <span class="cred-dot">&middot;</span>
+        <span class="hero-cred">Featured in <a href="https://www.entrepreneur.com/building-a-business/run-your-business/ai-will-never-replace-this-one-thing-6-business-leaders-warn" target="_blank" rel="noopener" class="cred-link">Entrepreneur</a></span>
+      </div>
     </section>
 
     <!-- ════════════ I · CAREER ════════════ -->
@@ -377,6 +391,11 @@
       <div>
         <h3>Speaking &amp; <span class="it">Editorial</span></h3>
         <p class="col-sub">Talks, workshops, panels — subjects span building consumer brands, the operator's view of creative, and content strategy for founders.</p>
+        <div class="list-item">
+          <span class="meta">Feature &middot; Jan 2026</span>
+          <b><a href="https://www.entrepreneur.com/building-a-business/run-your-business/ai-will-never-replace-this-one-thing-6-business-leaders-warn" target="_blank" rel="noopener" style="color:inherit;border-bottom:1px solid var(--hair);padding-bottom:1px">Entrepreneur</a> &mdash; AI Will Never Replace This One Thing</b>
+          One of six business leaders quoted on the human skills no algorithm can replicate. On AI, taste, and why the creative director's eye has only gotten more valuable.
+        </div>
         <div class="list-item">
           <span class="meta">Workshop · 2025</span>
           <b>Building Your Soul-Led Brand</b>
