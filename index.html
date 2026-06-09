@@ -244,6 +244,11 @@
   .capsule-shop{display:inline-flex;align-items:center;gap:8px;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--ink);padding:8px 0;border-bottom:1px solid var(--ink);align-self:flex-start;transition:gap .25s var(--ease)}
   .capsule-shop .arr{font-family:'Instrument Serif',serif;font-style:normal;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400}
   .capsule-shop:hover{gap:12px}
+  .capsule-intro{padding:0 var(--gutter) clamp(20px,3vh,32px);display:flex;align-items:center;gap:28px}
+.capsule-intro-photo{width:170px;height:170px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;background:var(--peach)}
+.capsule-intro-text{font-family:'Instrument Serif',serif;font-style:normal;font-size:clamp(16px,1.5vw,20px);line-height:1.55;color:var(--ink-soft);max-width:580px}
+.capsule-intro-text b{color:var(--ink);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-style:normal;font-size:.85em;font-weight:600}
+@media (max-width:640px){.capsule-intro{flex-direction:column;gap:16px}.capsule-intro-photo{width:120px;height:120px}}
   
   /* ───── BIG-BRAND CAMPAIGNS ───── */
   .bbc-strip{padding:0 var(--gutter) clamp(60px,8vh,100px)}
@@ -1141,7 +1146,12 @@
       <!-- TIER B: Capsule (founded / co-founded) -->
       <section class="capsule-band">
       <div class="tier-label">Founded &amp; Co-Founded <span class="it">— brands I built, then launched</span></div>
-
+        
+<div class="capsule-intro">
+  <img src="./headshot-3.png" alt="Hannah McGough" class="capsule-intro-photo" onerror="this.style.display='none'">
+  <p class="capsule-intro-text">The best thing I ever did for my client work was start a few brands of my own. <b>Immeasurably fun. Genuinely educational. Still going.</b></p>
+</div>
+        
       <div class="capsule-grid">
         <div class="capsule">
           <div class="capsule-cover t-lilac"><img src="./mini-selfies.jpg" alt="Selfies Mini Prerolls" onerror="this.style.display='none'"></div>
