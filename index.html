@@ -322,6 +322,23 @@
   .bi-s-pill.after{right:10px;background:var(--chartreuse);color:var(--ink)}
   @media (max-width:980px){.bi-grid{grid-template-columns:1fr}}
 
+  /* ───── VENTURE OUT FEATURE ───── */
+  .vo-band{padding:0 var(--gutter) clamp(60px,8vh,100px)}
+  .vo-inner{display:grid;grid-template-columns:180px 1fr 1fr;gap:clamp(24px,3vw,40px);padding:clamp(28px,4vw,48px);background:var(--ink);border-radius:6px;align-items:start}
+  .vo-photos{display:flex;flex-direction:column;gap:8px}
+  .vo-photo{width:100%;border-radius:3px;overflow:hidden;display:block;object-fit:cover;background:rgba(244,237,231,.1)}
+  .vo-photo-ph{border-radius:3px;background:rgba(244,237,231,.1);border:1px dashed rgba(244,237,231,.22)}
+  .vo-eyebrow{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--chartreuse);margin-bottom:12px}
+  .vo-title{font-size:clamp(20px,2.4vw,30px);font-weight:700;color:var(--cream);letter-spacing:-.025em;line-height:1.18;margin-bottom:14px}
+  .vo-body{font-size:14px;line-height:1.7;color:rgba(244,237,231,.72)}
+  .vo-links{display:flex;flex-direction:column;gap:12px;justify-content:center}
+  .vo-link{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;border:1px solid rgba(244,237,231,.18);border-radius:4px;transition:background .2s var(--ease),border-color .2s;gap:14px;text-decoration:none}
+  .vo-link:hover{background:rgba(244,237,231,.07);border-color:rgba(244,237,231,.36)}
+  .vo-link-label{font-size:12.5px;font-weight:600;color:var(--cream);letter-spacing:-.01em}
+  .vo-link-cta{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--chartreuse);flex-shrink:0}
+  @media(max-width:980px){.vo-inner{grid-template-columns:1fr}.vo-photos{flex-direction:row}.vo-photo-ph:first-child{flex:3}.vo-photo-ph:last-child{flex:2}}
+  @media(max-width:640px){.vo-photos{flex-direction:column}}
+
   /* ───── PRACTICE ───── */
   .practice{padding:0 var(--gutter) clamp(60px,8vh,100px);display:grid;grid-template-columns:220px 1fr;gap:48px;align-items:start;max-width:900px;margin:0 auto}
   .p-portrait{width:220px;height:220px;border-radius:50%;background:var(--peach);position:relative;overflow:hidden}
@@ -1348,6 +1365,40 @@
       </div>
 
     </section>
+
+    <!-- ════════════ VENTURE OUT FEATURE ════════════ -->
+    <div class="vo-band">
+      <div class="tier-label">Community &amp; Experiential <span class="it">— brand-building meets real-life programming</span></div>
+      <div class="vo-inner">
+
+        <div class="vo-photos">
+          <div class="vo-photo-ph" style="aspect-ratio:4/3"></div>
+          <div class="vo-photo-ph" style="aspect-ratio:1/1"></div>
+        </div>
+
+        <div class="vo-story">
+          <div class="vo-eyebrow">Venture Out &middot; Nov 2024 – Apr 2025</div>
+          <h3 class="vo-title">Branding a community<br>like a CPG brand.</h3>
+          <p class="vo-body">An LA-based outdoor adventure community - ski trips, camping, sea kayaking across the West - had the audience but none of the brand infrastructure to attract real partners. I built the consolidated umbrella identity, sub-brand system, founding brand book (voice, visual, partnership architecture), and a sponsorship pipeline that turned their programming into a media asset. Proof-of-concept sponsor: Vacation Inc. First public event: Après LA, hundreds of guests at Burton's Santa Monica flagship.</p>
+        </div>
+
+        <div class="vo-links">
+          <a href="https://www.linkedin.com/in/hannahmcgough/details/projects/" target="_blank" rel="noopener" class="vo-link">
+            <span class="vo-link-label">Brand &amp; Partnership Project</span>
+            <span class="vo-link-cta">View on LinkedIn ↗</span>
+          </a>
+          <a href="https://www.linkedin.com/posts/hannahmcgough_communitybrand-brandidentity-brandlaunchevent-ugcPost-7297673152573095937-UC7_/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAA3qajUB5BY1m5TjNHK2jjDEj0M-fOtGHFY" target="_blank" rel="noopener" class="vo-link">
+            <span class="vo-link-label">Après LA at Burton Flagship</span>
+            <span class="vo-link-cta">Event recap ↗</span>
+          </a>
+          <a href="https://www.linkedin.com/pulse/communities-new-brands-so-brand-them-hannah-mcgough-wvprc/" target="_blank" rel="noopener" class="vo-link">
+            <span class="vo-link-label">Communities Are the New Brands</span>
+            <span class="vo-link-cta">Read the article ↗</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
 
     <!-- ════════════ II · BRAND PERSPECTIVE ════════════ -->
     <section id="ii" class="bp-section">
