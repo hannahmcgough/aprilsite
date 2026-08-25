@@ -440,6 +440,23 @@
   .submit-row .send:hover .arr{transform:translateX(8px)}
   .contact-meta{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(238,233,226,.5);font-weight:500;flex-wrap:wrap;gap:14px;padding-top:18px;border-top:1px solid rgba(238,233,226,.1);margin-top:24px}
   .contact-meta a{color:var(--chartreuse);border-bottom:1px solid rgba(221,239,68,.4);padding-bottom:1px}
+  .work-paths{display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(238,233,226,.22)}
+  .work-path{display:flex;flex-direction:column;min-height:330px;padding:clamp(28px,3vw,42px);text-decoration:none;transition:background .3s var(--ease),color .3s var(--ease)}
+  .work-path:first-child{border-right:1px solid rgba(238,233,226,.22)}
+  .work-path:hover{background:var(--cream);color:var(--ink)}
+  .work-path.consult:hover{background:var(--lilac)}
+  .work-path .path-no{font-family:'Instrument Serif',serif;font-size:46px;line-height:1;color:var(--chartreuse);margin-bottom:auto}
+  .work-path:hover .path-no{color:var(--ink-soft)}
+  .work-path .path-kicker{font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:rgba(238,233,226,.46);margin-bottom:12px}
+  .work-path:hover .path-kicker{color:var(--ink-soft)}
+  .work-path h3{font-size:clamp(27px,3vw,40px);line-height:1;letter-spacing:-.03em;margin:0 0 14px}
+  .work-path h3 .it{font-family:'Instrument Serif',serif;font-style:normal;font-weight:400}
+  .work-path p{font-size:13.5px;line-height:1.6;color:rgba(238,233,226,.62);margin:0 0 24px;max-width:310px}
+  .work-path:hover p{color:var(--ink-soft)}
+  .work-path .path-cta{font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(238,233,226,.22);padding-top:16px}
+  .work-path:hover .path-cta{border-color:var(--ink)}
+  .other-inquiries{font-family:'Instrument Serif',serif;font-size:16px;line-height:1.5;color:rgba(238,233,226,.62);margin-top:2px}
+  .other-inquiries a{color:var(--cream);border-bottom:1px solid var(--chartreuse);padding-bottom:2px}
 
   /* ───── FOOTER ───── */
   .footer{padding:36px var(--gutter);background:var(--ink);color:var(--cream);border-top:1px solid rgba(238,233,226,.1)}
@@ -493,6 +510,9 @@
     .chapter{grid-template-columns:1fr;gap:14px}
     .chapter .meta{text-align:left}
     .form-row{grid-template-columns:1fr;gap:6px}
+    .work-paths{grid-template-columns:1fr}
+    .work-path:first-child{border-right:0;border-bottom:1px solid rgba(238,233,226,.22)}
+    .work-path{min-height:290px}
   }
   @media (max-width:640px){
     .capsule-grid{grid-template-columns:1fr}
@@ -555,7 +575,7 @@
   <div class="page">
 
     <!-- TOP STATUS BANNER -->
-    <div class="banner">Accepting new projects <a href="inquiry.html">Let's talk</a></div>
+    <div class="banner">Accepting select projects + private sessions <a href="#contact">Choose your path</a></div>
 
     <!-- NAV -->
     <nav class="nav">
@@ -566,7 +586,7 @@
         <li><a href="#iii">Notes</a></li>
         <li><a href="experience.html">Experience</a></li>
       </ul>
-      <a href="inquiry.html" class="nav-cta">Get in touch <span class="arr">→</span></a>
+      <a href="#contact" class="nav-cta">Work with me <span class="arr">→</span></a>
     </nav>
 
     <!-- HERO -->
@@ -1537,34 +1557,28 @@
     <!-- ════════════ CONTACT ════════════ -->
     <section class="contact" id="contact">
       <div class="contact-inner">
-        <span class="label">Get in touch</span>
-        <h2>Open to <span class="it">what's next.</span></h2>
-        <p class="sub">Project work, retainers, advisory, or full-time roles. Tell me what you're working on or what you're hiring for.</p>
+        <span class="label">Work with me</span>
+        <h2>What do you <span class="it">need right now?</span></h2>
+        <p class="sub">Choose the path that best matches the conversation you want to have. You do not need the perfect diagnosis before you begin.</p>
 
-     <form class="form" action="https://formspree.io/f/xjglegbj" method="POST">
-  <div class="form-row">
-    <label for="f-name">Name</label>
-    <input id="f-name" name="name" type="text" placeholder="Your name" required>
-  </div>
-  <div class="form-row">
-    <label for="f-email">Email</label>
-    <input id="f-email" name="email" type="email" placeholder="you@company.com" required>
-  </div>
-  <div class="form-row">
-    <label for="f-co">Company / Role</label>
-    <input id="f-co" name="company" type="text" placeholder="Optional">
-  </div>
-  <div class="form-row tall">
-    <label for="f-msg">What are you<br>working on / hiring for?</label>
-    <textarea id="f-msg" name="message" placeholder="A role, a brand, a project, a chat…" required></textarea>
-  </div>
-  <input type="hidden" name="_subject" value="New message from hannahmcgough.com">
-  <input type="hidden" name="_next" value="https://hannahmcgough.com/?sent=1">
-  <div class="submit-row">
-    <button type="submit" class="send">Send message <span class="arr">→</span></button>
-    <span style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(238,233,226,.4);font-weight:500">Replies within 48 hrs</span>
-  </div>
-</form>
+        <div class="work-paths">
+          <a class="work-path project" href="inquiry.html">
+            <span class="path-no">I</span>
+            <span class="path-kicker">For engagements</span>
+            <h3>Start a <span class="it">project.</span></h3>
+            <p>For brand strategy, launches, rebrands, creative direction, production, marketing systems and ongoing support.</p>
+            <span class="path-cta">Share your brief <span>→</span></span>
+          </a>
+          <a class="work-path consult" href="consult.html">
+            <span class="path-no">II</span>
+            <span class="path-kicker">For focused clarity</span>
+            <h3>Book a <span class="it">working session.</span></h3>
+            <p>For one consequential brand, creative, product or marketing decision—and experienced perspective on what to do next.</p>
+            <span class="path-cta">Explore the session <span>→</span></span>
+          </a>
+        </div>
+
+        <p class="other-inquiries">Press, speaking, partnerships or something else? <a href="mailto:hello@hannahmcgough.com">Email me directly.</a></p>
 
         <div class="contact-meta">
           <span><a href="mailto:hello@hannahmcgough.com">hello@hannahmcgough.com</a></span>
