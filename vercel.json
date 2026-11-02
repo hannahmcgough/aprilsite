@@ -1,0 +1,15 @@
+{
+  "rewrites": [
+    {
+      "source": "/xray",
+      "destination": "/xray.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/consult.html",
+      "destination": "/inquiry.html#working-session",
+      "permanent": true
+    }
+  ]
+}
