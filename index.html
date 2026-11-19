@@ -88,10 +88,15 @@
   .hero-name{font-weight:700;font-size:clamp(58px,11vw,168px);line-height:.88;letter-spacing:-.04em}
   .hero-title{font-size:clamp(16px,1.6vw,20px);font-weight:600;letter-spacing:-.005em;color:var(--ink);margin-top:18px}
   .hero-title .sep{color:var(--chartreuse);margin:0 6px}
-  .hero-grid{display:grid;grid-template-columns:.85fr 1fr;gap:clamp(36px,5vw,80px);align-items:end}
+  .hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center}
+  .hero-copy{min-width:0}
+  .hero-copy .hero-name{font-size:clamp(54px,7.5vw,128px)}
+  .hero-copy .deck{margin-top:28px}
+  .hero-campaigns{margin:0;min-width:0}
+  .hero-campaigns a{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .hero-campaigns img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+  .hero-campaigns figcaption{font-size:13px;color:var(--ink-soft);margin-top:10px}
 
-  .portrait{position:relative;background:var(--lilac);overflow:hidden;aspect-ratio:4/5;max-width:220px;width:100%;justify-self:end}
-  .portrait>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0}
 
   .deck{display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:clamp(8px,2vh,24px);max-width:540px}
   .deck .lead{font-size:clamp(20px,2vw,26px);line-height:1.32;color:var(--ink);font-weight:400;margin-bottom:24px}
@@ -489,7 +494,7 @@
   /* ───── RESPONSIVE ───── */
   @media (max-width:980px){
     .hero{grid-template-columns:1fr}
-    .hero-campaigns{grid-column:auto;grid-row:auto}
+    .hero-copy .hero-name{font-size:clamp(54px,11vw,110px)}
     .deck{padding-bottom:0;max-width:none}
     .row{grid-template-columns:48px 1fr 32px;gap:14px}
     .row .desc{display:none}
@@ -593,7 +598,7 @@
 
     <!-- HERO -->
     <section class="hero">
-      <div>
+      <div class="hero-copy">
         <div class="hero-eyebrow">
           <span>Brand &amp; Marketing Studio</span>
           <span class="line"></span>
@@ -601,9 +606,6 @@
         </div>
         <h1 class="hero-name">Hannah<br>McGough</h1>
         <div class="hero-title">Brand strategy <span class="sep">·</span> Creative direction <span class="sep">·</span> Go-to-market</div>
-      </div>
-
-      <div class="hero-grid">
 
         <div class="deck">
           <p class="lead">
@@ -652,6 +654,7 @@
             </div>
           </details>
         </div>
+      </div>
         <figure class="hero-campaigns">
           <a href="#campaigns" aria-label="See ChapStick and Suave campaign work">
             <img src="./chapstick-1.jpg" alt="ChapStick campaign creative" fetchpriority="high">
@@ -659,7 +662,6 @@
           </a>
           <figcaption>Campaign creative for ChapStick and Suave</figcaption>
         </figure>
-      </div>
     </section>
 
     <!-- ════════════ SECTION NAV ════════════ -->
