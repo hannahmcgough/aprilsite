@@ -488,7 +488,8 @@
 
   /* ───── RESPONSIVE ───── */
   @media (max-width:980px){
-    .hero-grid{grid-template-columns:1fr;gap:36px}
+    .hero{grid-template-columns:1fr}
+    .hero-campaigns{grid-column:auto;grid-row:auto}
     .deck{padding-bottom:0;max-width:none}
     .row{grid-template-columns:48px 1fr 32px;gap:14px}
     .row .desc{display:none}
@@ -603,9 +604,6 @@
       </div>
 
       <div class="hero-grid">
-        <div class="portrait">
-          <img src="./lilac-ringlight.png" alt="Hannah McGough" onerror="this.style.display='none'">
-        </div>
 
         <div class="deck">
           <p class="lead">
@@ -654,6 +652,13 @@
             </div>
           </details>
         </div>
+        <figure class="hero-campaigns">
+          <a href="#campaigns" aria-label="See ChapStick and Suave campaign work">
+            <img src="./chapstick-1.jpg" alt="ChapStick campaign creative" fetchpriority="high">
+            <img src="./suave-1.jpg" alt="Suave campaign creative">
+          </a>
+          <figcaption>Campaign creative for ChapStick and Suave</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -1292,7 +1297,7 @@
       <div class="tier-label">Big-Brand Campaigns <span class="it">— production for recognized names</span></div>
 
       <div class="bbc-strip">
-        <div class="bbc-list">
+        <div class="bbc-list" id="campaigns">
           <button class="bbc-row" data-bbc-gallery="chapstick">
             <div class="bbc-thumb t-peach"><img src="./chapstick-1.jpg" alt="ChapStick" onerror="this.style.display='none'"></div>
             <div class="bbc-logo"><span class="text">ChapStick</span></div>
